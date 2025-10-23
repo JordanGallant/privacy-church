@@ -54,7 +54,7 @@ export default function Navbar() {
 
       {/* Mobile Full-screen Overlay */}
       {isOpen && (
-        <div className="md:hidden fixed inset-0 bg-white z-[100]">
+        <div className="md:hidden fixed inset-0  z-[100]">
           <div className="p-4 pt-20">
             <Menu/>
           </div>

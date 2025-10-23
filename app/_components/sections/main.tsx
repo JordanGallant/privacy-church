@@ -2,6 +2,24 @@ import React from 'react'
 
 export default function Main() {
   return (
-    <div>main</div>
+    <div className="px-4 py-8 md:py-16">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
+        {/* Image */}
+        <div className="w-full md:w-1/2">
+          <img 
+            src="/assets/main.png" 
+            alt="Main" 
+            className="w-full h-auto rounded-lg"
+          />
+        </div>
+
+        {/* Text */}
+        <div className="w-full md:w-1/2">
+          <p className="text-base md:text-lg leading-relaxed">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+      </div>
+    </div>
   )
 }

@@ -5,9 +5,9 @@ import Main from "./_components/sections/main";
 export default function Home() {
   return (
     <>
-<Main/>
-<Navbar/>
 
+<Navbar/>
+<Main/>
 </>
   );
 }
