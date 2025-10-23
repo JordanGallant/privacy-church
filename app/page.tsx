@@ -1,13 +1,11 @@
-import Navbar from "./_components/nav";
-import Main from "./_components/sections/main";
+import Landing from "./_components/sections/landing";
 
 
 export default function Home() {
   return (
     <>
 
-<Navbar/>
-<Main/>
+<Landing/>
 </>
   );
 }
