@@ -11,15 +11,18 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     const newState = !isOpen;
     setIsOpen(newState);
     onMenuToggle?.(newState);
     
-    // Remove focus from button to prevent styling issue
-    e.currentTarget.blur();
+    // Remove focus immediately
+    requestAnimationFrame(() => {
+      e.currentTarget.blur();
+    });
   };
-
-
 
   return (
     <>
@@ -48,25 +51,25 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
           <a href="#news" className="hover:text-[#ff6213] transition-colors">News</a>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button - NO BLUR VERSION */}
         <button 
           onClick={toggleMenu}
-          className="md:hidden relative flex items-center justify-center w-16 h-8 focus:outline-none active:outline-none touch-manipulation"
+          type="button"
+          className="md:hidden relative flex items-center justify-center w-16 h-8 rounded-full transition-all duration-200"
           style={{
             fontFamily: 'Arial, Helvetica, sans-serif',
-            WebkitTapHighlightColor: 'transparent'
+            backgroundColor: isOpen ? '#1E1E1E' : '#DDDEE3',
+            WebkitTapHighlightColor: 'transparent',
+            outline: 'none',
+            border: 'none',
+            WebkitAppearance: 'none',
+            MozAppearance: 'none',
+            appearance: 'none',
+            touchAction: 'manipulation'
           }}
         >
-          <div 
-            className="absolute inset-0 rounded-full transition-colors duration-200"
-            style={{
-              background: isOpen ? '#1E1E1E' : '#DDDEE3',
-              filter: 'blur(2px)'
-            }}
-          />
-          
           <span 
-            className="relative text-base font-medium tracking-tight z-10 transition-colors duration-200"
+            className="text-base font-medium transition-colors duration-200"
             style={{
               fontFamily: 'Arial, Helvetica, sans-serif',
               letterSpacing: '-0.01em',
