@@ -9,33 +9,31 @@ interface MainModalProps {
 }
 
 export default function MainModal({ isOpen, onClose }: MainModalProps) {
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const [touchStartX, setTouchStartX] = useState(0);
+const [touchEndX, setTouchEndX] = useState(0);
+const contentRef = useRef<HTMLDivElement>(null);
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    // Don't track swipes if touch started on navbar
-    const target = e.target as HTMLElement;
-    if (target.closest('nav')) {
-      return;
-    }
-    setTouchStart(e.targetTouches[0].clientY);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (touchStart !== 0) {
-      setTouchEnd(e.targetTouches[0].clientY);
-    }
-  };
-
-  const handleTouchEnd = () => {
-  if (touchStart !== 0 && touchEnd - touchStart > 50) {
-    onClose();
+const handleTouchStart = (e: React.TouchEvent) => {
+  const target = e.target as HTMLElement;
+  if (target.closest('nav')) {
+    return;
   }
-  setTouchStart(0);
-  setTouchEnd(0);
+  setTouchStartX(e.targetTouches[0].clientX);
 };
 
+const handleTouchMove = (e: React.TouchEvent) => {
+  if (touchStartX !== 0) {
+    setTouchEndX(e.targetTouches[0].clientX);
+  }
+};
+
+const handleTouchEnd = () => {
+  if (touchStartX !== 0 && touchEndX - touchStartX > 100) {
+    onClose();
+  }
+  setTouchStartX(0);
+  setTouchEndX(0);
+};
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
