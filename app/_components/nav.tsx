@@ -2,19 +2,29 @@
 import { useState } from 'react';
 import Menu from './modals/menu';
 
-export default function Navbar() {
+interface NavbarProps {
+  hideLogo?: boolean;
+}
+
+export default function Navbar({ hideLogo = false }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <nav className="relative flex items-center justify-between px-4 py-5 z-[110]">
-        <div className="flex items-center">
-          <img 
-            src="/assets/logo.svg" 
-            alt="Logo" 
-            className="h-8 w-auto"
-          />
-        </div>
+        {hideLogo ? (
+          <div className="flex-1 text-center">
+            <span className="text-base font-medium">hello stranger</span>
+          </div>
+        ) : (
+          <div className="flex items-center">
+            <img 
+              src="/assets/logo.svg" 
+              alt="Logo" 
+              className="h-8 w-auto"
+            />
+          </div>
+        )}
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8 text-base font-medium">
@@ -54,7 +64,7 @@ export default function Navbar() {
 
       {/* Mobile Full-screen Overlay */}
       {isOpen && (
-        <div className="md:hidden fixed inset-0  z-[100]">
+        <div className="md:hidden fixed inset-0 z-[100]">
           <div className="p-4 pt-20">
             <Menu/>
           </div>
