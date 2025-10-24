@@ -65,7 +65,7 @@ export default function MainModal({ isOpen, onClose }: MainModalProps) {
         <div className="flex flex-col items-center justify-center gap-6 py-8 px-4">
           <h2 className="text-center">Welcome to the place of care and consciousness, a sanctuary for the digitally damned.</h2>
           <p className="text-center">Let's transform the era of panopticore. Made with love, by winprivacy.</p>
-          <img src="/assets/t.png" alt="Logo" />
+          <img src="/assets/t.svg" alt="Logo" />
         </div>
 
         <div className="px-8 pb-8">

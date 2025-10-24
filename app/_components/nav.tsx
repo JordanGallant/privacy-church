@@ -11,18 +11,15 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
     const newState = !isOpen;
     setIsOpen(newState);
     onMenuToggle?.(newState);
     
-    // Remove focus immediately
-    requestAnimationFrame(() => {
-      e.currentTarget.blur();
-    });
+    // Remove focus from button to prevent styling issue
+    e.currentTarget.blur();
   };
+
+
 
   return (
     <>
@@ -41,7 +38,6 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
           </div>
         )}
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8 text-base font-medium">
           <a href="#actions" className="hover:text-[#ff6213] transition-colors">Actions</a>
           <a href="#events" className="hover:text-[#ff6213] transition-colors">Events</a>
@@ -51,25 +47,24 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
           <a href="#news" className="hover:text-[#ff6213] transition-colors">News</a>
         </div>
 
-        {/* Mobile Menu Button - NO BLUR VERSION */}
         <button 
           onClick={toggleMenu}
-          type="button"
-          className="md:hidden relative flex items-center justify-center w-16 h-8 rounded-full transition-all duration-200"
+          className="md:hidden relative flex items-center justify-center w-16 h-8 focus:outline-none active:outline-none touch-manipulation"
           style={{
             fontFamily: 'Arial, Helvetica, sans-serif',
-            backgroundColor: isOpen ? '#1E1E1E' : '#DDDEE3',
-            WebkitTapHighlightColor: 'transparent',
-            outline: 'none',
-            border: 'none',
-            WebkitAppearance: 'none',
-            MozAppearance: 'none',
-            appearance: 'none',
-            touchAction: 'manipulation'
+            WebkitTapHighlightColor: 'transparent'
           }}
         >
+          <div 
+            className="absolute inset-0 rounded-full transition-colors duration-200"
+            style={{
+              background: isOpen ? '#1E1E1E' : '#DDDEE3',
+              filter: 'blur(2px)'
+            }}
+          />
+          
           <span 
-            className="text-base font-medium transition-colors duration-200"
+            className="relative text-base font-medium tracking-tight z-10 transition-colors duration-200"
             style={{
               fontFamily: 'Arial, Helvetica, sans-serif',
               letterSpacing: '-0.01em',
