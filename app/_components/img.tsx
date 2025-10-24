@@ -4,9 +4,10 @@ interface CustomImageProps {
   src: string;
   crop?: 'top' | 'bottom' | 'shrink' | null;
   text?: string;
+  subtext?: string;
 }
 
-const CustomImage: React.FC<CustomImageProps> = ({ src, crop = null, text = '' }) => {
+const CustomImage: React.FC<CustomImageProps> = ({ src, crop = null, text = '', subtext=''}) => {
   const getCropStyle = (): React.CSSProperties => {
     if (crop === 'top') {
       return {
@@ -38,9 +39,9 @@ const CustomImage: React.FC<CustomImageProps> = ({ src, crop = null, text = '' }
 
   const getContainerClass = () => {
     if (crop === 'shrink') {
-      return "relative w-1/2 h-64 overflow-hidden rounded-lg shadow-lg mx-auto";
+      return "relative w-1/2 h-[167px] overflow-hidden rounded-lg shadow-lg mx-auto";
     }
-    return "relative w-full h-64 overflow-hidden rounded-lg shadow-lg";
+    return "relative w-full h-[167px] overflow-hidden rounded-lg shadow-lg";
   };
 
   const getGradientStyle = () => {
@@ -66,9 +67,10 @@ const CustomImage: React.FC<CustomImageProps> = ({ src, crop = null, text = '' }
         className="absolute inset-0 pointer-events-none"
         style={getGradientStyle()}
       />
-      {text && (
-        <div className="absolute bottom-4 left-4 text-white px-3 py-1 rounded">
-          {text}
+     {text && (
+        <div className="absolute bottom-4 left-4 text-white px-1 py-1 rounded">
+          <div className="text-sm italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">{text}</div>
+          {subtext && <div className="text-sm mb-2 leading-tight font-[family-name:var(--font-dm-mono)]">{subtext}</div>}
         </div>
       )}
     </div>

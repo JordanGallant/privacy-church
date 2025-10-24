@@ -63,8 +63,8 @@ export default function MainModal({ isOpen, onClose }: MainModalProps) {
         <Navbar hideLogo={!isMenuOpen} onMenuToggle={setIsMenuOpen} />
 
         <div className="flex flex-col items-center justify-center gap-6 py-8 px-4">
-          <h2 className="text-center">Welcome to the place of care and consciousness, a sanctuary for the digitally damned.</h2>
-          <p className="text-center">Let's transform the era of panopticore. Made with love, by winprivacy.</p>
+          <h2 className="text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight">Welcome to the place of care and consciousness, a sanctuary for the digitally damned.</h2>
+          <p className=" font-[family-name:var(--font-dm-mono)]">Let's transform the era of panopticore. Made with love, by winprivacy.</p>
           <img src="/assets/t.svg" alt="Logo" />
         </div>
 
@@ -72,9 +72,10 @@ export default function MainModal({ isOpen, onClose }: MainModalProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <CustomImage 
-                src="/assets/usb.png" 
+                src="/assets/keys.png" 
                 crop="bottom" 
-                text="Tools" 
+                text="Action" 
+                subtext='Where belief becomes practice'
               />
             </div>
             
@@ -82,28 +83,30 @@ export default function MainModal({ isOpen, onClose }: MainModalProps) {
               <CustomImage 
                 src="/assets/statue.png" 
                 crop="top" 
-                text="Events" 
+                text="Events"
+                subtext='Show up in real life'
               />
             </div>
-            
-            <div className="flex gap-6">
+            <div>
               <CustomImage 
                 src="/assets/people.png" 
-                crop="shrink" 
                 text="Community" 
+                subtext='Where connections begin'
+              />
+            </div>
+
+            <div className="flex gap-6">
+              <CustomImage 
+                src="/assets/usb.png" 
+                crop="shrink" 
+                text="Tools" 
+                subtext='A-Z'
               />
               <CustomImage 
                 src="/assets/candle.png" 
                 crop="shrink" 
                 text="Manifesto" 
-              />
-            </div>
-
-            <div>
-              <CustomImage 
-                src="/assets/keys.png" 
-                crop="bottom" 
-                text="Action" 
+                subtext='Why, who, how'
               />
             </div>
           </div>
