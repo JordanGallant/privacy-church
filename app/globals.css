@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'GT Planar Trial';
+  src: url('/fonts/GT-Planar/GT-Planar-Retalic-15-Bold-Trial.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
