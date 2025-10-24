@@ -1,8 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react';
 
-
-
 interface NewsItem {
   id: string;
   title: string;
@@ -29,17 +27,16 @@ export default function NewsFeed() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#ECECEC]">
+      <div className="flex items-center justify-center min-h-screen">
         <p className="text-lg font-[var(--font-gt-planar)]">Loading news...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#ECECEC] px-6 py-8">
+    <div className="min-h-screen px-8 md:px-12 lg:px-16 py-8">
       <div className="max-w-2xl mx-auto">
-
-        <div className="space-y-8">
+        <div className="space-y-6">
           {news.map((item) => (
             <div key={item.id} className="flex items-start gap-4">
               <div 
@@ -49,10 +46,10 @@ export default function NewsFeed() {
                 }}
               />
               <div className="flex-1">
-                <h2 className="text-2xl font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-light)]">
+                <h2 className="text-xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-black)]">
                   {item.title}
                 </h2>
-                <p className={`text-base md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]`}>
+                <p className="text-base italic md:text-lg leading-relaxed font-[family-name:var(--font-gt-planar-light)] text-[#A0A0A0]">
                   {new Date(item.date).toLocaleTimeString('en-US', {
                     hour: '2-digit',
                     minute: '2-digit',

@@ -40,7 +40,7 @@ export default function Menu() {
         Manifesto
       </a>
       <a 
-        href="/news" 
+        href="/ news" 
         className="text-2xl font-bold text-black hover:opacity-70 transition-opacity"
       >
         News

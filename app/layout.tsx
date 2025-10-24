@@ -14,8 +14,14 @@ const geistMono = Geist_Mono({
 });
 
 const gtPlanarLight = localFont({
-  src: '../public/fonts/GT-Planar-Thin-Trial.woff2',
+  src: '../public/fonts/GT-Planar-Italic-15-Light-Trial.woff2',
  variable: '--font-gt-planar-light',
+  display: 'swap',
+});
+
+const gtPlanarBlack = localFont({
+  src: '../public/fonts/GT-Planar-Retalic-30-Bold-Trial.woff2',
+ variable: '--font-gt-planar-black',
   display: 'swap',
 });
 
@@ -40,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en">
      <body
-    className={`${geistSans.variable} ${geistMono.variable} ${gtDMono.variable} ${gtPlanarLight.variable} antialiased`}
+    className={`${geistSans.variable} ${geistMono.variable} ${gtDMono.variable} ${gtPlanarLight.variable} ${gtPlanarBlack.variable} antialiased`}
       >
         {children}
       </body>
