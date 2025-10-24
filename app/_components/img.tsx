@@ -5,53 +5,60 @@ interface CustomImageProps {
   crop?: 'top' | 'bottom' | 'shrink' | null;
   text?: string;
   subtext?: string;
+  invert?: boolean;
 }
 
-const CustomImage: React.FC<CustomImageProps> = ({ src, crop = null, text = '', subtext=''}) => {
+const CustomImage: React.FC<CustomImageProps> = ({
+  src,
+  crop = null,
+  text = '',
+  subtext = '',
+  invert = false,
+}) => {
   const getCropStyle = (): React.CSSProperties => {
     if (crop === 'top') {
       return {
         objectFit: 'cover',
         objectPosition: 'top',
         height: '200%',
-        transform: 'translateY(0)'
+        transform: 'translateY(0)',
       };
     } else if (crop === 'bottom') {
       return {
         objectFit: 'cover',
         objectPosition: 'bottom',
         height: '200%',
-        transform: 'translateY(-50%)'
+        transform: 'translateY(-50%)',
       };
     } else if (crop === 'shrink') {
       return {
         objectFit: 'cover',
         height: '100%',
-        width: '100%'
+        width: '100%',
       };
     }
     return {
       objectFit: 'cover',
       height: '100%',
-      width: '100%'
+      width: '100%',
     };
   };
 
   const getContainerClass = () => {
     if (crop === 'shrink') {
-      return "relative w-1/2 h-[167px] overflow-hidden rounded-lg shadow-lg mx-auto";
+      return 'relative w-1/2 h-[167px] overflow-hidden rounded-lg shadow-lg mx-auto';
     }
-    return "relative w-full h-[167px] overflow-hidden rounded-lg shadow-lg";
+    return 'relative w-full h-[167px] overflow-hidden rounded-lg shadow-lg';
   };
 
   const getGradientStyle = () => {
     if (crop === 'shrink') {
       return {
-        background: 'linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent)'
+        background: 'linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent)',
       };
     }
     return {
-      background: 'linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent)'
+      background: 'linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent)',
     };
   };
 
@@ -60,21 +67,27 @@ const CustomImage: React.FC<CustomImageProps> = ({ src, crop = null, text = '', 
       <img
         src={src}
         alt={text || 'Custom image'}
-        className="w-full"
+        className={`w-full transition duration-300 ${invert ? 'scale-x-[-1]' : ''}`}
         style={getCropStyle()}
       />
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none"
         style={getGradientStyle()}
       />
-     {text && (
+      {text && (
         <div className="absolute bottom-4 left-4 text-white px-1 py-1 rounded">
-          <div className="text-sm italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">{text}</div>
-          {subtext && <div className="text-sm mb-2 leading-tight font-[family-name:var(--font-dm-mono)]">{subtext}</div>}
+          <div className="text-sm italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
+            {text}
+          </div>
+          {subtext && (
+            <div className="text-sm mb-2 leading-tight font-[family-name:var(--font-dm-mono)]">
+              {subtext}
+            </div>
+          )}
         </div>
       )}
     </div>
   );
 };
 
-export default CustomImage
+export default CustomImage;

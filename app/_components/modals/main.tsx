@@ -101,6 +101,7 @@ export default function MainModal({ isOpen, onClose }: MainModalProps) {
                 crop="shrink" 
                 text="Tools" 
                 subtext='A-Z'
+                invert={true}
               />
               <CustomImage 
                 src="/assets/candle.png" 
