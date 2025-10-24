@@ -25,6 +25,18 @@ const gtPlanarBlack = localFont({
   display: 'swap',
 });
 
+const gtPlanarMenu = localFont({
+  src: '../public/fonts/GT-Planar-Retalic-30-Regular-Trial.woff2',
+ variable: '--font-gt-planar-menu',
+  display: 'swap',
+});
+
+const gtPlanarHead = localFont({
+  src: '../public/fonts/GT-Planar-Italic-30-Light-Trial.woff2',
+ variable: '--font-gt-planar-head',
+  display: 'swap',
+});
+
 const gtDMono = localFont({
   src: '../public/fonts/DMMono-Regular.ttf',
  variable: '--font-dm-mono',
@@ -46,7 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en">
      <body
-    className={`${geistSans.variable} ${geistMono.variable} ${gtDMono.variable} ${gtPlanarLight.variable} ${gtPlanarBlack.variable} antialiased`}
+    className={`${geistSans.variable} ${geistMono.variable} ${gtDMono.variable} ${gtPlanarHead.variable} ${gtPlanarLight.variable} ${gtPlanarMenu.variable} ${gtPlanarBlack.variable} antialiased`}
       >
         {children}
       </body>
