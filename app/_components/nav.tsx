@@ -47,33 +47,35 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
           <a href="#news" className="hover:text-[#ff6213] transition-colors">News</a>
         </div>
 
-        <button 
-          onClick={toggleMenu}
-          className="md:hidden relative flex items-center justify-center w-16 h-8 focus:outline-none active:outline-none touch-manipulation"
-          style={{
-            fontFamily: 'Arial, Helvetica, sans-serif',
-            WebkitTapHighlightColor: 'transparent'
-          }}
-        >
-          <div 
-            className="absolute inset-0 rounded-full transition-colors duration-200"
-            style={{
-              background: isOpen ? '#1E1E1E' : '#DDDEE3',
-              filter: 'blur(2px)'
-            }}
-          />
-          
-          <span 
-            className="relative text-base font-medium tracking-tight z-10 transition-colors duration-200"
-            style={{
-              fontFamily: 'Arial, Helvetica, sans-serif',
-              letterSpacing: '-0.01em',
-              color: isOpen ? '#FFFFFF' : '#000000'
-            }}
-          >
-            {isOpen ? 'Close' : 'Menu'}
-          </span>
-        </button>
+<button 
+  onClick={toggleMenu}
+  type="button"
+  className="md:hidden relative flex items-center justify-center w-16 h-8 focus:outline-none active:outline-none touch-manipulation border-0"
+  style={{
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    WebkitTapHighlightColor: 'transparent',
+    border: 'none'
+  }}
+>
+  <div 
+    className="absolute inset-0 rounded-full transition-colors duration-200"
+    style={{
+      background: isOpen ? '#1E1E1E' : '#DDDEE3',
+      filter: 'blur(2px)'
+    }}
+  />
+  
+  <span 
+    className="relative text-base font-medium tracking-tight z-10 transition-colors duration-200"
+    style={{
+      fontFamily: 'Arial, Helvetica, sans-serif',
+      letterSpacing: '-0.01em',
+      color: isOpen ? '#FFFFFF' : '#000000'
+    }}
+  >
+    {isOpen ? 'Close' : 'Menu'}
+  </span>
+</button>
       </nav>
 
       {/* Mobile Full-screen Overlay */}
