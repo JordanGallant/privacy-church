@@ -24,7 +24,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
       <nav className="relative flex items-center justify-between px-4 py-5 z-[110]">
         {hideLogo ? (
           <div className="flex-1 text-center">
-            <span className="text-base font-medium">hello stranger</span>
+            <span className="text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight">Hello, stranger</span>
           </div>
         ) : (
           <div className="flex items-center">
