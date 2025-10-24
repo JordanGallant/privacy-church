@@ -13,12 +13,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const gtPlanar = localFont({
-  src: '../public/fonts/GT-Planar/GT-Planar-Retalic-15-Bold-Trial.woff2',
-  variable: '--font-gt-planar',
-  style: 'italic',
+const gtPlanarLight = localFont({
+  src: '../public/fonts/GT-Planar-Thin-Trial.woff2',
+ variable: '--font-gt-planar-light',
   display: 'swap',
 });
+
+const gtDMono = localFont({
+  src: '../public/fonts/DMMono-Regular.ttf',
+ variable: '--font-dm-mono',
+  display: 'swap',
+});
+
+
 
 export const metadata: Metadata = {
   title: "Privacy Church",
@@ -32,8 +39,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${gtPlanar.variable} antialiased`}
+     <body
+    className={`${geistSans.variable} ${geistMono.variable} ${gtDMono.variable} ${gtPlanarLight.variable} antialiased`}
       >
         {children}
       </body>

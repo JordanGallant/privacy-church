@@ -10,37 +10,37 @@ export default function Menu() {
       }}
     >
       <a 
-        href="#actions" 
+        href="/actions" 
         className="text-2xl font-bold text-black hover:opacity-70 transition-opacity"
       >
         Actions
       </a>
       <a 
-        href="#events" 
+        href="/events  " 
         className="text-2xl font-bold text-black hover:opacity-70 transition-opacity"
       >
         Events
       </a>
       <a 
-        href="#community" 
+        href="/community" 
         className="text-2xl font-bold text-black hover:opacity-70 transition-opacity"
       >
         Community
       </a>
       <a 
-        href="#tools" 
+        href="/tools" 
         className="text-2xl font-bold text-black hover:opacity-70 transition-opacity"
       >
         Tools
       </a>
       <a 
-        href="#manifesto" 
+        href="/manifesto" 
         className="text-2xl font-bold text-black hover:opacity-70 transition-opacity"
       >
         Manifesto
       </a>
       <a 
-        href="#news" 
+        href="/news" 
         className="text-2xl font-bold text-black hover:opacity-70 transition-opacity"
       >
         News
