@@ -1,4 +1,3 @@
-// _components/MainModal.tsx
 'use client'
 import { useState, useRef, useEffect } from 'react';
 import CustomImage from '../img';
@@ -24,24 +23,20 @@ export default function MainModal({ isOpen, onClose }: MainModalProps) {
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    // Only track if we have a valid touchStart
     if (touchStart !== 0) {
       setTouchEnd(e.targetTouches[0].clientY);
     }
   };
 
   const handleTouchEnd = () => {
-    // Check if it's a swipe up (touchStart > touchEnd means upward swipe)
-    if (touchStart !== 0 && touchStart - touchEnd > 50) {
-      onClose();
-    }
-    // Reset touch positions
-    setTouchStart(0);
-    setTouchEnd(0);
-  };
+  if (touchStart !== 0 && touchEnd - touchStart > 50) {
+    onClose();
+  }
+  setTouchStart(0);
+  setTouchEnd(0);
+};
 
   useEffect(() => {
-    // Prevent body scroll when modal is open
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -56,10 +51,8 @@ export default function MainModal({ isOpen, onClose }: MainModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
-      {/* Backdrop */}
       <div className="fixed inset-0 bg-black bg-opacity-50" />
       
-      {/* Modal Content */}
       <div 
         className="relative min-h-screen bg-white"
         ref={contentRef}
