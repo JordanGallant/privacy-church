@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Menu from './modals/menu';
 
 interface NavbarProps {
@@ -13,14 +13,16 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
   const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newState = !isOpen;
     setIsOpen(newState);
-    onMenuToggle?.(newState); 
-     e.currentTarget.blur();
+    onMenuToggle?.(newState);
+    
+    // Remove focus from button to prevent styling issue
+    e.currentTarget.blur();
   };
 
-  // Also notify parent when menu state changes
-  useEffect(() => {
-    onMenuToggle?.(isOpen);
-  }, [isOpen, onMenuToggle]);
+  // REMOVE the useEffect - it's causing double updates
+  // useEffect(() => {
+  //   onMenuToggle?.(isOpen);
+  // }, [isOpen, onMenuToggle]);
 
   return (
     <>
@@ -50,32 +52,33 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
         </div>
 
         {/* Mobile Menu Button */}
-<button 
-  onClick={toggleMenu}  // This now receives the event automatically
-  className="md:hidden relative flex items-center justify-center w-16 h-8"
-  style={{
-    fontFamily: 'Arial, Helvetica, sans-serif'
-  }}
->
-  <div 
-    className="absolute inset-0 rounded-full transition-colors"
-    style={{
-      background: isOpen ? '#1E1E1E' : '#DDDEE3',
-      filter: 'blur(2px)'
-    }}
-  />
-  
-  <span 
-    className="relative text-base font-medium tracking-tight z-10"
-    style={{
-      fontFamily: 'Arial, Helvetica, sans-serif', // Sans-serif here too
-      letterSpacing: '-0.01em',
-      color: isOpen ? '#FFFFFF' : '#000000'
-    }}
-  >
-    {isOpen ? 'Close' : 'Menu'}
-  </span>
-</button>
+        <button 
+          onClick={toggleMenu}
+          className="md:hidden relative flex items-center justify-center w-16 h-8 focus:outline-none active:outline-none touch-manipulation"
+          style={{
+            fontFamily: 'Arial, Helvetica, sans-serif',
+            WebkitTapHighlightColor: 'transparent'
+          }}
+        >
+          <div 
+            className="absolute inset-0 rounded-full transition-colors duration-200"
+            style={{
+              background: isOpen ? '#1E1E1E' : '#DDDEE3',
+              filter: 'blur(2px)'
+            }}
+          />
+          
+          <span 
+            className="relative text-base font-medium tracking-tight z-10 transition-colors duration-200"
+            style={{
+              fontFamily: 'Arial, Helvetica, sans-serif',
+              letterSpacing: '-0.01em',
+              color: isOpen ? '#FFFFFF' : '#000000'
+            }}
+          >
+            {isOpen ? 'Close' : 'Menu'}
+          </span>
+        </button>
       </nav>
 
       {/* Mobile Full-screen Overlay */}
