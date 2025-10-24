@@ -19,8 +19,6 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
     e.currentTarget.blur();
   };
 
-
-
   return (
     <>
       <nav className="relative flex items-center justify-between px-4 py-5 z-[110]">
@@ -30,11 +28,13 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
           </div>
         ) : (
           <div className="flex items-center">
-            <img 
-              src="/assets/logo.svg" 
-              alt="Logo" 
-              className="h-8 w-auto"
-            />
+            <a href="/">
+              <img 
+                src="/assets/logo.svg" 
+                alt="Logo" 
+                className="h-8 w-auto cursor-pointer"
+              />
+            </a>
           </div>
         )}
 
@@ -47,38 +47,38 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
           <a href="#news" className="hover:text-[#ff6213] transition-colors">News</a>
         </div>
 
-<div className="md:hidden relative w-16 h-8" style={{ transform: 'translateZ(0)', willChange: 'transform' }}>
-  <button 
-    onClick={toggleMenu}
-    type="button"
-    className="relative flex items-center justify-center w-full h-full focus:outline-none active:outline-none touch-manipulation border-0"
-    style={{
-      fontFamily: 'Arial, Helvetica, sans-serif',
-      WebkitTapHighlightColor: 'transparent',
-      border: 'none'
-    }}
-  >
-    <div 
-      className="absolute inset-0 rounded-full transition-colors duration-200"
-      style={{
-        background: isOpen ? '#1E1E1E' : '#DDDEE3',
-        filter: 'blur(2px)',
-        transform: 'translateZ(0)'
-      }}
-    />
-    
-    <span 
-      className="relative text-base font-medium tracking-tight z-10 transition-colors duration-200"
-      style={{
-        fontFamily: 'Arial, Helvetica, sans-serif',
-        letterSpacing: '-0.01em',
-        color: isOpen ? '#FFFFFF' : '#000000'
-      }}
-    >
-      {isOpen ? 'Close' : 'Menu'}
-    </span>
-  </button>
-</div>
+        <div className="md:hidden relative w-16 h-8" style={{ transform: 'translateZ(0)', willChange: 'transform' }}>
+          <button 
+            onClick={toggleMenu}
+            type="button"
+            className="relative flex items-center justify-center w-full h-full focus:outline-none active:outline-none touch-manipulation border-0"
+            style={{
+              fontFamily: 'Arial, Helvetica, sans-serif',
+              WebkitTapHighlightColor: 'transparent',
+              border: 'none'
+            }}
+          >
+            <div 
+              className="absolute inset-0 rounded-full transition-colors duration-200"
+              style={{
+                background: isOpen ? '#1E1E1E' : '#DDDEE3',
+                filter: 'blur(2px)',
+                transform: 'translateZ(0)'
+              }}
+            />
+            
+            <span 
+              className="relative text-base font-medium tracking-tight z-10 transition-colors duration-200"
+              style={{
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                letterSpacing: '-0.01em',
+                color: isOpen ? '#FFFFFF' : '#000000'
+              }}
+            >
+              {isOpen ? 'Close' : 'Menu'}
+            </span>
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Full-screen Overlay */}
