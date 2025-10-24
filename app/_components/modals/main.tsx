@@ -10,30 +10,32 @@ interface MainModalProps {
 
 export default function MainModal({ isOpen, onClose }: MainModalProps) {
   const [touchStartX, setTouchStartX] = useState(0);
-const [touchEndX, setTouchEndX] = useState(0);
-const contentRef = useRef<HTMLDivElement>(null);
+  const [touchEndX, setTouchEndX] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-const handleTouchStart = (e: React.TouchEvent) => {
-  const target = e.target as HTMLElement;
-  if (target.closest('nav')) {
-    return;
-  }
-  setTouchStartX(e.targetTouches[0].clientX);
-};
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('nav')) {
+      return;
+    }
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
 
-const handleTouchMove = (e: React.TouchEvent) => {
-  if (touchStartX !== 0) {
-    setTouchEndX(e.targetTouches[0].clientX);
-  }
-};
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX !== 0) {
+      setTouchEndX(e.targetTouches[0].clientX);
+    }
+  };
 
-const handleTouchEnd = () => {
-  if (touchStartX !== 0 && touchEndX - touchStartX > 100) {
-    onClose();
-  }
-  setTouchStartX(0);
-  setTouchEndX(0);
-};
+  const handleTouchEnd = () => {
+    if (touchStartX !== 0 && touchEndX - touchStartX > 100) {
+      onClose();
+    }
+    setTouchStartX(0);
+    setTouchEndX(0);
+  };
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -58,7 +60,7 @@ const handleTouchEnd = () => {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <Navbar hideLogo={true} />
+        <Navbar hideLogo={!isMenuOpen} onMenuToggle={setIsMenuOpen} />
 
         <div className="flex flex-col items-center justify-center gap-6 py-8 px-4">
           <h2 className="text-center">Welcome to the place of care and consciousness, a sanctuary for the digitally damned.</h2>

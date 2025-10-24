@@ -1,13 +1,25 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Menu from './modals/menu';
 
 interface NavbarProps {
   hideLogo?: boolean;
+  onMenuToggle?: (isOpen: boolean) => void;
 }
 
-export default function Navbar({ hideLogo = false }: NavbarProps) {
+export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    const newState = !isOpen;
+    setIsOpen(newState);
+    onMenuToggle?.(newState); // Notify parent component
+  };
+
+  // Also notify parent when menu state changes
+  useEffect(() => {
+    onMenuToggle?.(isOpen);
+  }, [isOpen, onMenuToggle]);
 
   return (
     <>
@@ -37,29 +49,32 @@ export default function Navbar({ hideLogo = false }: NavbarProps) {
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden relative flex items-center justify-center w-16 h-8"
-        >
-          <div 
-            className="absolute inset-0 rounded-full transition-colors"
-            style={{
-              background: isOpen ? '#1E1E1E' : '#DDDEE3',
-              filter: 'blur(2px)'
-            }}
-          />
-          
-          <span 
-            className="relative text-base font-medium tracking-tight z-10"
-            style={{
-              fontFamily: 'GT Planar Trial, sans-serif',
-              letterSpacing: '-0.01em',
-              color: isOpen ? '#FFFFFF' : '#000000'
-            }}
-          >
-            {isOpen ? 'Close' : 'Menu'}
-          </span>
-        </button>
+<button 
+  onClick={toggleMenu}
+  className="md:hidden relative flex items-center justify-center w-16 h-8"
+  style={{
+    fontFamily: 'Arial, Helvetica, sans-serif' // Override with sans-serif
+  }}
+>
+  <div 
+    className="absolute inset-0 rounded-full transition-colors"
+    style={{
+      background: isOpen ? '#1E1E1E' : '#DDDEE3',
+      filter: 'blur(2px)'
+    }}
+  />
+  
+  <span 
+    className="relative text-base font-medium tracking-tight z-10"
+    style={{
+      fontFamily: 'Arial, Helvetica, sans-serif', // Sans-serif here too
+      letterSpacing: '-0.01em',
+      color: isOpen ? '#FFFFFF' : '#000000'
+    }}
+  >
+    {isOpen ? 'Close' : 'Menu'}
+  </span>
+</button>
       </nav>
 
       {/* Mobile Full-screen Overlay */}
