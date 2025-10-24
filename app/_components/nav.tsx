@@ -10,10 +10,11 @@ interface NavbarProps {
 export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
+  const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newState = !isOpen;
     setIsOpen(newState);
-    onMenuToggle?.(newState); // Notify parent component
+    onMenuToggle?.(newState); 
+     e.currentTarget.blur();
   };
 
   // Also notify parent when menu state changes
@@ -50,10 +51,10 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
 
         {/* Mobile Menu Button */}
 <button 
-  onClick={toggleMenu}
+  onClick={toggleMenu}  // This now receives the event automatically
   className="md:hidden relative flex items-center justify-center w-16 h-8"
   style={{
-    fontFamily: 'Arial, Helvetica, sans-serif' // Override with sans-serif
+    fontFamily: 'Arial, Helvetica, sans-serif'
   }}
 >
   <div 
