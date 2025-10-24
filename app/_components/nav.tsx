@@ -11,18 +11,18 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     const newState = !isOpen;
     setIsOpen(newState);
     onMenuToggle?.(newState);
     
-    // Remove focus from button to prevent styling issue
-    e.currentTarget.blur();
+    // Use setTimeout to ensure blur happens after state update
+    setTimeout(() => {
+      e.currentTarget.blur();
+    }, 0);
   };
-
-  // REMOVE the useEffect - it's causing double updates
-  // useEffect(() => {
-  //   onMenuToggle?.(isOpen);
-  // }, [isOpen, onMenuToggle]);
 
   return (
     <>
@@ -54,26 +54,35 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
         {/* Mobile Menu Button */}
         <button 
           onClick={toggleMenu}
-          className="md:hidden relative flex items-center justify-center w-16 h-8 focus:outline-none active:outline-none touch-manipulation"
+          className="md:hidden relative flex items-center justify-center w-16 h-8"
           style={{
             fontFamily: 'Arial, Helvetica, sans-serif',
-            WebkitTapHighlightColor: 'transparent'
+            WebkitTapHighlightColor: 'transparent',
+            outline: 'none',
+            border: 'none',
+            WebkitAppearance: 'none',
+            MozAppearance: 'none',
+            appearance: 'none'
           }}
         >
           <div 
-            className="absolute inset-0 rounded-full transition-colors duration-200"
+            className="absolute inset-0 rounded-full"
             style={{
               background: isOpen ? '#1E1E1E' : '#DDDEE3',
-              filter: 'blur(2px)'
+              filter: 'blur(2px)',
+              transition: 'background 200ms ease-in-out',
+              pointerEvents: 'none'
             }}
           />
           
           <span 
-            className="relative text-base font-medium tracking-tight z-10 transition-colors duration-200"
+            className="relative text-base font-medium z-10"
             style={{
               fontFamily: 'Arial, Helvetica, sans-serif',
               letterSpacing: '-0.01em',
-              color: isOpen ? '#FFFFFF' : '#000000'
+              color: isOpen ? '#FFFFFF' : '#000000',
+              transition: 'color 200ms ease-in-out',
+              pointerEvents: 'none'
             }}
           >
             {isOpen ? 'Close' : 'Menu'}
