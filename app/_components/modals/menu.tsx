@@ -11,37 +11,37 @@ export default function Menu() {
     >
       <a 
         href="/actions" 
-        className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
+        className="text-5xl italic  mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
       >
         Actions
       </a>
       <a 
         href="/events" 
-        className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
+        className="text-5xl italic  mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
       >
         Events
       </a>
       <a 
         href="/community" 
-        className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
+        className="text-5xl italic  mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
       >
         Community
       </a>
       <a 
         href="/tools" 
-        className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
+        className="text-5xl italic  mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
       >
         Tools
       </a>
       <a 
         href="/manifesto" 
-        className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
+        className="text-5xl italic  mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
       >
         Manifesto
       </a>
       <a 
         href="/news" 
-        className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
+        className="text-5xl italic  mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
       >
         News
       </a>
