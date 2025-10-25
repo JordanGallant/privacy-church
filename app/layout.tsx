@@ -26,13 +26,13 @@ const gtPlanarBlack = localFont({
 });
 
 const gtPlanarMenu = localFont({
-  src: '../public/fonts/GT-Planar-Retalic-30-Regular-Trial.woff2',
+  src: '../public/fonts/GT-Planar-Retalic-30-Bold-Trial.woff2',
  variable: '--font-gt-planar-menu',
   display: 'swap',
 });
 
 const gtPlanarHead = localFont({
-  src: '../public/fonts/GT-Planar-Italic-30-Light-Trial.woff2',
+  src: '../public/fonts/GT-Planar-Italic-30-Regular-Trial.woff2',
  variable: '--font-gt-planar-head',
   display: 'swap',
 });

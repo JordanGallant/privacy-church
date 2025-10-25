@@ -23,7 +23,7 @@ export default function Menu() {
       </a>
       <a 
         href="/community" 
-        className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-dm-mono)]"
+        className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
       >
         Community
       </a>
