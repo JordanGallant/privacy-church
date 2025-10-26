@@ -32,7 +32,7 @@ export default function Communities() {
         {communities.map(community => (
           <div
             key={community.id}
-            className="flex items-center gap-4 hover:shadow-md transition-shadow"
+            className="flex items-start gap-4 hover:shadow-md transition-shadow"
           >
             <div
               className="rounded-lg flex-shrink-0"
@@ -43,10 +43,10 @@ export default function Communities() {
               }}
             />
             <div>
-              <h3 className="text-xl font-semibold mb-2">
+              <h3 className="text-xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
                 {community.title}
               </h3>
-              <p className="text-gray-600 mb-1">
+              <p className="text-base md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]">
                 {community.description}
               </p>
             </div>
