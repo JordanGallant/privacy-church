@@ -86,7 +86,7 @@ export default function EventsList({ argentina = false }: EventsListProps) {
               />
               <div>
                 {index < 2 && <OurPick color="green" />}
-                <h3 className="text-xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
+                <h3 className="text-xl italic font-bold mb-2 leading-tight font-[family-name:var( )]">
                   {event.title}
                 </h3>
                 <p className="inline-block px-[2px] mb-2 text-xs uppercase font-[family-name:var(--font-elevatica)]"
@@ -119,7 +119,7 @@ export default function EventsList({ argentina = false }: EventsListProps) {
                 <h3 className="text-xl italic font-bold text-white mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
                   {event.title}
                 </h3>
-                <p className="txt-5xl  text-white font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
+                <p className="txt-xl font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
                   style={{ color: '#A0A0A0' }}
 >
                   {new Date(event.date).toLocaleDateString('en-US', {
