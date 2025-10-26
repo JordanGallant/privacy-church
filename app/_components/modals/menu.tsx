@@ -13,44 +13,39 @@ export default function Menu() {
 >
       <a 
         href="/actions" 
-        className="text-5xl italic font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
         
       >
         Actions
       </a>
       <a 
         href="/events" 
-        className="text-5xl italic font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
       >
         Events
       </a>
       <a 
         href="/community" 
-        className="text-5xl italic font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
       >
         Community
       </a>
       <a 
         href="/tools" 
-        className="text-5xl italic font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
+        className="text-5xl italic font-medium mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
       >
         Tools
       </a>
       <a 
         href="/manifesto" 
-        className="text-5xl italic font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
       >
         Manifesto
       </a>
       <a 
         href="/news" 
-        className="text-5xl italic font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
       >
         News
       </a>
       
       <div className="mt-auto pb-8">
-        <p className="text-base   font-[family-name:var(--font-gt-planar-light)]">
+        <p className="text-base  font-[family-name:var(--font-gt-planar-light)]">
           Made with love, by winprivacy. 
         </p>
       </div>
