@@ -47,6 +47,11 @@ const gtPlanarStraight = localFont({
  variable: '--font-gt-planar-straight',
   display: 'swap',
 });
+const Elevatica = localFont({
+  src: '../public/fonts/Elevatia-Regular.ttf',
+ variable: '--font-elevatica',
+  display: 'swap',
+});
 
 
 
@@ -63,7 +68,7 @@ export default function RootLayout({
   return (
     <html lang="en">
      <body
-    className={`${geistSans.variable} ${geistMono.variable} ${gtDMono.variable} ${gtPlanarHead.variable} ${gtPlanarStraight.variable} ${gtPlanarLight.variable} ${gtPlanarMenu.variable} ${gtPlanarBlack.variable} antialiased`}
+    className={`${geistSans.variable} ${geistMono.variable} ${gtDMono.variable} ${Elevatica.variable} ${gtPlanarHead.variable} ${gtPlanarStraight.variable} ${gtPlanarLight.variable} ${gtPlanarMenu.variable} ${gtPlanarBlack.variable} antialiased`}
       >
         {children}
       </body>

@@ -46,19 +46,11 @@ export default function NewsFeed() {
                 }}
               />
               <div className="flex-1">
-                <h2 className="text-xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-black)]">
+                <h2 className="text-2xl italic font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-black)]">
                   {item.title}
                 </h2>
                 <p className="text-base italic md:text-lg leading-relaxed font-[family-name:var(--font-gt-planar-light)] text-[#A0A0A0]">
-                  {new Date(item.date).toLocaleTimeString('en-US', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: true
-                  })}, {new Date(item.date).toLocaleDateString('en-US', {
-                    month: '2-digit',
-                    day: '2-digit',
-                    year: 'numeric'
-                  })}
+                 {item.date}
                 </p>
               </div>
             </div>

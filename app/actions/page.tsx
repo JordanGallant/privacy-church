@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../_components/nav'
+import Picks from '../_components/pick'
 
 export default function ToolsPage() {
   return (
@@ -18,7 +19,15 @@ export default function ToolsPage() {
 
         <img src = "/assets/tool.png"/>
 
+        <Picks events={[
+  { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },
+  { id: 2, title: "Web3 Summit", date: "2025-09-10", tag: "blockchain" },
+  { id: 3, title: "DeFi Conference", date: "2025-09-15", location: "New York" }
+]} />
+
     </div>
+
+    
     </>
   )
 }

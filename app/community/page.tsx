@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../_components/nav'
+import Communities from '../_components/communities'
 
 export default function EventsPage() {
   return (
@@ -18,6 +19,7 @@ export default function EventsPage() {
         <img src = "/assets/tool.png"/>
 
     </div>
+    <Communities/>
     </>
   )
 }

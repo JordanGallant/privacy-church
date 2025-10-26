@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../_components/nav'
+import EventsList from '../_components/events'
 
 export default function EventsPage() {
   return (
@@ -18,6 +19,9 @@ export default function EventsPage() {
         <img src = "/assets/tool.png"/>
 
     </div>
+    <EventsList/>
+
+    <EventsList argentina={true}/>
     </>
   )
 }
