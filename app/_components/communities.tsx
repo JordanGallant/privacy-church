@@ -24,9 +24,8 @@ export default function Communities() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6">
-        Featured
-      </h2>
+      <h1 className="text-2xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
+            FEATURED</h1>
       
       <div className="space-y-4">
         {communities.map(community => (
@@ -52,6 +51,8 @@ export default function Communities() {
             </div>
           </div>
         ))}
+
+        
       </div>
     </div>
   );

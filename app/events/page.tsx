@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../_components/nav'
 import EventsList from '../_components/events'
+import Picks from '../_components/pick'
 
 export default function EventsPage() {
   return (
@@ -22,6 +23,17 @@ export default function EventsPage() {
     <EventsList/>
 
     <EventsList argentina={true}/>
+
+    <div className="p-6 max-w-4xl mx-auto">
+
+        <h1 className="text-2xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
+            BI-CURIOUS</h1>
+          <Picks events={[
+            { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },
+            { id: 2, title: "Web3 Summit", date: "2025-09-10", tag: "blockchain" },
+            { id: 3, title: "DeFi Conference", date: "2025-09-15", location: "New York" }
+          ]} />
+        </div>
     </>
   )
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import Navbar from '../_components/nav'
+import Picks from '../_components/pick'
+
 
 export default function ManifestoPage() {
   return (
@@ -61,6 +63,13 @@ export default function ManifestoPage() {
       <p className="text-base  md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]">Good luck divas.</p>
 
 
+    </div>    
+      <div className="p-6 max-w-4xl mx-auto">
+      <Picks events={[
+        { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },
+        { id: 2, title: "Web3 Summit", date: "2025-09-10", tag: "blockchain" },
+        { id: 3, title: "DeFi Conference", date: "2025-09-15", location: "New York" }
+      ]} />
     </div>
     </>
   )
