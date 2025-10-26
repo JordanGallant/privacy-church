@@ -86,17 +86,21 @@ export default function EventsList({ argentina = false }: EventsListProps) {
               />
               <div>
                 {index < 2 && <OurPick color="green" />}
-                <h3 className="text-xl font-semibold mb-2">
+                <h3 className="text-xl italic font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
                   {event.title}
                 </h3>
-                <p className="text-gray-600 mb-1">
+                <p className="inline-block px-[2px] mb-2 text-xs uppercase font-[family-name:var(--font-elevatica)]"
+                    style={{ color: '#A0A0A0' }}
+>
                   {new Date(event.date).toLocaleDateString('en-US', {
                     weekday: 'short',
                     day: 'numeric',
                     month: 'short'
                   })}
                 </p>
-                <p className="text-gray-600">
+                <br/>
+                <p className="inline-block px-[2px] mb-2 text-xs uppercase font-[family-name:var(--font-elevatica)]"
+                 style={{ color: '#A0A0A0' }}>
                   {event.location.city}
                 </p>
               </div>
@@ -112,10 +116,12 @@ export default function EventsList({ argentina = false }: EventsListProps) {
             >
               <div>
                 {index === 0 && <OurPick color="green" />}
-                <h3 className="text-xl font-semibold mb-2 text-white">
+                <h3 className="text-xl italic font-semibold text-white mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
                   {event.title}
                 </h3>
-                <p className="mb-1 text-white">
+                <p className="txt-5xl  text-white font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
+                  style={{ color: '#A0A0A0' }}
+>
                   {new Date(event.date).toLocaleDateString('en-US', {
                     weekday: 'short',
                     day: 'numeric',
