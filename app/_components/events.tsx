@@ -65,7 +65,7 @@ export default function EventsList({ argentina = false }: EventsListProps) {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <h2 className="text-3xl font-bold mb-6">
-        {argentina ? 'Events in Argentina' : 'Featured Events'}
+        {argentina ? 'in Argentina' : 'Featured'}
       </h2>
       
       <div className="space-y-4">
@@ -102,7 +102,6 @@ export default function EventsList({ argentina = false }: EventsListProps) {
               </div>
             </div>
           ) : (
-            // Featured style - gradient background
             <div
               key={event.id}
               className="rounded-lg p-5 hover:shadow-lg transition-shadow flex flex-col justify-end"
