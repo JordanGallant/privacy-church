@@ -26,7 +26,7 @@ export default function EventsPage() {
 
     <div className="p-6 max-w-4xl mx-auto">
 
-        <h1 className="text-2xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
+        <h1 className="text-2xl italic  mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
             BI-CURIOUS</h1>
           <Picks events={[
             { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },

@@ -13,7 +13,7 @@ export default function Menu() {
 >
       <a 
         href="/actions" 
-        className="text-5xl italic font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
+        className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]"
         
       >
         Actions
