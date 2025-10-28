@@ -5,8 +5,8 @@ export async function GET() {
   const events = [
     {
       id: 1,
-      title: "Tango Under the Stars",
-      date: "2025-11-15",
+      title: "Ethereum Cypherpunk Congress II",
+      date: "Sun Nov 16",
       location: {
         city: "Buenos Aires",
         country: "Argentina"
@@ -14,8 +14,8 @@ export async function GET() {
     },
     {
       id: 2,
-      title: "Latin American Tech Summit",
-      date: "2025-12-03",
+      title: "Ethereum Day & DevConnect Opening Ceremony",
+      date: "Mon Nov 17",
       location: {
         city: "Buenos Aires",
         country: "Argentina"
@@ -23,8 +23,8 @@ export async function GET() {
     },
     {
       id: 3,
-      title: "Palermo Food Festival",
-      date: "2025-11-28",
+      title: "The Privacy Salon (Miden)",
+      date: "Mon Nov 17",
       location: {
         city: "Buenos Aires",
         country: "Argentina"
@@ -32,8 +32,8 @@ export async function GET() {
     },
     {
       id: 4,
-      title: "Contemporary Art Exhibition",
-      date: "2025-12-10",
+      title: "Buenos Railes / Railgun Private Party",
+      date: "Mon Nov 17",
       location: {
         city: "Buenos Aires",
         country: "Argentina"
@@ -41,8 +41,8 @@ export async function GET() {
     },
     {
       id: 5,
-      title: "River Plate Football Match",
-      date: "2025-11-22",
+      title: "Aztec DevConnect",
+      date: "Mon Nov 17",
       location: {
         city: "Buenos Aires",
         country: "Argentina"
@@ -50,65 +50,65 @@ export async function GET() {
     },
     {
       id: 6,
-      title: "Broadway Musical Night",
-      date: "2025-11-18",
+      title: "zkID and Client-Side Proving Day",
+      date: "Tues Nov 18",
       location: {
-        city: "New York",
-        country: "United States"
+        city: "Buenos Aires",
+        country: "Argentina"
       }
     },
     {
       id: 7,
-      title: "Central Park Jazz Concert",
-      date: "2025-12-05",
+      title: "Confidential Token Association",
+      date: "Tues Nov 18",
       location: {
-        city: "New York",
-        country: "United States"
+        city: "Buenos Aires",
+        country: "Argentina"
       }
     },
     {
       id: 8,
-      title: "Canal Light Festival",
-      date: "2025-12-01",
+      title: "DeFiConnect",
+      date: "Tues Nov 18",
       location: {
-        city: "Amsterdam",
-        country: "Netherlands"
+        city: "Buenos Aires",
+        country: "Argentina"
       }
     },
     {
       id: 9,
-      title: "Dutch Design Week",
-      date: "2025-11-25",
+      title: "Encryption Day",
+      date: "Wed Nov 19",
       location: {
-        city: "Amsterdam",
-        country: "Netherlands"
+        city: "Buenos Aires",
+        country: "Argentina"
       }
     },
     {
       id: 10,
-      title: "Winter Fashion Show",
-      date: "2025-12-08",
+      title: "Casa ZK (Institutional Day)",
+      date: "Wed Nov 19",
       location: {
-        city: "Paris",
-        country: "France"
+        city: "Buenos Aires",
+        country: "Argentina"
       }
     },
     {
       id: 11,
-      title: "Cherry Blossom Festival",
-      date: "2025-11-30",
+      title: "WalletCon",
+      date: "Thurs Nov 20",
       location: {
-        city: "Tokyo",
-        country: "Japan"
+        city: "Buenos Aires",
+        country: "Argentina"
       }
     },
     {
       id: 12,
-      title: "Thames Christmas Market",
-      date: "2025-12-12",
+      title: "Noir Con ",
+      date: "Thurs Nov 20",
       location: {
-        city: "London",
-        country: "United Kingdom"
+        city: "Buenos Aires",
+        country: "Argentina"
       }
     }
   ];

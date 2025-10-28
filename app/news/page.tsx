@@ -7,7 +7,7 @@ export default function NewspPage() {
       <Navbar hideLogo={false} />
 
       <div className="px-6 my-8">
-        <h1 className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
+    <h1 className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]">
           News
         </h1>
 

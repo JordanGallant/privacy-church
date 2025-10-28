@@ -90,13 +90,8 @@ export default function EventsList({ argentina = false }: EventsListProps) {
                   {event.title}
                 </h3>
                 <p className="inline-block px-[2px] mb-2 text-xs uppercase font-[family-name:var(--font-elevatica)]"
-                    style={{ color: '#A0A0A0' }}
->
-                  {new Date(event.date).toLocaleDateString('en-US', {
-                    weekday: 'short',
-                    day: 'numeric',
-                    month: 'short'
-                  })}
+                    style={{ color: '#A0A0A0' }}>
+                  {event.date}
                 </p>
                 <br/>
                 <p className="inline-block px-[2px] mb-2 text-xs uppercase font-[family-name:var(--font-elevatica)]"
