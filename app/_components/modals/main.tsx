@@ -63,13 +63,14 @@ export default function MainModal({ isOpen, onClose }: MainModalProps) {
       >
         <Navbar hideLogo={!isMenuOpen} onMenuToggle={setIsMenuOpen} />
 
-        <div className="flex flex-col items-center justify-center gap-6 py-8 px-4">
+       
+
+        <div className="px-8 pb-8">
+           <div className="flex flex-col items-center justify-center gap-6 py-8 px-4">
           <h2 className="text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight">Welcome to the place of care and consciousness, a sanctuary for the digitally damned.</h2>
           <p className=" font-[family-name:var(--font-dm-mono)]">Let's transform the era of panopticore. Made with love, by winprivacy.</p>
           <img src="/assets/t.svg" alt="Logo" />
         </div>
-
-        <div className="px-8 pb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <Link href="/actions">

@@ -12,47 +12,48 @@ export default function Menu() {
   
   return (
     <div 
-      className="md:hidden fixed inset-0 z-40 flex flex-col gap-3 pt-24 px-8"
+      className="md:hidden fixed inset-0 z-40 flex flex-col pt-24 px-8"
       style={{
         background: 'linear-gradient(to right, #ff6213, transparent)',
         fontFamily: 'var(--font-gt-planar), sans-serif',
         WebkitFontSmoothing: 'antialiased',
-        MozOsxFontSmoothing: 'grayscale'
+        MozOsxFontSmoothing: 'grayscale',
+        gap: '22px'
       }}
     >
       <a 
         href="/actions" 
-        className={`text-5xl italic font-bold mb-2 leading-tight ${getLinkFont('/actions')}`}
+        className={`text-5xl italic font-bold leading-tight ${getLinkFont('/actions')}`}
       >
         Actions
       </a>
       <a 
         href="/events" 
-        className={`text-5xl italic font-semibold mb-2 leading-tight ${getLinkFont('/events')}`}
+        className={`text-5xl italic font-semibold leading-tight ${getLinkFont('/events')}`}
       >
         Events
       </a>
       <a 
         href="/community" 
-        className={`text-5xl italic font-semibold mb-2 leading-tight ${getLinkFont('/community')}`}
+        className={`text-5xl italic font-semibold leading-tight ${getLinkFont('/community')}`}
       >
         Community
       </a>
       <a 
         href="/tools" 
-        className={`text-5xl italic font-semibold mb-2 leading-tight ${getLinkFont('/tools')}`}
+        className={`text-5xl italic font-semibold leading-tight ${getLinkFont('/tools')}`}
       >
         Tools
       </a>
       <a 
         href="/manifesto" 
-        className={`text-5xl italic font-semibold mb-2 leading-tight ${getLinkFont('/manifesto')}`}
+        className={`text-5xl italic font-semibold leading-tight ${getLinkFont('/manifesto')}`}
       >
         Manifesto
       </a>
       <a 
         href="/news" 
-        className={`text-5xl italic font-semibold mb-2 leading-tight ${getLinkFont('/news')}`}
+        className={`text-5xl italic font-semibold leading-tight ${getLinkFont('/news')}`}
       >
         News
       </a>
