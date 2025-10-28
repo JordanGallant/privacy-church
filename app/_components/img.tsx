@@ -46,7 +46,7 @@ const CustomImage: React.FC<CustomImageProps> = ({
 
   const getContainerClass = () => {
     if (crop === 'shrink') {
-      return 'relative w-1/2 h-[167px] overflow-hidden rounded-lg shadow-lg mx-auto';
+      return 'relative h-[167px] overflow-hidden rounded-lg shadow-lg mx-auto';
     }
     return 'relative w-full h-[167px] overflow-hidden rounded-lg shadow-lg';
   };

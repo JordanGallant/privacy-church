@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 import CustomImage from '../img';
 import Navbar from '../nav';
+import Link from 'next/link';
 
 interface MainModalProps {
   isOpen: boolean;
@@ -71,44 +72,55 @@ export default function MainModal({ isOpen, onClose }: MainModalProps) {
         <div className="px-8 pb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <CustomImage 
-                src="/assets/keys.png" 
+              <Link href="/actions">
+              <CustomImage
+                  src="/assets/keys.png" 
                 crop="bottom" 
                 text="Action" 
                 subtext='Where belief becomes practice'
               />
+              </Link>
             </div>
             
             <div>
-              <CustomImage 
+              <Link href="/events">
+              <CustomImage
                 src="/assets/statue.png" 
                 crop="top" 
                 text="Events"
                 subtext='Show up in real life'
               />
+              </Link>
             </div>
+            
             <div>
-              <CustomImage 
+              <Link href="/community">
+              <CustomImage
                 src="/assets/people.png" 
                 text="Community" 
                 subtext='Where connections begin'
               />
+              </Link>
             </div>
-
-            <div className="flex gap-6">
-              <CustomImage 
+            <div style={{ display: 'flex', gap: '16px' }}>
+            <Link href="/tools">
+              <CustomImage
                 src="/assets/usb.png" 
                 crop="shrink" 
                 text="Tools" 
                 subtext='A-Z'
                 invert={true}
               />
+            </Link>
+
+            <Link href="/manifesto">
               <CustomImage 
                 src="/assets/candle.png" 
                 crop="shrink" 
                 text="Manifesto" 
                 subtext='Why, who, how'
               />
+            </Link>
             </div>
           </div>
         </div>
