@@ -53,7 +53,11 @@ const Elevatica = localFont({
   display: 'swap',
 });
 
-
+const Menusmall = localFont({
+  src: '../public/fonts/GT-Planar-Regular-Trial.woff2',
+ variable: '--font-gt-planar-menusmall',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "Privacy Church",
@@ -68,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en">
      <body
-    className={`${geistSans.variable} ${geistMono.variable} ${gtDMono.variable} ${Elevatica.variable} ${gtPlanarHead.variable} ${gtPlanarStraight.variable} ${gtPlanarLight.variable} ${gtPlanarMenu.variable} ${gtPlanarBlack.variable} antialiased`}
+    className={`${geistSans.variable} ${Menusmall.variable} ${geistMono.variable} ${gtDMono.variable} ${Elevatica.variable} ${gtPlanarHead.variable} ${gtPlanarStraight.variable} ${gtPlanarLight.variable} ${gtPlanarMenu.variable} ${gtPlanarBlack.variable} antialiased`}
       >
         {children}
       </body>

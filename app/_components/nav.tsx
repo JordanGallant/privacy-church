@@ -68,13 +68,12 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
             />
             
             <span 
-              className="relative text-base font-medium tracking-tight z-10 transition-colors duration-200"
-              style={{
-                fontFamily: 'Arial, Helvetica, sans-serif',
-                letterSpacing: '-0.01em',
-                color: isOpen ? '#FFFFFF' : '#000000'
-              }}
-            >
+  className="relative text-base font-bold tracking-tight z-10 transition-colors duration-200 font-[family-name:var(--font-gt-planar-menusmall)]"
+  style={{
+    letterSpacing: '-0.01em',
+    color: isOpen ? '#FFFFFF' : '#000000'
+  }}
+>
               {isOpen ? 'Close' : 'Menu'}
             </span>
           </button>
