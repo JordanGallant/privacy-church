@@ -17,15 +17,15 @@ export default function Landing() {
             />
             <p 
               onClick={() => setIsModalOpen(true)}
-              className="cursor-pointer underline text-center md:hidden"
+              className=" font-bold underline text-center md:hidden"
             >
               Enter
             </p>
           </div>
         </div>
 
-        <div className="w-full max-w-7xl mx-auto pb-8">
-          <p className="text-base md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]">
+        <div className="w-full max-w-7xl mx-auto">
+          <p className="text-base font-bold md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]">
             Privacy Church is a living guide to digital privacy, uniting knowledge, tools and people that care. We translate the chaos of digital life into something you can actually act on: to show you why privacy matters, who is fighting for it, and how you can join them.
           </p>
         </div>
