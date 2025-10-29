@@ -73,8 +73,8 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
 
       {/* Mobile Full-screen Overlay */}
 {isOpen && (
-  <div className="fixed inset-0 z-[100] flex items-start justify-center">
-    <div className="max-w-[480px] w-full min-h-screen">
+  <div className="fixed inset-0 z-[100] flex items-start justify-center md:items-center">
+<div className="max-w-[480px] w-full h-screen md:h-[calc(100vh-4rem)] md:rounded-lg overflow-hidden relative">
       <Menu/>
     </div>
   </div>

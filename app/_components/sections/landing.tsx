@@ -1,13 +1,13 @@
 'use client'
 import React, { useState } from 'react'
-import MainModal from '../modals/main'
+import Link from 'next/link'
 
 export default function Landing() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <>
-      <div className="px-4 py-8 md:py-16 min-h-screen flex flex-col">
+      <div className="px-4 py-8 md:py-16 min-h-screen md:min-h-0 md:h-full flex flex-col">
         <div className="flex-1 flex items-center justify-center">
           <div className="flex flex-col items-center gap-4">
             <img 
@@ -15,12 +15,14 @@ export default function Landing() {
               alt="Main" 
               className="w-full max-w-md h-auto rounded-lg"
             />
+            <Link href="/home">
             <p 
               onClick={() => setIsModalOpen(true)}
               className=" font-bold underline text-center"
             >
               Enter
             </p>
+            </Link>
           </div>
         </div>
 
@@ -31,7 +33,6 @@ export default function Landing() {
         </div>
       </div>
 
-      <MainModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   )
 }

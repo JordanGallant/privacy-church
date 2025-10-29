@@ -72,9 +72,9 @@ export default function RootLayout({
   return (
     <html lang="en">
 <body
-  className={`${geistSans.variable} ${Menusmall.variable} ${geistMono.variable} ${gtDMono.variable} ${Elevatica.variable} ${gtPlanarHead.variable} ${gtPlanarStraight.variable} ${gtPlanarLight.variable} ${gtPlanarMenu.variable} ${gtPlanarBlack.variable} antialiased bg-white md:bg-blue-600 md:flex md:justify-center md:items-start md:min-h-screen`}
+  className={`${geistSans.variable} ${Menusmall.variable} ${geistMono.variable} ${gtDMono.variable} ${Elevatica.variable} ${gtPlanarHead.variable} ${gtPlanarStraight.variable} ${gtPlanarLight.variable} ${gtPlanarMenu.variable} ${gtPlanarBlack.variable} antialiased bg-white md:bg-blue-600 md:flex md:justify-center md:items-center md:h-screen md:p-8 md:overflow-hidden`}
 >
-  <div className="w-full min-h-screen md:max-w-[480px] md:shadow-2xl md:bg-white">
+  <div className="w-full h-full md:max-w-[480px] md:max-h-full md:shadow-2xl md:bg-white md:overflow-y-auto md:rounded-lg scrollbar-hide">
     {children}
   </div>
 </body>
