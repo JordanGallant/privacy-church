@@ -1,7 +1,7 @@
 // app/_components/news.tsx
 import { createClient } from 'redis';
 
-const REDIS_URL = 'redis://default:zQ7dv6aT4ZNa9d4bspA1T02M9OyydbcX@redis-17712.c282.east-us-mz.azure.redns.redis-cloud.com:17712';
+const REDIS_URL = process.env.REDIS_URL!;
 const REDIS_KEY = 'rss:items';
 
 interface NewsItem {
