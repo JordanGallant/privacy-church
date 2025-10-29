@@ -17,7 +17,7 @@ export default function ToolsPage() {
           A to Z’s of digital freedom.
         </p>
 
-        <img src = "/assets/tool.png"/>
+        <img src = "/assets/tool.png" className='mb-4'/>
         <Picks events={[
           { id: 1, title: "Ethereum Cypherpunk Congress",text:"Basic guide of how to survive the internet without being lost in rabbit holes.", date: "2025-09-04", tag: "#Whistleblowing #Whistleblowing", ourPick: true, pickColor: 'blue' },
           { id: 2, title: "Web3 Summit", date: "2025-09-10", tag: "#Whistleblowing #Whistleblowing", ourPick: true },
