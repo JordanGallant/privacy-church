@@ -34,44 +34,38 @@ export default async function News() {
   const items = await getTopNews();
   
   return (
-    <div className="px-6 pb-12">
-      <div className="space-y-4">
-        {items.map((item, i) => (
-          <a
-            key={i}
-            href={item.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block p-4 border rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            <div className="flex items-start gap-3">
+    <div className="min-h-screen px-8 md:px-12 lg:px-16 py-8">
+      <div className="max-w-2xl mx-auto">
+        <div className="space-y-6">
+          {items.map((item, i) => (
+            <a
+              key={i}
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-4 group"
+            >
               <img 
                 src={item.favicon} 
                 alt="" 
-                className="w-5 h-5 mt-1 flex-shrink-0"
+                className="w-6 h-6 flex-shrink-0 mt-1"
               />
-              <div className="flex-1 min-w-0">
-                <h3 className="font-medium text-lg mb-1 line-clamp-2">
+              <div className="flex-1">
+                <h2 className="text-2xl italic font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-black)] group-hover:underline">
                   {item.title}
-                </h3>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <span className="font-[family-name:var(--font-dm-mono)]">
-                    {item.source}
-                  </span>
-                  <span>•</span>
-                  <time>
-                    {new Date(item.pubDate).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}
-                  </time>
-                </div>
+                </h2>
+                <p className="text-base italic md:text-lg leading-relaxed font-[family-name:var(--font-gt-planar-light)] text-[#A0A0A0]">
+                  {item.source} • {new Date(item.pubDate).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
+                </p>
               </div>
-            </div>
-          </a>
-        ))}
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
