@@ -15,7 +15,7 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center gap-6 py-8 px-4">
           <h2 className="text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight">Welcome to the place of care and consciousness, a sanctuary for the digitally damned.</h2>
           <p className="font-[family-name:var(--font-dm-mono)]">Let's transform the era of panopticore. Made with love, by winprivacy.</p>
-          <img src="/assets/t.svg" alt="Logo" />
+          <img src="/assets/t.svg" alt="Logo" className='py-4' />
         </div>
         
         <div className="grid grid-cols-0.5 gap-2.5">
@@ -51,7 +51,7 @@ export default function Home() {
             </Link>
           </div>
           
-          <div className="flex gap-4">
+          <div className="flex gap-4 md: gap-[30px]">
   <Link href="/tools">
     <CustomImage
       src="/assets/usb.png" 
