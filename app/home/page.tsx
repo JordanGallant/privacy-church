@@ -51,7 +51,7 @@ export default function Home() {
             </Link>
           </div>
           
-          <div className="flex gap-4 md: gap-[30px]">
+          <div className="flex gap-4 ">
   <Link href="/tools">
     <CustomImage
       src="/assets/usb.png" 
