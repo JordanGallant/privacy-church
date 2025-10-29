@@ -38,16 +38,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
           </div>
         )}
 
-        <div className="hidden md:flex items-center gap-8 text-base font-medium">
-          <a href="#actions" className="hover:text-[#ff6213] transition-colors">Actions</a>
-          <a href="#events" className="hover:text-[#ff6213] transition-colors">Events</a>
-          <a href="#community" className="hover:text-[#ff6213] transition-colors">Community</a>
-          <a href="#tools" className="hover:text-[#ff6213] transition-colors">Tools</a>
-          <a href="#manifesto" className="hover:text-[#ff6213] transition-colors">Manifesto</a>
-          <a href="#news" className="hover:text-[#ff6213] transition-colors">News</a>
-        </div>
-
-        <div className="md:hidden relative w-16 h-8" style={{ transform: 'translateZ(0)', willChange: 'transform' }}>
+        <div className="relative w-16 h-8" style={{ transform: 'translateZ(0)', willChange: 'transform' }}>
           <button 
             onClick={toggleMenu}
             type="button"
@@ -81,13 +72,13 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
       </nav>
 
       {/* Mobile Full-screen Overlay */}
-      {isOpen && (
-        <div className="md:hidden fixed inset-0 z-[100]">
-          <div className="p-4 pt-20">
-            <Menu/>
-          </div>
-        </div>
-      )}
+{isOpen && (
+  <div className="fixed inset-0 z-[100] flex items-start justify-center">
+    <div className="max-w-[480px] w-full min-h-screen">
+      <Menu/>
+    </div>
+  </div>
+)}
     </>
   )
 }

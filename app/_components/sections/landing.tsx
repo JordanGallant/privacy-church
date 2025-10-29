@@ -17,7 +17,7 @@ export default function Landing() {
             />
             <p 
               onClick={() => setIsModalOpen(true)}
-              className=" font-bold underline text-center md:hidden"
+              className=" font-bold underline text-center"
             >
               Enter
             </p>

@@ -71,11 +71,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-     <body
-    className={`${geistSans.variable} ${Menusmall.variable} ${geistMono.variable} ${gtDMono.variable} ${Elevatica.variable} ${gtPlanarHead.variable} ${gtPlanarStraight.variable} ${gtPlanarLight.variable} ${gtPlanarMenu.variable} ${gtPlanarBlack.variable} antialiased`}
-      >
-        {children}
-      </body>
+<body
+  className={`${geistSans.variable} ${Menusmall.variable} ${geistMono.variable} ${gtDMono.variable} ${Elevatica.variable} ${gtPlanarHead.variable} ${gtPlanarStraight.variable} ${gtPlanarLight.variable} ${gtPlanarMenu.variable} ${gtPlanarBlack.variable} antialiased bg-white md:bg-blue-600 md:flex md:justify-center md:items-start md:min-h-screen`}
+>
+  <div className="w-full min-h-screen md:max-w-[480px] md:shadow-2xl md:bg-white">
+    {children}
+  </div>
+</body>
     </html>
   );
 }
