@@ -32,7 +32,7 @@ const gtPlanarMenu = localFont({
 });
 
 const gtPlanarHead = localFont({
-  src: '../public/fonts/GT-Planar-Italic-45-Regular-Trial.woff2',
+  src: '../public/fonts/GT-Planar-Italic-30-Bold-Trial.woff2',
  variable: '--font-gt-planar-head',
   display: 'swap',
 });
