@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <Navbar hideLogo={!isMenuOpen} onMenuToggle={setIsMenuOpen} />
 
-      <div className="px-8 pb-8">
+      <div className="px-6 pb-8">
         <div className="flex flex-col items-center justify-center gap-6 py-8 px-4">
           <h2 className="text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight">Welcome to the place of care and consciousness, a sanctuary for the digitally damned.</h2>
           <p className="font-[family-name:var(--font-dm-mono)]">Let's transform the era of panopticore. Made with love, by winprivacy.</p>
@@ -51,26 +51,26 @@ export default function Home() {
             </Link>
           </div>
           
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <Link href="/tools">
-              <CustomImage
-                src="/assets/usb.png" 
-                crop="shrink" 
-                text="Tools" 
-                subtext='A-Z'
-                invert={true}
-              />
-            </Link>
+          <div className="flex gap-4">
+  <Link href="/tools">
+    <CustomImage
+      src="/assets/usb.png" 
+      crop="shrink" 
+      text="Tools" 
+      subtext='A-Z'
+      invert={true}
+    />
+  </Link>
 
-            <Link href="/manifesto">
-              <CustomImage 
-                src="/assets/candle.png" 
-                crop="shrink" 
-                text="Manifesto" 
-                subtext='Why, who, how'
-              />
-            </Link>
-          </div>
+  <Link href="/manifesto">
+    <CustomImage 
+      src="/assets/candle.png" 
+      crop="shrink" 
+      text="Manifesto" 
+      subtext='Why, who, how'
+    />
+  </Link>
+</div>
         </div>
       </div>
     </>
