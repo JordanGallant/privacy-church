@@ -18,7 +18,7 @@ export default function Home() {
           <img src="/assets/t.svg" alt="Logo" />
         </div>
         
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-0.5 gap-2.5">
           <div>
             <Link href="/actions">
               <CustomImage

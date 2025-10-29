@@ -46,7 +46,7 @@ const CustomImage: React.FC<CustomImageProps> = ({
 
   const getContainerClass = () => {
     if (crop === 'shrink') {
-      return 'relative h-[167px] overflow-hidden rounded-lg shadow-lg mx-auto';
+      return 'relative w-[167px] h-[167px] overflow-hidden rounded-lg shadow-lg mx-auto';
     }
     return 'relative w-full h-[167px] overflow-hidden rounded-lg shadow-lg';
   };
@@ -75,14 +75,14 @@ const CustomImage: React.FC<CustomImageProps> = ({
         style={getGradientStyle()}
       />
       {text && (
-        <div className="absolute bottom-4 left-4 text-white px-1 py-1 rounded">
-          <div className="text-sm italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
-            {text}
-          </div>
+        <div className="absolute bottom-2 left-3 text-white px-1 py-1 rounded">
+         <div className="text-[22px] leading-[22px] mb-[6px] font-[family-name:var(--font-gt-planar-image)]">
+          {text}
+        </div>
           {subtext && (
-            <div className="text-sm mb-2 leading-tight font-[family-name:var(--font-dm-mono)]">
-              {subtext}
-            </div>
+          <div className="text-[14px] font-light leading-tight tracking-tight font-[family-name:var(--font-dm-mono)]" style={{ wordSpacing: '-2px' }}>
+  {subtext}
+</div>
           )}
         </div>
       )}
