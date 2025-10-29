@@ -28,7 +28,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
           </div>
         ) : (
           <div className="flex items-center">
-            <a href="/">
+            <a href="/home">
               <img 
                 src="/assets/logo.svg" 
                 alt="Logo" 

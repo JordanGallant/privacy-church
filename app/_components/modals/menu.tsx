@@ -6,8 +6,8 @@ export default function Menu() {
   
   const getLinkFont = (linkPath: string) => {
     return pathname === linkPath 
-      ? 'font-[family-name:var(--font-gt-planar-head)]'
-      : 'font-[family-name:var(--font-gt-planar-menu)]'
+      ? 'font-[family-name:var(--font-gt-planar-heading)]'
+      : 'font-[family-name:var(--font-gt-planar-image)]'
   }
   
   return (
@@ -18,48 +18,48 @@ export default function Menu() {
         fontFamily: 'var(--font-gt-planar), sans-serif',
         WebkitFontSmoothing: 'antialiased',
         MozOsxFontSmoothing: 'grayscale',
-        gap: '22px'
+        gap: '8px'
       }}
     >
       <a 
         href="/actions" 
-        className={`text-5xl italic font-bold leading-tight ${getLinkFont('/actions')}`}
+        className={`text-5xl leading-tight ${getLinkFont('/actions')}`}
       >
         Actions
       </a>
       <a 
         href="/events" 
-        className={`text-5xl italic font-semibold leading-tight ${getLinkFont('/events')}`}
+        className={`text-5xl leading-tight ${getLinkFont('/events')}`}
       >
         Events
       </a>
       <a 
         href="/community" 
-        className={`text-5xl italic font-semibold leading-tight ${getLinkFont('/community')}`}
+        className={`text-5xl leading-tight ${getLinkFont('/community')}`}
       >
         Community
       </a>
       <a 
         href="/tools" 
-        className={`text-5xl italic font-semibold leading-tight ${getLinkFont('/tools')}`}
+        className={`text-5xl leading-tight ${getLinkFont('/tools')}`}
       >
         Tools
       </a>
       <a 
         href="/manifesto" 
-        className={`text-5xl italic font-semibold leading-tight ${getLinkFont('/manifesto')}`}
+        className={`text-5xl leading-tight ${getLinkFont('/manifesto')}`}
       >
         Manifesto
       </a>
       <a 
         href="/news" 
-        className={`text-5xl italic font-semibold leading-tight ${getLinkFont('/news')}`}
+        className={`text-5xl leading-tight ${getLinkFont('/news')}`}
       >
         News
       </a>
       
       <div className="mt-auto pb-8">
-        <p className="text-base font-[family-name:var(--font-gt-planar-light)]">
+        <p className="text-base font-[family-name:var(--font-dm-mono)]">
           Made with love, by winprivacy. 
         </p>
       </div>

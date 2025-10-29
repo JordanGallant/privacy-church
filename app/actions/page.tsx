@@ -7,7 +7,7 @@ export default function ToolsPage() {
     <>
     <Navbar/>
     <div className="px-6 my-8">
-    <h1 className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]">
+    <h1 className="text-5xl  mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
         Actions
     </h1>
     <p
@@ -17,7 +17,7 @@ export default function ToolsPage() {
           Each setting you change, each tracker you block, each lie you tell an algorithm, it all adds up.
         </p>
 
-        <img src = "/assets/tool.png"/>
+        <img src = "/assets/tool.png" className='mb-4'/>
 
         <Picks events={[
   { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },

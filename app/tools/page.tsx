@@ -7,7 +7,7 @@ export default function ToolsPage() {
     <>
     <Navbar/>
     <div className="px-6 my-8">
-    <h1 className="text-5xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]">
+    <h1 className="text-5xl  mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
         Tools
     </h1>
     <p

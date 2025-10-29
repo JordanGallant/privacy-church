@@ -64,6 +64,12 @@ const Image = localFont({
   display: 'swap',
 });
 
+const Heading = localFont({
+  src: '../public/fonts/GT-Planar-Italic-45-Medium-Trial.woff2',
+ variable: '--font-gt-planar-heading',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: "Privacy Church",
   description: "Keep News Private",
@@ -77,7 +83,7 @@ export default function RootLayout({
   return (
     <html lang="en">
 <body
-  className={`${geistSans.variable} ${Menusmall.variable} ${Image.variable} ${geistMono.variable} ${gtDMono.variable} ${Elevatica.variable} ${gtPlanarHead.variable} ${gtPlanarStraight.variable} ${gtPlanarLight.variable} ${gtPlanarMenu.variable} ${gtPlanarBlack.variable} antialiased bg-white md:bg-blue-600 md:flex md:justify-center md:items-center md:h-screen md:p-8 md:overflow-hidden`}
+  className={`${geistSans.variable} ${Menusmall.variable} ${Heading.variable} ${Image.variable} ${geistMono.variable} ${gtDMono.variable} ${Elevatica.variable} ${gtPlanarHead.variable} ${gtPlanarStraight.variable} ${gtPlanarLight.variable} ${gtPlanarMenu.variable} ${gtPlanarBlack.variable} antialiased bg-white md:bg-blue-600 md:flex md:justify-center md:items-center md:h-screen md:p-8 md:overflow-hidden`}
 >
   <div className="w-full h-full md:max-w-[480px] md:max-h-full md:shadow-2xl md:bg-white md:overflow-y-auto md:rounded-lg scrollbar-hide">
     {children}
