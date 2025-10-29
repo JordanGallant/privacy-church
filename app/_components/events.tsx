@@ -105,13 +105,13 @@ export default function EventsList({ argentina = false }: EventsListProps) {
               key={event.id}
               className="rounded-lg p-5 hover:shadow-lg transition-shadow flex flex-col justify-end"
               style={{
-                background: 'linear-gradient(to top, #000000, #ff6213)',
+                background: 'linear-gradient(to top, #000000, #FF6213)',
                 height: '200px'
               }}
             >
               <div>
                 {index === 0 && <OurPick color="green" />}
-                <h3 className="text-xl italic font-bold text-white mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
+                <h3 className="text-xl  text-white mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)]">
                   {event.title}
                 </h3>
                 <p className="txt-xl font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
