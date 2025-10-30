@@ -2,8 +2,6 @@
 import { NextResponse } from 'next/server';
 import { parseStringPromise } from 'xml2js';
 import { createClient } from 'redis';
-//what
-export const revalidate = 600;
 
 const RSS_FEEDS = [
   { name: 'Hacker News', url: 'https://news.ycombinator.com/rss' },
@@ -25,11 +23,10 @@ const RSS_FEEDS = [
 
 const REDIS_URL = process.env.REDIS_URL!;
 const REDIS_KEY = 'rss:items';
-const REDIS_TIMESTAMP_KEY = 'rss:last_update';
 
 async function fetchFeed(feed: { name: string; url: string }) {
   try {
-    const response = await fetch(feed.url, { next: { revalidate: 600 } });
+    const response = await fetch(feed.url, { cache: 'no-store' });
     if (!response.ok) return null;
     
     const xmlText = await response.text();
@@ -62,57 +59,45 @@ export async function GET() {
   try {
     await redis.connect();
     
-    const now = Date.now();
-    const lastUpdate = await redis.get(REDIS_TIMESTAMP_KEY);
-    const shouldUpdate = !lastUpdate || (now - parseInt(lastUpdate)) > 600000; // 10 mins
+    // Always fetch new items
+    const results = await Promise.all(RSS_FEEDS.map(fetchFeed));
+    const newItems = results.filter(Boolean).flat();
     
-    if (shouldUpdate) {
-      // Fetch new items
-      const results = await Promise.all(RSS_FEEDS.map(fetchFeed));
-      const newItems = results.filter(Boolean).flat();
-      
-      // Get existing items
-      const cached = await redis.get(REDIS_KEY);
-      const existingItems = cached ? JSON.parse(cached) : [];
-      
-      // Merge and deduplicate by link
-      const itemMap = new Map();
-      [...existingItems, ...newItems].forEach(item => {
-        const existing = itemMap.get(item.link);
-        if (!existing || new Date(item.pubDate) > new Date(existing.pubDate)) {
-          itemMap.set(item.link, item);
-        }
-      });
-      
-      const mergedItems = Array.from(itemMap.values());
-      mergedItems.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
-      
-      // Keep only last 500 items
-      const itemsToStore = mergedItems.slice(0, 500);
-      
-      await redis.set(REDIS_KEY, JSON.stringify(itemsToStore));
-      await redis.set(REDIS_TIMESTAMP_KEY, now.toString());
-      
-      await redis.disconnect();
-      return NextResponse.json({ items: itemsToStore, count: itemsToStore.length, cached: false });
-    }
-    
-    // Return cached items
+    // Get existing items
     const cached = await redis.get(REDIS_KEY);
-    const items = cached ? JSON.parse(cached) : [];
+    const existingItems = cached ? JSON.parse(cached) : [];
+    
+    // Merge and deduplicate by link
+    const itemMap = new Map();
+    [...existingItems, ...newItems].forEach(item => {
+      const existing = itemMap.get(item.link);
+      if (!existing || new Date(item.pubDate) > new Date(existing.pubDate)) {
+        itemMap.set(item.link, item);
+      }
+    });
+    
+    const mergedItems = Array.from(itemMap.values());
+    mergedItems.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+    
+    // Keep only last 500 items
+    const itemsToStore = mergedItems.slice(0, 500);
+    
+    await redis.set(REDIS_KEY, JSON.stringify(itemsToStore));
     
     await redis.disconnect();
-    return NextResponse.json({ items, count: items.length, cached: true });
+    return NextResponse.json({ items: itemsToStore, count: itemsToStore.length });
     
   } catch (error) {
     console.error('Redis error:', error);
-    await redis.disconnect();
+    try {
+      await redis.disconnect();
+    } catch {}
     
     // Fallback to direct fetch
     const results = await Promise.all(RSS_FEEDS.map(fetchFeed));
     const items = results.filter(Boolean).flat();
     items.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
     
-    return NextResponse.json({ items, count: items.length, cached: false, error: 'Redis unavailable' });
+    return NextResponse.json({ items, count: items.length, error: 'Redis unavailable' });
   }
 }
