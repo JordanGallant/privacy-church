@@ -88,50 +88,63 @@ async function fetchFeed(feed: {
         ? parsed.urlset.url
         : [parsed.urlset.url];
 
-      items = urls.map((u: any) => {
-        const loc = u.loc;
-        let title = loc;
+      items = urls
+        .map((u: any) => {
+          const loc = u.loc;
+          if (!loc) return null;
 
-        try {
-          const url = new URL(loc);
-          const pathSegments = url.pathname.split('/').filter(Boolean);
-          const lastSegment = pathSegments[pathSegments.length - 1] || '';
-
-          if (lastSegment && /^[a-z0-9-]+$/.test(lastSegment)) {
-            // Convert slug → Title Case
-            title = lastSegment
-              .split('-')
-              .map(
-                (word) =>
-                  word.length > 1
-                    ? word.charAt(0).toUpperCase() + word.slice(1)
-                    : word.toUpperCase()
-              )
-              .join(' ');
-
-            // Fix common contractions
-            title = title
-              .replace(/\bYoure\b/g, "You're")
-              .replace(/\bDont\b/g, "Don't")
-              .replace(/\bCant\b/g, "Can't")
-              .replace(/\bIm\b/g, "I'm")
-              .replace(/\bIsnt\b/g, "Isn't")
-              .replace(/\bWasnt\b/g, "Wasn't")
-              .replace(/\bHes\b/g, "He's")
-              .replace(/\bShes\b/g, "She's");
-          } else {
-            title = url.hostname.replace('www.', '');
+          // Skip non-article pages
+          if (
+            loc.includes('/about') ||
+            loc.endsWith('/articles') ||
+            loc.endsWith('/articles/')
+          ) {
+            return null;
           }
-        } catch {
-          // Keep raw loc if URL parsing fails
-        }
 
-        return {
-          title,
-          link: loc,
-          pubDate: u.lastmod || new Date().toISOString(),
-        };
-      });
+          let title = loc;
+
+          try {
+            const url = new URL(loc);
+            const pathSegments = url.pathname.split('/').filter(Boolean);
+            const lastSegment = pathSegments[pathSegments.length - 1] || '';
+
+            if (lastSegment && /^[a-z0-9-]+$/.test(lastSegment)) {
+              // Convert slug → Title Case
+              title = lastSegment
+                .split('-')
+                .map(
+                  (word) =>
+                    word.length > 1
+                      ? word.charAt(0).toUpperCase() + word.slice(1)
+                      : word.toUpperCase()
+                )
+                .join(' ');
+
+              // Fix common contractions
+              title = title
+                .replace(/\bYoure\b/g, "You're")
+                .replace(/\bDont\b/g, "Don't")
+                .replace(/\bCant\b/g, "Can't")
+                .replace(/\bIm\b/g, "I'm")
+                .replace(/\bIsnt\b/g, "Isn't")
+                .replace(/\bWasnt\b/g, "Wasn't")
+                .replace(/\bHes\b/g, "He's")
+                .replace(/\bShes\b/g, "She's");
+            } else {
+              title = url.hostname.replace('www.', '');
+            }
+          } catch {
+            // Keep raw loc if URL parsing fails
+          }
+
+          return {
+            title,
+            link: loc,
+            pubDate: u.lastmod || new Date().toISOString(),
+          };
+        })
+        .filter(Boolean);
 
       console.log(`🌐 ${feed.name}: parsed ${items.length} sitemap entries.`);
     } else {
@@ -218,6 +231,7 @@ async function fetchFeed(feed: {
     return [];
   }
 }
+
 
 
 
