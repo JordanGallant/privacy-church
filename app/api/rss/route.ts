@@ -4,21 +4,21 @@ import { parseStringPromise } from 'xml2js';
 import { getRedis } from '../../lib/redis';
 
 const RSS_FEEDS = [
-  { name: 'Hacker News', url: 'https://news.ycombinator.com/rss' },
-  { name: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index' },
-  { name: 'TechCrunch', url: 'https://techcrunch.com/feed/' },
-  { name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml' },
-  { name: 'Wired', url: 'https://www.wired.com/feed/rss' },
-  { name: 'CoinDesk', url: 'https://www.coindesk.com/arc/outboundfeeds/rss/' },
-  { name: 'Decrypt', url: 'https://decrypt.co/feed' },
-  { name: 'The Block', url: 'https://www.theblock.co/rss.xml' },
-  { name: 'Krebs on Security', url: 'https://krebsonsecurity.com/feed/' },
-  { name: 'Schneier on Security', url: 'https://www.schneier.com/feed/atom/' },
-  { name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml' },
-  { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml' },
-  { name: 'r/technology', url: 'https://www.reddit.com/r/technology/.rss' },
-  { name: 'r/privacy', url: 'https://www.reddit.com/r/privacy/.rss' },
-  { name: 'r/CryptoCurrency', url: 'https://www.reddit.com/r/CryptoCurrency/.rss' }
+  { name: 'Hacker News', url: 'https://news.ycombinator.com/rss', priority: 3, maxItems: 10 },
+  { name: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index', priority: 2, maxItems: 10 },
+  { name: 'TechCrunch', url: 'https://techcrunch.com/feed/', priority: 2, maxItems: 10 },
+  { name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml', priority: 1, maxItems: 20 },
+  { name: 'Wired', url: 'https://www.wired.com/feed/rss', priority: 2, maxItems: 10 },
+  { name: 'CoinDesk', url: 'https://www.coindesk.com/arc/outboundfeeds/rss/', priority: 2, maxItems: 10 },
+  { name: 'Decrypt', url: 'https://decrypt.co/feed', priority: 2, maxItems: 40 },
+  { name: 'The Block', url: 'https://www.theblock.co/rss.xml', priority: 2, maxItems: 40 },
+  { name: 'Krebs on Security', url: 'https://krebsonsecurity.com/feed/', priority: 2, maxItems: 10 },
+  { name: 'Schneier on Security', url: 'https://www.schneier.com/feed/atom/', priority: 2, maxItems: 40 },
+  { name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml', priority: 2, maxItems: 10 },
+  { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml', priority: 2, maxItems: 10 },
+  { name: 'r/technology', url: 'https://www.reddit.com/r/technology/.rss', priority: 1, maxItems: 20 },
+  { name: 'r/privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 1, maxItems: 20 },
+  { name: 'r/CryptoCurrency', url: 'https://www.reddit.com/r/CryptoCurrency/.rss', priority: 1, maxItems: 20 }
 ];
 
 const REDIS_KEY = 'rss:items';
@@ -31,9 +31,9 @@ interface RSSItem {
   favicon: string;
 }
 
-async function fetchFeed(feed: { name: string; url: string }): Promise<RSSItem[]> {
+async function fetchFeed(feed: { name: string; url: string; priority: number; maxItems: number }): Promise<RSSItem[]> {
   try {
-    console.log(`📡 Fetching ${feed.name}...`);
+    console.log(`📡 Fetching ${feed.name} (priority: ${feed.priority}, max: ${feed.maxItems})...`);
     
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 15000);
@@ -69,8 +69,8 @@ async function fetchFeed(feed: { name: string; url: string }): Promise<RSSItem[]
       return [];
     }
     
-    // Take first 30 items from each feed
-    const itemsToProcess = items.slice(0, 30);
+    // Use the feed's maxItems setting
+    const itemsToProcess = items.slice(0, feed.maxItems);
     
     const processedItems = itemsToProcess.map((item: any) => {
       // Extract link
@@ -134,9 +134,6 @@ async function fetchFeed(feed: { name: string; url: string }): Promise<RSSItem[]
 }
 
 export async function POST(request: Request) {
-  console.log('\n========================================');
-  console.log('🚀 RSS UPDATE STARTED:', new Date().toISOString());
-  console.log('========================================\n');
   
   try {
     // Auth
@@ -148,29 +145,15 @@ export async function POST(request: Request) {
       console.error('❌ CRON_SECRET not set');
       return NextResponse.json({ error: 'Server misconfiguration' }, { status: 500 });
     }
-    
     const isAuthorized = authHeader === expectedAuth || vercelCronAuth === process.env.CRON_SECRET;
-    
     if (!isAuthorized) {
-      console.error('❌ Unauthorized');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
-    console.log('✅ Authorized\n');
-
-    // Connect to Redis
     const redis = getRedis();
     await redis.ping();
-    console.log('✅ Redis connected\n');
-
-    // Fetch ALL feeds
-    console.log(`📡 Fetching ${RSS_FEEDS.length} RSS feeds...\n`);
-    
     const allResults = await Promise.all(
       RSS_FEEDS.map(feed => fetchFeed(feed))
     );
-    
-    // Flatten all items into one array
     const allItems: RSSItem[] = allResults.flat();
     
     console.log(`\n📊 Total items fetched: ${allItems.length}`);
@@ -183,15 +166,12 @@ export async function POST(request: Request) {
       }, { status: 500 });
     }
 
-    // Sort by date - NEWEST FIRST
-    console.log('🔄 Sorting by date (newest first)...');
     allItems.sort((a, b) => {
       const dateA = new Date(a.pubDate).getTime();
       const dateB = new Date(b.pubDate).getTime();
-      return dateB - dateA; // Descending order (newest first)
+      return dateB - dateA; 
     });
 
-    // Remove duplicates by link
     console.log('🔄 Removing duplicates...');
     const uniqueItems: RSSItem[] = [];
     const seenLinks = new Set<string>();
@@ -219,9 +199,6 @@ export async function POST(request: Request) {
       throw new Error(`Redis SET failed: ${result}`);
     }
     
-    console.log('✅ Written to Redis');
-
-    // VERIFY
     console.log('🔍 Verifying write...');
     const verify = await redis.get(REDIS_KEY);
     
@@ -230,26 +207,17 @@ export async function POST(request: Request) {
     }
     
     const verifiedItems = JSON.parse(verify);
-    console.log(`✅ Verified: ${verifiedItems.length} items in Redis`);
-    
-    // Show sample of what was stored
-    console.log('\n📰 Sample of stored items (first 3):');
-    itemsToStore.slice(0, 3).forEach((item, i) => {
-      console.log(`${i+1}. [${item.source}] ${item.title.substring(0, 60)}...`);
-      console.log(`   ${item.pubDate}`);
-    });
+ 
 
-    console.log('\n========================================');
-    console.log('✅ RSS UPDATE COMPLETED SUCCESSFULLY');
-    console.log('========================================\n');
-    
     return NextResponse.json({ 
       success: true,
       totalItems: itemsToStore.length,
       feedsProcessed: RSS_FEEDS.length,
       itemsBySource: RSS_FEEDS.map(feed => ({
         source: feed.name,
-        count: itemsToStore.filter(item => item.source === feed.name).length
+        count: itemsToStore.filter(item => item.source === feed.name).length,
+        priority: feed.priority,
+        maxItems: feed.maxItems
       })),
       timestamp: new Date().toISOString()
     });
