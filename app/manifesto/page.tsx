@@ -7,8 +7,8 @@ export default function ManifestoPage() {
   return (
     <>
     <Navbar/>
-    <div className="px-6 my-8">
-    <h1 className="text-5xl  mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
+<div className="px-6 mt-2 mb-8">
+  <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
         Manifesto
     </h1>
     <p

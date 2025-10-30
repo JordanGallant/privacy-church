@@ -6,8 +6,8 @@ export default function ToolsPage() {
   return (
     <>
     <Navbar/>
-    <div className="px-6 my-8">
-    <h1 className="text-5xl  mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
+    <div className="px-6 mt-2 my-8">
+  <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
         Actions
     </h1>
     <p

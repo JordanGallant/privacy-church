@@ -7,19 +7,21 @@ export default function EventsPage() {
   return (
     <>
     <Navbar/>
-    <div className="px-6 my-8">
-    <h1 className="text-5xl  mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
-        Community
-    </h1>
-    <p
-          className="text-base md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]"
-          style={{ color: "#717171" }}
-        >
-        Welcome to the Other Side of the Screen, for the curious, cautious and chronically online.        </p>
+<div className="px-6 mt-2 mb-8">
+  <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
+    Community
+  </h1>
 
-        <img src = "/assets/tool.png"/>
+  <p
+    className="font-[family-name:var(--font-dm-mono)] font-normal text-[15px] leading-[20px] tracking-[-0.06em]"
+    style={{ color: "#717171" }}
+  >
+    Welcome to the Other Side of the Screen, for the curious, cautious and chronically online.
+  </p>
 
-    </div>
+  <img src="/assets/tool.png" alt="Tool" className="mt-4" />
+</div>
+
      
     <Communities/>
 
