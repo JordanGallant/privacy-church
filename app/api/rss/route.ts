@@ -97,7 +97,8 @@ async function fetchFeed(feed: {
           if (
             loc.includes('/about') ||
             loc.endsWith('/articles') ||
-            loc.endsWith('/articles/')
+            loc.endsWith('/articles/') || 
+            loc.endsWith('/board-of-advisors')
           ) {
             return null;
           }
