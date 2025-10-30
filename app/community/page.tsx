@@ -7,8 +7,8 @@ export default function EventsPage() {
   return (
     <>
     <Navbar/>
-<div className="px-6 mt-2 mb-8">
-  <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
+<div className="p-6 max-w-4xl mx-auto">
+    <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
     Community
   </h1>
 
