@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 import { parseStringPromise } from 'xml2js';
 import { createClient } from 'redis';
-
+//what
 export const revalidate = 600;
 
 const RSS_FEEDS = [
