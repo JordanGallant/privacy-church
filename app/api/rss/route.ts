@@ -28,116 +28,123 @@ interface RSSItem {
   favicon: string;
 }
 
-async function fetchFeed(feed: { name: string; url: string; priority: number; maxItems: number }): Promise<RSSItem[]> {
+async function fetchFeed(feed: { name: string; url: string; priority: number; maxItems: number }) {
   try {
-    console.log(`📡 Fetching ${feed.name} (priority: ${feed.priority}, max: ${feed.maxItems})...`);
-    
+    console.log(`📡 Fetching ${feed.name}...`);
+
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000); // Increased to 30s
-    
-    const response = await fetch(feed.url, { 
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
+    const response = await fetch(feed.url, {
       cache: 'no-store',
       signal: controller.signal,
-     headers: {
-  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-  'Accept': 'application/rss+xml, application/xml;q=0.9, */*;q=0.8',
-  'Accept-Language': 'en-US,en;q=0.9',
-  'Cache-Control': 'no-cache',
-  'Pragma': 'no-cache',
-}
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'application/rss+xml, application/xml;q=0.9, */*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+      },
     });
-    
+
     clearTimeout(timeoutId);
-    
+
     if (!response.ok) {
-      console.error(`❌ ${feed.name} failed: HTTP ${response.status} ${response.statusText}`);
-      const errorText = await response.text().catch(() => 'Could not read error');
-      console.error(`Response preview: ${errorText.substring(0, 200)}`);
+      console.error(`❌ ${feed.name} failed: ${response.status} ${response.statusText}`);
       return [];
     }
-    
+
     const xmlText = await response.text();
-    console.log(`📄 ${feed.name} response length: ${xmlText.length} chars`);
-    
-    const parsed = await parseStringPromise(xmlText);
-    console.log(`🔍 ${feed.name} parsed structure:`, Object.keys(parsed));
-    
-    // Handle both RSS and Atom feeds
+    const parsed = await parseStringPromise(xmlText, {
+      explicitArray: false,
+      mergeAttrs: true,
+      trim: true,
+      normalize: true,
+    });
+
+    // --- Determine feed type ---
     let items: any[] = [];
-    if (parsed.rss?.channel?.[0]?.item) {
-      items = parsed.rss.channel[0].item;
-    } else if (parsed.feed?.entry) {
-      items = parsed.feed.entry;
-    }
-    
-    if (items.length === 0) {
-      console.warn(`⚠️ ${feed.name} returned 0 items`);
+
+    if (parsed?.rss?.channel?.item) {
+      // RSS feed
+      items = Array.isArray(parsed.rss.channel.item)
+        ? parsed.rss.channel.item
+        : [parsed.rss.channel.item];
+    } else if (parsed?.feed?.entry) {
+      // Atom feed
+      items = Array.isArray(parsed.feed.entry)
+        ? parsed.feed.entry
+        : [parsed.feed.entry];
+    } else {
+      console.warn(`⚠️ ${feed.name}: No recognizable items found`);
       return [];
     }
-    
-    // Use the feed's maxItems setting
-    const itemsToProcess = items.slice(0, feed.maxItems);
-    
-    const processedItems = itemsToProcess.map((item: any) => {
-      // Extract link
+
+    // --- Normalize items ---
+    const processedItems = items.slice(0, feed.maxItems).map((item: any) => {
+      // --- Title ---
+      let title =
+        item.title?._ ||
+        item.title?.['#'] ||
+        item.title ||
+        'Untitled';
+
+      if (Array.isArray(title)) title = title[0];
+
+      // --- Link ---
       let link = '';
       if (item.link) {
         if (typeof item.link === 'string') {
           link = item.link;
         } else if (Array.isArray(item.link)) {
-          link = item.link[0]?._ || item.link[0]?.$.href || item.link[0];
-        } else if (item.link.$?.href) {
-          link = item.link.$.href;
+          const linkObj = item.link.find((l: any) => l.href || l.rel === 'alternate') || item.link[0];
+          link = linkObj?.href || linkObj?._ || linkObj;
+        } else if (item.link.href) {
+          link = item.link.href;
         }
-      }
-      if (!link && item.id) {
+      } else if (item.id) {
         link = Array.isArray(item.id) ? item.id[0] : item.id;
       }
-      
-      // Extract title
-      let title = '';
-      if (item.title) {
-        title = Array.isArray(item.title) ? (item.title[0]?._ || item.title[0]) : item.title;
-      }
-      
-      // Extract date
-      let pubDate = '';
-      if (item.pubDate) {
-        pubDate = Array.isArray(item.pubDate) ? item.pubDate[0] : item.pubDate;
-      } else if (item.published) {
-        pubDate = Array.isArray(item.published) ? item.published[0] : item.published;
-      } else if (item.updated) {
-        pubDate = Array.isArray(item.updated) ? item.updated[0] : item.updated;
-      }
-      
-      // Get favicon
+
+      // --- Publication Date ---
+      let pubDate =
+        item.pubDate ||
+        item.published ||
+        item.updated ||
+        new Date().toISOString();
+
+      if (Array.isArray(pubDate)) pubDate = pubDate[0];
+
+      // --- Favicon ---
       let favicon = '';
       try {
         if (link) {
           const url = new URL(link);
           favicon = `https://www.google.com/s2/favicons?domain=${url.hostname}&sz=128`;
         }
-      } catch (e) {
+      } catch {
         favicon = '';
       }
-      
+
       return {
         source: feed.name,
-        title: title || 'Untitled',
-        link: link || '',
-        pubDate: pubDate || new Date().toISOString(),
-        favicon
+        title: title.toString(),
+        link: link.toString(),
+        pubDate: pubDate.toString(),
+        favicon,
       };
-    }).filter(item => item.link); // Only keep items with valid links
-    
-    console.log(`✅ ${feed.name}: ${processedItems.length} items`);
-    return processedItems;
-    
+    });
+
+    const validItems = processedItems.filter((i) => i.link);
+    console.log(`✅ ${feed.name}: ${validItems.length} items`);
+
+    return validItems;
   } catch (error) {
     console.error(`❌ ${feed.name} error:`, error instanceof Error ? error.message : error);
     return [];
   }
 }
+
 
 export async function POST(request: Request) {
   
