@@ -1,8 +1,6 @@
 // app/_components/news.tsx
-import { createClient } from 'redis';
-
-const REDIS_URL = process.env.REDIS_URL!;
-const REDIS_KEY = 'rss:items';
+'use client'
+import { useState, useEffect } from 'react';
 
 interface NewsItem {
   source: string;
@@ -12,27 +10,33 @@ interface NewsItem {
   favicon: string;
 }
 
-async function getTopNews(): Promise<NewsItem[]> {
-  const redis = createClient({ url: REDIS_URL });
-  
-  try {
-    await redis.connect();
-    const cached = await redis.get(REDIS_KEY);
-    await redis.disconnect();
-    
-    if (!cached) return [];
-    
-    const items = JSON.parse(cached);
-    return items.slice(0, 30);
-  } catch (error) {
-    console.error('Redis error:', error);
-    return [];
-  }
-}
+export default function News() {
+  const [items, setItems] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function News() {
-  const items = await getTopNews();
-  
+  useEffect(() => {
+    fetch('/api/rss')
+      .then(res => res.json())
+      .then(data => {
+        setItems(data.items.slice(0, 30));
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error fetching news:', err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen px-8 md:px-12 lg:px-16 py-8">
+        <div className="max-w-2xl mx-auto">
+          <p className="text-lg font-[family-name:var(--font-gt-planar)]">Loading news...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen px-8 md:px-12 lg:px-16 py-8">
       <div className="max-w-2xl mx-auto">
@@ -59,8 +63,9 @@ export default async function News() {
                     month: 'short',
                     day: 'numeric',
                     hour: '2-digit',
-                    minute: '2-digit'
-                  })}
+                    minute: '2-digit',
+                    timeZone: 'UTC'
+                  })} UTC
                 </p>
               </div>
             </a>
