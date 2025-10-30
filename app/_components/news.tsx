@@ -38,7 +38,7 @@ export default function News() {
   }
 
   return (
-    <div className="min-h-screen px-8 md:px-12 lg:px-16 py-8">
+<div className="p-6 max-w-4xl mx-auto">
       <div className="max-w-2xl mx-auto">
         <div className="space-y-6">
           {items.map((item, i) => (
