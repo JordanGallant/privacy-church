@@ -64,8 +64,8 @@ export default function News() {
                     day: 'numeric',
                     hour: '2-digit',
                     minute: '2-digit',
-                    timeZone: 'UTC'
-                  })} UTC
+                    timeZone: 'Europe/Amsterdam'
+                  })}
                 </p>
               </div>
             </a>
