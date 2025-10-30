@@ -1,7 +1,7 @@
 // app/api/rss/route.ts
 import { NextResponse } from 'next/server';
 import { parseStringPromise } from 'xml2js';
-import { createClient } from 'redis';
+import { getRedis } from '../../lib/redis';
 
 const RSS_FEEDS = [
   { name: 'Hacker News', url: 'https://news.ycombinator.com/rss' },
@@ -21,83 +21,268 @@ const RSS_FEEDS = [
   { name: 'r/CryptoCurrency', url: 'https://www.reddit.com/r/CryptoCurrency/.rss' }
 ];
 
-const REDIS_URL = process.env.REDIS_URL!;
 const REDIS_KEY = 'rss:items';
 
-async function fetchFeed(feed: { name: string; url: string }) {
+interface RSSItem {
+  source: string;
+  title: string;
+  link: string;
+  pubDate: string;
+  favicon: string;
+}
+
+async function fetchFeed(feed: { name: string; url: string }): Promise<RSSItem[]> {
   try {
-    const response = await fetch(feed.url, { cache: 'no-store' });
-    if (!response.ok) return null;
+    console.log(`📡 Fetching ${feed.name}...`);
+    
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    
+    const response = await fetch(feed.url, { 
+      cache: 'no-store',
+      signal: controller.signal,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; RSSReader/1.0)'
+      }
+    });
+    
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) {
+      console.error(`❌ ${feed.name} failed: HTTP ${response.status}`);
+      return [];
+    }
     
     const xmlText = await response.text();
     const parsed = await parseStringPromise(xmlText);
     
-    const items = parsed.rss?.channel?.[0]?.item || parsed.feed?.entry || [];
+    // Handle both RSS and Atom feeds
+    let items: any[] = [];
+    if (parsed.rss?.channel?.[0]?.item) {
+      items = parsed.rss.channel[0].item;
+    } else if (parsed.feed?.entry) {
+      items = parsed.feed.entry;
+    }
     
-    return items.slice(0, 10).map((item: any) => {
-      const link = item.link?.[0]?._ || item.link?.[0] || item.id?.[0];
-      const url = new URL(link);
-      const favicon = `https://www.google.com/s2/favicons?domain=${url.hostname}&sz=128`;
+    if (items.length === 0) {
+      console.warn(`⚠️ ${feed.name} returned 0 items`);
+      return [];
+    }
+    
+    // Take first 30 items from each feed
+    const itemsToProcess = items.slice(0, 30);
+    
+    const processedItems = itemsToProcess.map((item: any) => {
+      // Extract link
+      let link = '';
+      if (item.link) {
+        if (typeof item.link === 'string') {
+          link = item.link;
+        } else if (Array.isArray(item.link)) {
+          link = item.link[0]?._ || item.link[0]?.$.href || item.link[0];
+        } else if (item.link.$?.href) {
+          link = item.link.$.href;
+        }
+      }
+      if (!link && item.id) {
+        link = Array.isArray(item.id) ? item.id[0] : item.id;
+      }
+      
+      // Extract title
+      let title = '';
+      if (item.title) {
+        title = Array.isArray(item.title) ? (item.title[0]?._ || item.title[0]) : item.title;
+      }
+      
+      // Extract date
+      let pubDate = '';
+      if (item.pubDate) {
+        pubDate = Array.isArray(item.pubDate) ? item.pubDate[0] : item.pubDate;
+      } else if (item.published) {
+        pubDate = Array.isArray(item.published) ? item.published[0] : item.published;
+      } else if (item.updated) {
+        pubDate = Array.isArray(item.updated) ? item.updated[0] : item.updated;
+      }
+      
+      // Get favicon
+      let favicon = '';
+      try {
+        if (link) {
+          const url = new URL(link);
+          favicon = `https://www.google.com/s2/favicons?domain=${url.hostname}&sz=128`;
+        }
+      } catch (e) {
+        favicon = '';
+      }
       
       return {
         source: feed.name,
-        title: item.title?.[0]?._ || item.title?.[0],
-        link,
-        pubDate: item.pubDate?.[0] || item.published?.[0] || item.updated?.[0],
+        title: title || 'Untitled',
+        link: link || '',
+        pubDate: pubDate || new Date().toISOString(),
         favicon
       };
-    });
+    }).filter(item => item.link); // Only keep items with valid links
+    
+    console.log(`✅ ${feed.name}: ${processedItems.length} items`);
+    return processedItems;
+    
   } catch (error) {
-    console.error(`Failed to fetch ${feed.name}:`, error);
-    return null;
+    console.error(`❌ ${feed.name} error:`, error instanceof Error ? error.message : error);
+    return [];
   }
 }
 
-export async function GET() {
-  const redis = createClient({ url: REDIS_URL });
+export async function POST(request: Request) {
+  console.log('\n========================================');
+  console.log('🚀 RSS UPDATE STARTED:', new Date().toISOString());
+  console.log('========================================\n');
   
   try {
-    await redis.connect();
+    // Auth
+    const authHeader = request.headers.get('authorization');
+    const vercelCronAuth = request.headers.get('x-vercel-cron-secret');
+    const expectedAuth = `Bearer ${process.env.CRON_SECRET}`;
     
-    // Always fetch new items
-    const results = await Promise.all(RSS_FEEDS.map(fetchFeed));
-    const newItems = results.filter(Boolean).flat();
+    if (!process.env.CRON_SECRET) {
+      console.error('❌ CRON_SECRET not set');
+      return NextResponse.json({ error: 'Server misconfiguration' }, { status: 500 });
+    }
     
-    // Get existing items
-    const cached = await redis.get(REDIS_KEY);
-    const existingItems = cached ? JSON.parse(cached) : [];
+    const isAuthorized = authHeader === expectedAuth || vercelCronAuth === process.env.CRON_SECRET;
     
-    // Merge and deduplicate by link
-    const itemMap = new Map();
-    [...existingItems, ...newItems].forEach(item => {
-      const existing = itemMap.get(item.link);
-      if (!existing || new Date(item.pubDate) > new Date(existing.pubDate)) {
-        itemMap.set(item.link, item);
+    if (!isAuthorized) {
+      console.error('❌ Unauthorized');
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    console.log('✅ Authorized\n');
+
+    // Connect to Redis
+    const redis = getRedis();
+    await redis.ping();
+    console.log('✅ Redis connected\n');
+
+    // Fetch ALL feeds
+    console.log(`📡 Fetching ${RSS_FEEDS.length} RSS feeds...\n`);
+    
+    const allResults = await Promise.all(
+      RSS_FEEDS.map(feed => fetchFeed(feed))
+    );
+    
+    // Flatten all items into one array
+    const allItems: RSSItem[] = allResults.flat();
+    
+    console.log(`\n📊 Total items fetched: ${allItems.length}`);
+    
+    if (allItems.length === 0) {
+      console.error('❌ NO ITEMS FETCHED FROM ANY FEED!');
+      return NextResponse.json({ 
+        error: 'No items fetched',
+        success: false 
+      }, { status: 500 });
+    }
+
+    // Sort by date - NEWEST FIRST
+    console.log('🔄 Sorting by date (newest first)...');
+    allItems.sort((a, b) => {
+      const dateA = new Date(a.pubDate).getTime();
+      const dateB = new Date(b.pubDate).getTime();
+      return dateB - dateA; // Descending order (newest first)
+    });
+
+    // Remove duplicates by link
+    console.log('🔄 Removing duplicates...');
+    const uniqueItems: RSSItem[] = [];
+    const seenLinks = new Set<string>();
+    
+    for (const item of allItems) {
+      if (!seenLinks.has(item.link)) {
+        seenLinks.add(item.link);
+        uniqueItems.push(item);
       }
+    }
+    
+    console.log(`✅ Unique items: ${uniqueItems.length}`);
+
+    // Keep only the 500 most recent
+    const itemsToStore = uniqueItems.slice(0, 500);
+    
+    console.log(`\n💾 Storing ${itemsToStore.length} items in Redis...`);
+    console.log(`📅 Date range: ${itemsToStore[0]?.pubDate} to ${itemsToStore[itemsToStore.length-1]?.pubDate}`);
+
+    // WRITE TO REDIS
+    const jsonData = JSON.stringify(itemsToStore);
+    const result = await redis.set(REDIS_KEY, jsonData);
+    
+    if (result !== 'OK') {
+      throw new Error(`Redis SET failed: ${result}`);
+    }
+    
+    console.log('✅ Written to Redis');
+
+    // VERIFY
+    console.log('🔍 Verifying write...');
+    const verify = await redis.get(REDIS_KEY);
+    
+    if (!verify) {
+      throw new Error('Verification failed: no data found');
+    }
+    
+    const verifiedItems = JSON.parse(verify);
+    console.log(`✅ Verified: ${verifiedItems.length} items in Redis`);
+    
+    // Show sample of what was stored
+    console.log('\n📰 Sample of stored items (first 3):');
+    itemsToStore.slice(0, 3).forEach((item, i) => {
+      console.log(`${i+1}. [${item.source}] ${item.title.substring(0, 60)}...`);
+      console.log(`   ${item.pubDate}`);
+    });
+
+    console.log('\n========================================');
+    console.log('✅ RSS UPDATE COMPLETED SUCCESSFULLY');
+    console.log('========================================\n');
+    
+    return NextResponse.json({ 
+      success: true,
+      totalItems: itemsToStore.length,
+      feedsProcessed: RSS_FEEDS.length,
+      itemsBySource: RSS_FEEDS.map(feed => ({
+        source: feed.name,
+        count: itemsToStore.filter(item => item.source === feed.name).length
+      })),
+      timestamp: new Date().toISOString()
     });
     
-    const mergedItems = Array.from(itemMap.values());
-    mergedItems.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
-    
-    // Keep only last 500 items
-    const itemsToStore = mergedItems.slice(0, 500);
-    
-    await redis.set(REDIS_KEY, JSON.stringify(itemsToStore));
-    
-    await redis.disconnect();
-    return NextResponse.json({ items: itemsToStore, count: itemsToStore.length });
-    
   } catch (error) {
-    console.error('Redis error:', error);
-    try {
-      await redis.disconnect();
-    } catch {}
+    console.error('\n❌❌❌ FATAL ERROR ❌❌❌');
+    console.error(error);
+    return NextResponse.json({ 
+      error: 'Update failed',
+      details: error instanceof Error ? error.message : String(error)
+    }, { status: 500 });
+  }
+}
+
+// GET endpoint
+export async function GET() {
+  try {
+    const redis = getRedis();
+    await redis.ping();
     
-    // Fallback to direct fetch
-    const results = await Promise.all(RSS_FEEDS.map(fetchFeed));
-    const items = results.filter(Boolean).flat();
-    items.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+    const cached = await redis.get(REDIS_KEY);
     
-    return NextResponse.json({ items, count: items.length, error: 'Redis unavailable' });
+    if (!cached) {
+      return NextResponse.json([]);
+    }
+    
+    const items = JSON.parse(cached);
+    
+    return NextResponse.json(items);
+  } catch (error) {
+    return NextResponse.json({ 
+      error: 'Failed to read',
+      details: error instanceof Error ? error.message : String(error)
+    }, { status: 500 });
   }
 }

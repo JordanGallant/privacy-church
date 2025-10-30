@@ -15,7 +15,7 @@ export default function News() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/rss')
+    fetch('/api/news')
       .then(res => res.json())
       .then(data => {
         setItems(data.items.slice(0, 30));
