@@ -4,21 +4,22 @@ import { parseStringPromise } from 'xml2js';
 import { getRedis } from '../../lib/redis';
 
 const RSS_FEEDS = [
-  { name: 'Hacker News', url: 'https://news.ycombinator.com/rss', priority: 3, maxItems: 60 },
-  { name: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index', priority: 2, maxItems: 40 },
-  { name: 'TechCrunch', url: 'https://techcrunch.com/feed/', priority: 2, maxItems: 40 },
-  { name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml', priority: 1, maxItems: 10 },
-  { name: 'Wired', url: 'https://www.wired.com/feed/rss', priority: 2, maxItems: 40 },
-  { name: 'CoinDesk', url: 'https://www.coindesk.com/arc/outboundfeeds/rss/', priority: 2, maxItems: 40 },
-  { name: 'Decrypt', url: 'https://decrypt.co/feed', priority: 2, maxItems: 40 },
-  { name: 'The Block', url: 'https://www.theblock.co/rss.xml', priority: 2, maxItems: 40 },
-  { name: 'Krebs on Security', url: 'https://krebsonsecurity.com/feed/', priority: 2, maxItems: 40 },
-  { name: 'Schneier on Security', url: 'https://www.schneier.com/feed/atom/', priority: 2, maxItems: 40 },
-  { name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml', priority: 2, maxItems: 40 },
-  { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml', priority: 2, maxItems: 40 },
+  { name: 'Hacker News', url: 'https://news.ycombinator.com/rss', priority: 3, maxItems: 60, filter: false },
+  { name: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index', priority: 2, maxItems: 40, filter: false },
+  { name: 'TechCrunch', url: 'https://techcrunch.com/feed/', priority: 2, maxItems: 40, filter: true },
+  { name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml', priority: 1, maxItems: 10, filter: false },
+  { name: 'Wired', url: 'https://www.wired.com/feed/rss', priority: 2, maxItems: 40, filter: true },
+  { name: 'CoinDesk', url: 'https://www.coindesk.com/arc/outboundfeeds/rss/', priority: 2, maxItems: 40, filter: false },
+  { name: 'Decrypt', url: 'https://decrypt.co/feed', priority: 2, maxItems: 40, filter: false },
+  { name: 'The Block', url: 'https://www.theblock.co/rss.xml', priority: 2, maxItems: 40, filter: false },
+  { name: 'Krebs on Security', url: 'https://krebsonsecurity.com/feed/', priority: 2, maxItems: 40, filter: false },
+  { name: 'Schneier on Security', url: 'https://www.schneier.com/feed/atom/', priority: 2, maxItems: 40, filter: false },
+  { name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml', priority: 2, maxItems: 40, filter: false },
+  { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml', priority: 2, maxItems: 40, filter: false },
 ];
 
 const REDIS_KEY = 'rss:items';
+const KEYWORDS = ['privacy', 'tech'];
 
 interface RSSItem {
   source: string;
@@ -28,7 +29,7 @@ interface RSSItem {
   favicon: string;
 }
 
-async function fetchFeed(feed: { name: string; url: string; priority: number; maxItems: number }) {
+async function fetchFeed(feed: { name: string; url: string; priority: number; maxItems: number; filter?: boolean }) {
   try {
     console.log(`📡 Fetching ${feed.name}...`);
 
@@ -39,11 +40,8 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
       cache: 'no-store',
       signal: controller.signal,
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
         'Accept': 'application/rss+xml, application/xml;q=0.9, */*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
       },
     });
 
@@ -62,16 +60,13 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
       normalize: true,
     });
 
-    // --- Determine feed type ---
+    // Detect feed format
     let items: any[] = [];
-
     if (parsed?.rss?.channel?.item) {
-      // RSS feed
       items = Array.isArray(parsed.rss.channel.item)
         ? parsed.rss.channel.item
         : [parsed.rss.channel.item];
     } else if (parsed?.feed?.entry) {
-      // Atom feed
       items = Array.isArray(parsed.feed.entry)
         ? parsed.feed.entry
         : [parsed.feed.entry];
@@ -80,18 +75,15 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
       return [];
     }
 
-    // --- Normalize items ---
+    // Normalize items
     const processedItems = items.slice(0, feed.maxItems).map((item: any) => {
-      // --- Title ---
       let title =
         item.title?._ ||
         item.title?.['#'] ||
         item.title ||
         'Untitled';
-
       if (Array.isArray(title)) title = title[0];
 
-      // --- Link ---
       let link = '';
       if (item.link) {
         if (typeof item.link === 'string') {
@@ -106,16 +98,13 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
         link = Array.isArray(item.id) ? item.id[0] : item.id;
       }
 
-      // --- Publication Date ---
       let pubDate =
         item.pubDate ||
         item.published ||
         item.updated ||
         new Date().toISOString();
-
       if (Array.isArray(pubDate)) pubDate = pubDate[0];
 
-      // --- Favicon ---
       let favicon = '';
       try {
         if (link) {
@@ -136,134 +125,89 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
     });
 
     const validItems = processedItems.filter((i) => i.link);
-    console.log(`✅ ${feed.name}: ${validItems.length} items`);
 
-    return validItems;
+    // Apply keyword filtering if enabled for this feed
+    let filteredItems = validItems;
+    if (feed.filter) {
+      filteredItems = validItems.filter((item) => {
+        const title = item.title?.toLowerCase() || '';
+        return KEYWORDS.some((kw) => title.includes(kw));
+      });
+      console.log(`🔍 ${feed.name}: filtered ${filteredItems.length}/${validItems.length} items by keywords.`);
+    }
+
+    console.log(`✅ ${feed.name}: ${filteredItems.length} items`);
+    return filteredItems;
   } catch (error) {
     console.error(`❌ ${feed.name} error:`, error instanceof Error ? error.message : error);
     return [];
   }
 }
 
-
 export async function POST(request: Request) {
-  
   try {
-    // Auth
     const authHeader = request.headers.get('authorization');
     const vercelCronAuth = request.headers.get('x-vercel-cron-secret');
     const expectedAuth = `Bearer ${process.env.CRON_SECRET}`;
-    
+
     if (!process.env.CRON_SECRET) {
       console.error('❌ CRON_SECRET not set');
       return NextResponse.json({ error: 'Server misconfiguration' }, { status: 500 });
     }
+
     const isAuthorized = authHeader === expectedAuth || vercelCronAuth === process.env.CRON_SECRET;
     if (!isAuthorized) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+
     const redis = getRedis();
     await redis.ping();
-    const allResults = await Promise.all(
-      RSS_FEEDS.map(feed => fetchFeed(feed))
-    );
+
+    const allResults = await Promise.all(RSS_FEEDS.map(fetchFeed));
     const allItems: RSSItem[] = allResults.flat();
-    
-    console.log(`\n📊 Total items fetched: ${allItems.length}`);
-    
+
+    console.log(`📊 Total items fetched: ${allItems.length}`);
+
     if (allItems.length === 0) {
-      console.error('❌ NO ITEMS FETCHED FROM ANY FEED!');
-      return NextResponse.json({ 
-        error: 'No items fetched',
-        success: false 
-      }, { status: 500 });
+      return NextResponse.json({ error: 'No items fetched', success: false }, { status: 500 });
     }
 
-    allItems.sort((a, b) => {
-      const dateA = new Date(a.pubDate).getTime();
-      const dateB = new Date(b.pubDate).getTime();
-      return dateB - dateA; 
-    });
-
-    console.log('🔄 Removing duplicates...');
-    const uniqueItems: RSSItem[] = [];
-    const seenLinks = new Set<string>();
-    
-    for (const item of allItems) {
-      if (!seenLinks.has(item.link)) {
-        seenLinks.add(item.link);
-        uniqueItems.push(item);
-      }
-    }
-    
-    console.log(`✅ Unique items: ${uniqueItems.length}`);
-
-    // Keep only the 500 most recent
+    // Sort and dedupe
+    allItems.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+    const uniqueItems = Array.from(new Map(allItems.map(i => [i.link, i])).values());
     const itemsToStore = uniqueItems.slice(0, 500);
-    
-    console.log(`\n💾 Storing ${itemsToStore.length} items in Redis...`);
-    console.log(`📅 Date range: ${itemsToStore[0]?.pubDate} to ${itemsToStore[itemsToStore.length-1]?.pubDate}`);
 
-    // WRITE TO REDIS
-    const jsonData = JSON.stringify(itemsToStore);
-    const result = await redis.set(REDIS_KEY, jsonData);
-    
-    if (result !== 'OK') {
-      throw new Error(`Redis SET failed: ${result}`);
-    }
-    
-    console.log('🔍 Verifying write...');
-    const verify = await redis.get(REDIS_KEY);
-    
-    if (!verify) {
-      throw new Error('Verification failed: no data found');
-    }
-    
-    const verifiedItems = JSON.parse(verify);
- 
+    // Save to Redis
+    await redis.set(REDIS_KEY, JSON.stringify(itemsToStore));
 
-    return NextResponse.json({ 
+    console.log(`💾 Stored ${itemsToStore.length} items.`);
+
+    return NextResponse.json({
       success: true,
       totalItems: itemsToStore.length,
       feedsProcessed: RSS_FEEDS.length,
-      itemsBySource: RSS_FEEDS.map(feed => ({
-        source: feed.name,
-        count: itemsToStore.filter(item => item.source === feed.name).length,
-        priority: feed.priority,
-        maxItems: feed.maxItems
-      })),
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
-    
   } catch (error) {
-    console.error('\n❌❌❌ FATAL ERROR ❌❌❌');
-    console.error(error);
-    return NextResponse.json({ 
+    console.error('❌ FATAL ERROR:', error);
+    return NextResponse.json({
       error: 'Update failed',
-      details: error instanceof Error ? error.message : String(error)
+      details: error instanceof Error ? error.message : String(error),
     }, { status: 500 });
   }
 }
 
-// GET endpoint
 export async function GET() {
   try {
     const redis = getRedis();
     await redis.ping();
-    
     const cached = await redis.get(REDIS_KEY);
-    
-    if (!cached) {
-      return NextResponse.json([]);
-    }
-    
-    const items = JSON.parse(cached);
-    
-    return NextResponse.json(items);
+    if (!cached) return NextResponse.json([]);
+    return NextResponse.json(JSON.parse(cached));
   } catch (error) {
-    return NextResponse.json({ 
+    return NextResponse.json({
       error: 'Failed to read',
-      details: error instanceof Error ? error.message : String(error)
+      details: error instanceof Error ? error.message : String(error),
     }, { status: 500 });
   }
 }
