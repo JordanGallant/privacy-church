@@ -16,9 +16,9 @@ const RSS_FEEDS = [
   { name: 'Schneier on Security', url: 'https://www.schneier.com/feed/atom/', priority: 2, maxItems: 40 },
   { name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml', priority: 2, maxItems: 40 },
   { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml', priority: 2, maxItems: 40 },
-  { name: 'r/technology', url: 'https://www.reddit.com/r/technology/.rss', priority: 1, maxItems: 5 },
-  { name: 'r/privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 1, maxItems: 5 },
-  { name: 'r/CryptoCurrency', url: 'https://www.reddit.com/r/CryptoCurrency/.rss', priority: 1, maxItems: 5 }
+  // { name: 'r/technology', url: 'https://www.reddit.com/r/technology/.rss', priority: 1, maxItems: 5 },
+  // { name: 'r/privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 1, maxItems: 5 },
+  // { name: 'r/CryptoCurrency', url: 'https://www.reddit.com/r/CryptoCurrency/.rss', priority: 1, maxItems: 5 }
 ];
 
 const REDIS_KEY = 'rss:items';
@@ -36,25 +36,30 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
     console.log(`📡 Fetching ${feed.name} (priority: ${feed.priority}, max: ${feed.maxItems})...`);
     
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // Increased to 30s
     
     const response = await fetch(feed.url, { 
       cache: 'no-store',
       signal: controller.signal,
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; RSSReader/1.0)'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
       }
     });
     
     clearTimeout(timeoutId);
     
     if (!response.ok) {
-      console.error(`❌ ${feed.name} failed: HTTP ${response.status}`);
+      console.error(`❌ ${feed.name} failed: HTTP ${response.status} ${response.statusText}`);
+      const errorText = await response.text().catch(() => 'Could not read error');
+      console.error(`Response preview: ${errorText.substring(0, 200)}`);
       return [];
     }
     
     const xmlText = await response.text();
+    console.log(`📄 ${feed.name} response length: ${xmlText.length} chars`);
+    
     const parsed = await parseStringPromise(xmlText);
+    console.log(`🔍 ${feed.name} parsed structure:`, Object.keys(parsed));
     
     // Handle both RSS and Atom feeds
     let items: any[] = [];
