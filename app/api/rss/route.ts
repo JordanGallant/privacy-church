@@ -99,7 +99,10 @@ async function fetchFeed(feed: {
             loc.endsWith('/articles') ||
             loc.endsWith('/articles/') || 
             loc.endsWith('/board-of-advisors') ||
-             loc.endsWith('/jobs')
+             loc.endsWith('/jobs') || 
+             loc.endsWith('/home') ||
+             loc.endsWith('/community') ||
+             loc.endsWith('/graphic-designer') 
           ) {
             return null;
           }
