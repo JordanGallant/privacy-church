@@ -32,7 +32,13 @@ interface RSSItem {
   favicon: string;
 }
 
-async function fetchFeed(feed: { name: string; url: string; priority: number; maxItems: number; filter?: boolean }) {
+async function fetchFeed(feed: {
+  name: string;
+  url: string;
+  priority: number;
+  maxItems: number;
+  filter?: boolean;
+}) {
   try {
     console.log(`📡 Fetching ${feed.name}...`);
 
@@ -63,41 +69,77 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
       normalize: true,
     });
 
-    // Detect feed format
     let items: any[] = [];
-    let format: 'rss' | 'atom' | 'sitemap' | 'unknown' = 'unknown';
 
+    // --- Detect feed format ---
     if (parsed?.rss?.channel?.item) {
-      format = 'rss';
+      // RSS 2.0
       items = Array.isArray(parsed.rss.channel.item)
         ? parsed.rss.channel.item
         : [parsed.rss.channel.item];
     } else if (parsed?.feed?.entry) {
-      format = 'atom';
+      // Atom
       items = Array.isArray(parsed.feed.entry)
         ? parsed.feed.entry
         : [parsed.feed.entry];
     } else if (parsed?.urlset?.url) {
-      format = 'sitemap';
-      items = Array.isArray(parsed.urlset.url)
+      // Sitemap XML
+      const urls = Array.isArray(parsed.urlset.url)
         ? parsed.urlset.url
         : [parsed.urlset.url];
 
-      // Convert sitemap entries into pseudo-feed items
-      items = items.map((u: any) => ({
-        title: u.loc,
-        link: u.loc,
-        pubDate: u.lastmod || new Date().toISOString(),
-      }));
-      console.log(`🌐 ${feed.name}: parsed ${items.length} sitemap entries.`);
-    }
+      items = urls.map((u: any) => {
+        const loc = u.loc;
+        let title = loc;
 
-    if (items.length === 0) {
+        try {
+          const url = new URL(loc);
+          const pathSegments = url.pathname.split('/').filter(Boolean);
+          const lastSegment = pathSegments[pathSegments.length - 1] || '';
+
+          if (lastSegment && /^[a-z0-9-]+$/.test(lastSegment)) {
+            // Convert slug → Title Case
+            title = lastSegment
+              .split('-')
+              .map(
+                (word) =>
+                  word.length > 1
+                    ? word.charAt(0).toUpperCase() + word.slice(1)
+                    : word.toUpperCase()
+              )
+              .join(' ');
+
+            // Fix common contractions
+            title = title
+              .replace(/\bYoure\b/g, "You're")
+              .replace(/\bDont\b/g, "Don't")
+              .replace(/\bCant\b/g, "Can't")
+              .replace(/\bIm\b/g, "I'm")
+              .replace(/\bIsnt\b/g, "Isn't")
+              .replace(/\bWasnt\b/g, "Wasn't")
+              .replace(/\bHes\b/g, "He's")
+              .replace(/\bShes\b/g, "She's");
+          } else {
+            title = url.hostname.replace('www.', '');
+          }
+        } catch {
+          // Keep raw loc if URL parsing fails
+        }
+
+        return {
+          title,
+          link: loc,
+          pubDate: u.lastmod || new Date().toISOString(),
+        };
+      });
+
+      console.log(`🌐 ${feed.name}: parsed ${items.length} sitemap entries.`);
+    } else {
       console.warn(`⚠️ ${feed.name}: No recognizable items found`);
       return [];
     }
 
-    // Normalize items
+    // --- Normalize items ---
     const processedItems = items.slice(0, feed.maxItems).map((item: any) => {
       let title =
         item.title?._ ||
@@ -111,7 +153,9 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
         if (typeof item.link === 'string') {
           link = item.link;
         } else if (Array.isArray(item.link)) {
-          const linkObj = item.link.find((l: any) => l.href || l.rel === 'alternate') || item.link[0];
+          const linkObj =
+            item.link.find((l: any) => l.href || l.rel === 'alternate') ||
+            item.link[0];
           link = linkObj?.href || linkObj?._ || linkObj;
         } else if (item.link.href) {
           link = item.link.href;
@@ -119,7 +163,7 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
       } else if (item.id) {
         link = Array.isArray(item.id) ? item.id[0] : item.id;
       } else if (item.loc) {
-        // For sitemap-derived entries
+        // For sitemap items
         link = item.loc;
       }
 
@@ -152,23 +196,29 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
 
     const validItems = processedItems.filter((i) => i.link);
 
-    // Apply keyword filtering if enabled
+    // --- Apply keyword filtering ---
     let filteredItems = validItems;
     if (feed.filter) {
       filteredItems = validItems.filter((item) => {
         const title = item.title?.toLowerCase() || '';
         return KEYWORDS.some((kw) => title.includes(kw));
       });
-      console.log(`🔍 ${feed.name}: filtered ${filteredItems.length}/${validItems.length} items by keywords.`);
+      console.log(
+        `🔍 ${feed.name}: filtered ${filteredItems.length}/${validItems.length} items by keywords.`
+      );
     }
 
-    console.log(`✅ ${feed.name} (${format}): ${filteredItems.length} items`);
+    console.log(`✅ ${feed.name}: ${filteredItems.length} items`);
     return filteredItems;
   } catch (error) {
-    console.error(`❌ ${feed.name} error:`, error instanceof Error ? error.message : error);
+    console.error(
+      `❌ ${feed.name} error:`,
+      error instanceof Error ? error.message : error
+    );
     return [];
   }
 }
+
 
 
 export async function POST(request: Request) {
