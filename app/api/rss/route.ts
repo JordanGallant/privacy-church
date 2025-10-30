@@ -22,7 +22,7 @@ const RSS_FEEDS = [
 ];
 
 const REDIS_KEY = 'rss:items';
-const KEYWORDS = ['privacy', 'tech'];
+const KEYWORDS = ['privacy'];
 
 interface RSSItem {
   source: string;
@@ -98,7 +98,8 @@ async function fetchFeed(feed: {
             loc.includes('/about') ||
             loc.endsWith('/articles') ||
             loc.endsWith('/articles/') || 
-            loc.endsWith('/board-of-advisors')
+            loc.endsWith('/board-of-advisors') ||
+             loc.endsWith('/jobs')
           ) {
             return null;
           }
