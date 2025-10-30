@@ -4,21 +4,21 @@ import { parseStringPromise } from 'xml2js';
 import { getRedis } from '../../lib/redis';
 
 const RSS_FEEDS = [
-  { name: 'Hacker News', url: 'https://news.ycombinator.com/rss', priority: 3, maxItems: 10 },
-  { name: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index', priority: 2, maxItems: 10 },
-  { name: 'TechCrunch', url: 'https://techcrunch.com/feed/', priority: 2, maxItems: 10 },
-  { name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml', priority: 1, maxItems: 20 },
-  { name: 'Wired', url: 'https://www.wired.com/feed/rss', priority: 2, maxItems: 10 },
-  { name: 'CoinDesk', url: 'https://www.coindesk.com/arc/outboundfeeds/rss/', priority: 2, maxItems: 10 },
+  { name: 'Hacker News', url: 'https://news.ycombinator.com/rss', priority: 3, maxItems: 60 },
+  { name: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index', priority: 2, maxItems: 40 },
+  { name: 'TechCrunch', url: 'https://techcrunch.com/feed/', priority: 2, maxItems: 40 },
+  { name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml', priority: 1, maxItems: 10 },
+  { name: 'Wired', url: 'https://www.wired.com/feed/rss', priority: 2, maxItems: 40 },
+  { name: 'CoinDesk', url: 'https://www.coindesk.com/arc/outboundfeeds/rss/', priority: 2, maxItems: 40 },
   { name: 'Decrypt', url: 'https://decrypt.co/feed', priority: 2, maxItems: 40 },
   { name: 'The Block', url: 'https://www.theblock.co/rss.xml', priority: 2, maxItems: 40 },
-  { name: 'Krebs on Security', url: 'https://krebsonsecurity.com/feed/', priority: 2, maxItems: 10 },
+  { name: 'Krebs on Security', url: 'https://krebsonsecurity.com/feed/', priority: 2, maxItems: 40 },
   { name: 'Schneier on Security', url: 'https://www.schneier.com/feed/atom/', priority: 2, maxItems: 40 },
-  { name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml', priority: 2, maxItems: 10 },
-  { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml', priority: 2, maxItems: 10 },
-  { name: 'r/technology', url: 'https://www.reddit.com/r/technology/.rss', priority: 1, maxItems: 20 },
-  { name: 'r/privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 1, maxItems: 20 },
-  { name: 'r/CryptoCurrency', url: 'https://www.reddit.com/r/CryptoCurrency/.rss', priority: 1, maxItems: 20 }
+  { name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml', priority: 2, maxItems: 40 },
+  { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml', priority: 2, maxItems: 40 },
+  { name: 'r/technology', url: 'https://www.reddit.com/r/technology/.rss', priority: 1, maxItems: 5 },
+  { name: 'r/privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 1, maxItems: 5 },
+  { name: 'r/CryptoCurrency', url: 'https://www.reddit.com/r/CryptoCurrency/.rss', priority: 1, maxItems: 5 }
 ];
 
 const REDIS_KEY = 'rss:items';
