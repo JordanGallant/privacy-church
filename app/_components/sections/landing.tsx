@@ -26,11 +26,14 @@ export default function Landing() {
           </div>
         </div>
 
-        <div className="w-full max-w-7xl mx-auto">
-          <p className="text-base font-bold md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]">
-            Privacy Church is a living guide to digital privacy, uniting knowledge, tools and people that care. We translate the chaos of digital life into something you can actually act on: to show you why privacy matters, who is fighting for it, and how you can join them.
-          </p>
-        </div>
+<div className="w-full max-w-7xl mx-auto px-6 md:px-10">
+  <p
+    className="font-[family-name:var(--font-dm-mono)] font-normal text-[15px] leading-[20px] tracking-[-0.06em]"
+  >
+    Privacy Church is a living guide to digital privacy, uniting knowledge, tools and people that care. We translate the chaos of digital life into something you can actually act on: to show you why privacy matters, who is fighting for it, and how you can join them.
+  </p>
+</div>
+
       </div>
 
     </>
