@@ -16,6 +16,7 @@ const RSS_FEEDS = [
   { name: 'Schneier on Security', url: 'https://www.schneier.com/feed/atom/', priority: 2, maxItems: 100, filter: true },
   { name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml', priority: 2, maxItems: 100, filter: true },
   { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml', priority: 2, maxItems: 100, filter: true },
+  { name: 'Ludlow Institute', url: 'https://www.ludlowinstitute.org/sitemap.xml', priority: 2, maxItems: 100, filter: false },
   { name: 'r/Privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 3, maxItems: 50, filter: true },
 
 ];
@@ -64,15 +65,34 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
 
     // Detect feed format
     let items: any[] = [];
+    let format: 'rss' | 'atom' | 'sitemap' | 'unknown' = 'unknown';
+
     if (parsed?.rss?.channel?.item) {
+      format = 'rss';
       items = Array.isArray(parsed.rss.channel.item)
         ? parsed.rss.channel.item
         : [parsed.rss.channel.item];
     } else if (parsed?.feed?.entry) {
+      format = 'atom';
       items = Array.isArray(parsed.feed.entry)
         ? parsed.feed.entry
         : [parsed.feed.entry];
-    } else {
+    } else if (parsed?.urlset?.url) {
+      format = 'sitemap';
+      items = Array.isArray(parsed.urlset.url)
+        ? parsed.urlset.url
+        : [parsed.urlset.url];
+
+      // Convert sitemap entries into pseudo-feed items
+      items = items.map((u: any) => ({
+        title: u.loc,
+        link: u.loc,
+        pubDate: u.lastmod || new Date().toISOString(),
+      }));
+      console.log(`🌐 ${feed.name}: parsed ${items.length} sitemap entries.`);
+    }
+
+    if (items.length === 0) {
       console.warn(`⚠️ ${feed.name}: No recognizable items found`);
       return [];
     }
@@ -98,12 +118,16 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
         }
       } else if (item.id) {
         link = Array.isArray(item.id) ? item.id[0] : item.id;
+      } else if (item.loc) {
+        // For sitemap-derived entries
+        link = item.loc;
       }
 
       let pubDate =
         item.pubDate ||
         item.published ||
         item.updated ||
+        item.lastmod ||
         new Date().toISOString();
       if (Array.isArray(pubDate)) pubDate = pubDate[0];
 
@@ -128,7 +152,7 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
 
     const validItems = processedItems.filter((i) => i.link);
 
-    // Apply keyword filtering if enabled for this feed
+    // Apply keyword filtering if enabled
     let filteredItems = validItems;
     if (feed.filter) {
       filteredItems = validItems.filter((item) => {
@@ -138,13 +162,14 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
       console.log(`🔍 ${feed.name}: filtered ${filteredItems.length}/${validItems.length} items by keywords.`);
     }
 
-    console.log(`✅ ${feed.name}: ${filteredItems.length} items`);
+    console.log(`✅ ${feed.name} (${format}): ${filteredItems.length} items`);
     return filteredItems;
   } catch (error) {
     console.error(`❌ ${feed.name} error:`, error instanceof Error ? error.message : error);
     return [];
   }
 }
+
 
 export async function POST(request: Request) {
   try {
