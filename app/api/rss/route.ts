@@ -23,7 +23,7 @@ const RSS_FEEDS = [
   { name: 'r/CryptoCurrency', url: 'https://www.reddit.com/r/CryptoCurrency/.rss' }
 ];
 
-const REDIS_URL = 'process.env.REDIS_URL!';
+const REDIS_URL = process.env.REDIS_URL!;
 const REDIS_KEY = 'rss:items';
 const REDIS_TIMESTAMP_KEY = 'rss:last_update';
 
