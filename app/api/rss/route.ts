@@ -16,6 +16,8 @@ const RSS_FEEDS = [
   { name: 'Schneier on Security', url: 'https://www.schneier.com/feed/atom/', priority: 2, maxItems: 100, filter: true },
   { name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml', priority: 2, maxItems: 100, filter: true },
   { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml', priority: 2, maxItems: 100, filter: true },
+  { name: 'r/Privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 3, maxItems: 50, filter: true },
+
 ];
 
 const REDIS_KEY = 'rss:items';
