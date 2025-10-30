@@ -16,9 +16,6 @@ const RSS_FEEDS = [
   { name: 'Schneier on Security', url: 'https://www.schneier.com/feed/atom/', priority: 2, maxItems: 40 },
   { name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml', priority: 2, maxItems: 40 },
   { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml', priority: 2, maxItems: 40 },
-  // { name: 'r/technology', url: 'https://www.reddit.com/r/technology/.rss', priority: 1, maxItems: 5 },
-  // { name: 'r/privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 1, maxItems: 5 },
-  // { name: 'r/CryptoCurrency', url: 'https://www.reddit.com/r/CryptoCurrency/.rss', priority: 1, maxItems: 5 }
 ];
 
 const REDIS_KEY = 'rss:items';
@@ -41,9 +38,13 @@ async function fetchFeed(feed: { name: string; url: string; priority: number; ma
     const response = await fetch(feed.url, { 
       cache: 'no-store',
       signal: controller.signal,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-      }
+     headers: {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  'Accept': 'application/rss+xml, application/xml;q=0.9, */*;q=0.8',
+  'Accept-Language': 'en-US,en;q=0.9',
+  'Cache-Control': 'no-cache',
+  'Pragma': 'no-cache',
+}
     });
     
     clearTimeout(timeoutId);
