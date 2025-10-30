@@ -1,7 +1,7 @@
 // app/_components/news.tsx
 'use client'
 import { useState, useEffect } from 'react';
-
+//update
 interface NewsItem {
   source: string;
   title: string;
