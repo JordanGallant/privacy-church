@@ -24,7 +24,7 @@ export default function Communities() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
+      <h1 className="text-2xl  font-bold mb-4 leading-tight font-[family-name:var(--font-gt-planar-menu)] -mt-4">
             FEATURED</h1>
       
       <div className="space-y-4">
@@ -42,7 +42,7 @@ export default function Communities() {
               }}
             />
             <div>
-              <h3 className="text-xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
+              <h3 className="text-xl font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
                 {community.title}
               </h3>
               <p className="text-base md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]">

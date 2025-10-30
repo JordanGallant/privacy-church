@@ -13,13 +13,13 @@ export default function EventsPage() {
   </h1>
 
   <p
-    className="font-[family-name:var(--font-dm-mono)] font-normal text-[15px] leading-[20px] tracking-[-0.06em]"
+    className="font-[family-name:var(--font-dm-mono)] font-normal text-[15px] leading-[20px] tracking-[-0.06em] mb-4"
     style={{ color: "#717171" }}
   >
     Welcome to the Other Side of the Screen, for the curious, cautious and chronically online.
   </p>
 
-  <img src="/assets/tool.png" alt="Tool" className="mt-4" />
+  <img src="/assets/tool.png" alt="Tool" className="mt-8" />
 </div>
 
      
@@ -27,7 +27,7 @@ export default function EventsPage() {
 
     
     <div className="p-6 max-w-4xl mx-auto">
-       <h1 className="text-2xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
+       <h1 className="text-2xl  font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)] -mt-4">
         IN ASIA
     </h1>
       <Picks events={[

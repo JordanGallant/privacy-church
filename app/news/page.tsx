@@ -6,13 +6,13 @@ export default function NewspPage() {
     <>
       <Navbar hideLogo={false} />
 
-<div className="p-6 max-w-4xl mx-auto">
+<div className="px-6 max-w-4xl mx-auto">
   <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
           News
         </h1>
 
         <p
-          className="text-base md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]"
+          className="font-[family-name:var(--font-dm-mono)] font-normal text-[15px] leading-[20px] tracking-[-0.06em] mb-4"
           style={{ color: "#717171" }}
         >
           Fresh sins, big wins and ongoing acts of surveillance disguised as progress.

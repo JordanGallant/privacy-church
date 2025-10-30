@@ -12,7 +12,7 @@ export default function EventsPage() {
         Events
     </h1>
     <p
-          className="text-base md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]"
+          className="font-[family-name:var(--font-dm-mono)] font-normal text-[15px] leading-[20px] tracking-[-0.06em] mb-4"
           style={{ color: "#717171" }}
         >
         Go if you know everything. Go if you know nothing.        </p>

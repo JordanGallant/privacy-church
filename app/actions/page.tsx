@@ -11,13 +11,14 @@ export default function ToolsPage() {
         Actions
     </h1>
     <p
-          className="text-base md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]"
+            className="font-[family-name:var(--font-dm-mono)] font-normal text-[15px] leading-[20px] tracking-[-0.06em] mb-4"
+
           style={{ color: "#717171" }}
         >
           Each setting you change, each tracker you block, each lie you tell an algorithm, it all adds up.
         </p>
 
-        <img src = "/assets/tool.png" className='mb-4'/>
+        <img src = "/assets/tool.png" className='mb-8'/>
 
         <Picks events={[
   { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },

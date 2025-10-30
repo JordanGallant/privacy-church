@@ -12,7 +12,7 @@ export default function ManifestoPage() {
         Manifesto
     </h1>
     <p
-          className="text-base text-[#353535] md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]"
+          className="font-[family-name:var(--font-dm-mono)] font-normal text-[15px] leading-[20px] tracking-[-0.06em] mb-4"
           
         >
           The why, who and how of digital freedom
