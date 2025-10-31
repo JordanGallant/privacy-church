@@ -18,6 +18,8 @@ const RSS_FEEDS = [
   { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml', priority: 2, maxItems: 100, filter: true },
   { name: 'Ludlow Institute', url: 'https://www.ludlowinstitute.org/sitemap.xml', priority: 2, maxItems: 100, filter: false },
   { name: 'r/Privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 3, maxItems: 50, filter: true },
+  { name: 'Privacy International', url: 'https://privacyinternational.org/rss.xml', priority: 3, maxItems: 50, filter: false },
+  https://privacyinternational.org/rss.xml
 
 ];
 

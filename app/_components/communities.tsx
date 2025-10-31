@@ -42,7 +42,7 @@ export default function Communities() {
               }}
             />
             <div>
-              <h3 className="text-xl font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
+              <h3 className="text-xl  font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
                 {community.title}
               </h3>
               <p className="text-base md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]">
