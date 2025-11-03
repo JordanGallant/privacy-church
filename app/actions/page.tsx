@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../_components/nav'
 import Picks from '../_components/pick'
+import Heading from '../_components/tiny/heading'
 
 export default function ToolsPage() {
   return (
@@ -19,7 +20,8 @@ export default function ToolsPage() {
         </p>
 
         <img src = "/assets/tool.png" className='mb-8'/>
-
+        <Heading text="Policy-Level Engagement" />
+       
         <Picks events={[
   { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },
   { id: 2, title: "Web3 Summit", date: "2025-09-10", tag: "blockchain" },

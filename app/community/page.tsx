@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../_components/nav'
 import Communities from '../_components/communities'
 import Picks from '../_components/pick'
+import Heading from '../_components/tiny/heading'
 
 export default function EventsPage() {
   return (
@@ -21,15 +22,14 @@ export default function EventsPage() {
 
   <img src="/assets/tool.png" alt="Tool" className="mt-8" />
 </div>
-
-     
+<div className='pl-6'>
+<h1 className="text-[#A0A0A0] text-[20px] font-black whitespace-nowrap uppercase font-[family-name:var(--font-gt-planar-black)]">Featured</h1>
+    </div>
     <Communities/>
 
     
     <div className="p-6 max-w-4xl mx-auto">
-       <h1 className="text-2xl  font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)] -mt-4">
-        IN ASIA
-    </h1>
+     <Heading text="in Asia" />
       <Picks events={[
         { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },
         { id: 2, title: "Web3 Summit", date: "2025-09-10", tag: "blockchain" },

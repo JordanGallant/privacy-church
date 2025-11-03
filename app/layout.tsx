@@ -20,7 +20,7 @@ const gtPlanarLight = localFont({
 });
 
 const gtPlanarBlack = localFont({
-  src: '../public/fonts/GT-Planar-Retalic-30-Bold-Trial.woff2',
+  src: '../public/fonts/GT-Planar-Retalic-30-Black-Trial.woff2',
  variable: '--font-gt-planar-black',
   display: 'swap',
 });

@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../_components/nav'
 import Picks from '../_components/pick'
+import Heading from '../_components/tiny/heading'
 
 
 export default function ManifestoPage() {
@@ -8,7 +9,7 @@ export default function ManifestoPage() {
     <>
     <Navbar/>
 <div className="p-6 max-w-4xl mx-auto">
-  <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
+  <h1 className="text-5xl mb-2 pl-3 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
         Manifesto
     </h1>
     <p
@@ -61,6 +62,8 @@ export default function ManifestoPage() {
 
     </div>    
       <div className="p-6 max-w-4xl mx-auto">
+        <Heading text="additional manifestos" />
+        
       <Picks events={[
         { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },
         { id: 2, title: "Web3 Summit", date: "2025-09-10", tag: "blockchain" },

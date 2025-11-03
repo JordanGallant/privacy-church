@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../_components/nav'
 import Picks from '../_components/pick'
+import Heading from '../_components/tiny/heading'
 
 export default function ToolsPage() {
   return (
@@ -18,6 +19,17 @@ export default function ToolsPage() {
         </p>
 
         <img src = "/assets/tool.png" className='mb-8'/>
+        
+        <Heading text="Tool Aggregators" />
+        <Picks events={[
+          { id: 1, title: "Privacy.sexy",text:"Personalized privacy setup recommendations based on threat model and OS. ", tag: "#tools, #setup-guide, #web2, #open-source", ourPick: true, pickColor: 'blue', href: 'https://privacy.sexy' },
+          { id: 2, title: "Web3Privacy", text: "Curated database evaluating privacy in Web3 projects and protocols. ", tag: "#tools, #web3, #database, #open-source", ourPick: true, href:'https://github.com/web3privacy/web3privacy' },
+          { id: 3, title: "Privacy Builder Pack", text:"templates and frameworks for building privacy into products from design phase. ",tag:" #tools, #design, #web3, #developer-focused",href:"https://github.com/web3privacy/privacy-builder-pack" }
+        ]} />
+        <div className='pt-8'>
+
+        <Heading text="General Digital Hygiene" />
+        </div>
         <Picks events={[
           { id: 1, title: "Ethereum Cypherpunk Congress",text:"Basic guide of how to survive the internet without being lost in rabbit holes.", date: "2025-09-04", tag: "#Whistleblowing #Whistleblowing", ourPick: true, pickColor: 'blue' },
           { id: 2, title: "Web3 Summit", date: "2025-09-10", tag: "#Whistleblowing #Whistleblowing", ourPick: true },

@@ -12,7 +12,7 @@ export default function Menu() {
   
   return (
     <div 
-      className="absolute inset-0 flex flex-col pt-24 px-8"
+      className="absolute inset-0 flex flex-col pt-24 px-6"
       style={{
         background: 'linear-gradient(to right, #ff6213, transparent)',
         fontFamily: 'var(--font-gt-planar), sans-serif',

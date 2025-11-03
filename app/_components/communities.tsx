@@ -1,6 +1,7 @@
 // components/Communities.tsx
 'use client';
-
+import Head from "next/head";
+import Heading from "./tiny/heading";
 interface Community {
   id: number;
   title: string;
@@ -23,9 +24,10 @@ export default function Communities() {
   ];
 
   return (
+    <>
+    
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl  font-bold mb-4 leading-tight font-[family-name:var(--font-gt-planar-menu)] -mt-4">
-            FEATURED</h1>
+      
       
       <div className="space-y-4">
         {communities.map(community => (
@@ -55,5 +57,6 @@ export default function Communities() {
         
       </div>
     </div>
+    </>
   );
 }

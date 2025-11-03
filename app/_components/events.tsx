@@ -64,9 +64,7 @@ export default function EventsList({ argentina = false }: EventsListProps) {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-        <h1 className="text-2xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
-        {argentina ? 'IN ARGENTINA' : 'FEATURED'}
-      </h1>
+       
       
       <div className="space-y-4">
         {events.map((event, index) => (

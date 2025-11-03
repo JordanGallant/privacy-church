@@ -16,10 +16,12 @@ export default function NewspPage() {
           style={{ color: "#717171" }}
         >
           Fresh sins, big wins and ongoing acts of surveillance disguised as progress.
+
         </p>
+        <News />
       </div>
 
-      <News />
+      
     </>
   );
 }

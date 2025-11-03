@@ -16,12 +16,9 @@ export default function Landing() {
               className="w-full max-w-md h-auto rounded-lg"
             />
             <Link href="/home">
-            <p 
-              onClick={() => setIsModalOpen(true)}
-              className=" font-bold underline text-center"
-            >
+            <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
               Enter
-            </p>
+            </h1>
             </Link>
           </div>
         </div>
