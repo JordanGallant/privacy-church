@@ -77,7 +77,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
             
             {/* Logo */}
             <div 
-              className={`transition-opacity duration-700 ${
+              className={`transition-opacity duration-2000 ${
                 showGreeting ? 'opacity-0' : 'opacity-100'
               }`}
             >
