@@ -29,7 +29,7 @@ export default function SimpleEventsList({ events }: SimpleEventsListProps) {
               {event.ourPick && (
                 <Ourpick color={event.pickColor} />
               )}
-              <h3 className="text-xl  font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)]">
+              <h3 className="text-xl  font-medium mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)]">
                 {event.title}
               </h3>
               {event.text && (
