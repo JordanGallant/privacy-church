@@ -22,46 +22,51 @@ interface SimpleEventsListProps {
 export default function SimpleEventsList({ events }: SimpleEventsListProps) {
   return (
     <div className="space-y-4">
-      {events.map(event => {
+      {events.map((event, index) => {
         const content = (
-          <div className="border-b border-gray-400 pb-4 last:border-b-0">
-            {event.ourPick && (
-              <Ourpick color={event.pickColor} />
+          <>
+            <div className="">
+              {event.ourPick && (
+                <Ourpick color={event.pickColor} />
+              )}
+              <h3 className="text-xl  font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)]">
+                {event.title}
+              </h3>
+              {event.text && (
+                <p className=" text-[15px] leading-[20px] tracking-[-0.06em] font-[family-name:var(--font-dm-mono)] mb-2">
+                  {event.text}
+                </p>
+              )}
+              {event.date && (
+                <p className="txt-5xl text-white font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
+                  style={{ color: '#A0A0A0' }}
+                >
+                  {new Date(event.date).toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    day: 'numeric',
+                    month: 'short'
+                  })}
+                </p>
+              )}
+              {event.location && (
+                <p className="inline-block px-[2px] mb-2 text-xs uppercase font-[family-name:var(--font-elevatica)]"
+                  style={{ color: '#A0A0A0' }}
+                >
+                  {event.location}
+                </p>
+              )}
+              {event.tag && (
+                <p className="txt-xl font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
+                  style={{ color: '#A0A0A0' }}
+                >
+                  {event.tag}
+                </p>
+              )}
+            </div>
+            {index < events.length - 1 && (
+              <hr className="border-gray-400 my-4" />
             )}
-            <h3 className="text-xl italic font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
-              {event.title}
-            </h3>
-            {event.text && (
-              <p className="text-base md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]">
-                {event.text}
-              </p>
-            )}
-            {event.date && (
-              <p className="txt-5xl text-white font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
-                style={{ color: '#A0A0A0' }}
-              >
-                {new Date(event.date).toLocaleDateString('en-US', {
-                  weekday: 'short',
-                  day: 'numeric',
-                  month: 'short'
-                })}
-              </p>
-            )}
-            {event.location && (
-              <p className="inline-block px-[2px] mb-2 text-xs uppercase font-[family-name:var(--font-elevatica)]"
-                style={{ color: '#A0A0A0' }}
-              >
-                {event.location}
-              </p>
-            )}
-            {event.tag && (
-              <p className="txt-xl font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
-                style={{ color: '#A0A0A0' }}
-              >
-                {event.tag}
-              </p>
-            )}
-          </div>
+          </>
         );
 
         return event.href ? (
