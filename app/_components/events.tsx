@@ -1,6 +1,6 @@
 // components/EventsList.tsx
 'use client';
-
+import { MapPin } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import OurPick from './tiny/ourpick';
 
@@ -8,6 +8,7 @@ interface Event {
   id: number;
   title: string;
   date: string;
+  link: string;
   location: {
     city: string;
     country: string;
@@ -34,10 +35,10 @@ export default function EventsList({ argentina = false }: EventsListProps) {
         let filteredEvents: Event[];
         
         if (argentina) {
-          // Show all events in Argentina
-          filteredEvents = data.filter(
-            event => event.location.country === 'Argentina'
-          );
+          // Show only 4 events in Argentina
+          filteredEvents = data
+            .filter(event => event.location.country === 'Argentina')
+            .slice(0, 4);
         } else {
           // Show top 3 events from bottom of JSON (last 3 events)
           filteredEvents = data.slice(-3);
@@ -69,37 +70,46 @@ export default function EventsList({ argentina = false }: EventsListProps) {
         {events.map((event, index) => (
           argentina ? (
             // Argentina style - green square with text
-            <div
+            <a
               key={event.id}
+              href={event.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-4 hover:shadow-md transition-shadow"
             >
               <div
-                className="rounded-lg flex-shrink-0"
+                className="rounded-lg flex-shrink-0 relative flex items-start justify-start p-2"
                 style={{
                   width: '100px',
                   height: '100px',
-                  backgroundColor: '#BFF921'
+                  backgroundColor: '#873A03'
                 }}
-              />
+              >
+                {index < 1 && <OurPick color="green" />}
+              </div>
               <div>
-                {index < 2 && <OurPick color="green" />}
-                <h3 className="text-xl italic font-bold mb-2 leading-tight font-[family-name:var( )]">
+                <h3 className="text-xl leading-tight tracking-[-0.01em] font-medium mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)]">
                   {event.title}
                 </h3>
-                <p className="inline-block px-[2px] mb-2 text-xs uppercase font-[family-name:var(--font-elevatica)]"
-                    style={{ color: '#A0A0A0' }}>
-                  {event.date}
-                </p>
-                <br/>
-                <p className="inline-block px-[2px] mb-2 text-xs uppercase font-[family-name:var(--font-elevatica)]"
-                 style={{ color: '#A0A0A0' }}>
-                  {event.location.city}
-                </p>
+                <div className="flex gap-4">
+  <p className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
+    style={{ color: '#A0A0A0' }}>
+    {event.date}
+  </p>
+  <p className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)] flex items-center gap-1"
+    style={{ color: '#A0A0A0' }}>
+    <MapPin className="w-5 h-5" />
+    {event.location.city}
+  </p>
+</div>
               </div>
-            </div>
+            </a>
           ) : (
-            <div
+            <a
               key={event.id}
+              href={event.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-lg p-5 hover:shadow-lg transition-shadow flex flex-col justify-end"
               style={{
                 background: 'linear-gradient(to top, #000000, #FF6213)',
@@ -121,7 +131,7 @@ export default function EventsList({ argentina = false }: EventsListProps) {
                   })}, {event.location.city}
                 </p>
               </div>
-            </div>
+            </a>
           )
         ))}
       </div>
