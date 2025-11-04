@@ -50,7 +50,7 @@ export default function News() {
               className="flex items-start gap-4 group"
             >
               <div className="flex-1">
-                <h2 className="text-2xl italic font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-black)] group-hover:underline">
+                <h2 className="text-2xl font-medium mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)] group-hover:underline">
                   {item.title}
                 </h2>
                 <p className="flex items-center gap-2 text-base italic md:text-lg leading-relaxed font-[family-name:var(--font-gt-planar-light)] text-[#A0A0A0]">
