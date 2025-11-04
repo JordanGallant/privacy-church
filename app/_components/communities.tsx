@@ -47,7 +47,7 @@ export default function Communities() {
               <h3 className="text-xl  font-bold mb-2 leading-tight font-[family-name:var(--font-gt-planar-menu)]">
                 {community.title}
               </h3>
-              <p className="text-base md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]">
+                <p className=" text-[15px] leading-[20px] tracking-[-0.06em] font-[family-name:var(--font-dm-mono)] mb-2">
                 {community.description}
               </p>
             </div>

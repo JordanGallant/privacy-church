@@ -30,11 +30,13 @@ export default function EventsPage() {
     
     <div className="p-6 max-w-4xl mx-auto">
      <Heading text="in Asia" />
-      <Picks events={[
-        { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },
-        { id: 2, title: "Web3 Summit", date: "2025-09-10", tag: "blockchain" },
-        { id: 3, title: "DeFi Conference", date: "2025-09-15", location: "New York" }
-      ]} />
+     <Picks events={[
+               { id: 1, title: "Glitch Armour",text:"Basic guide of how to survive the internet without being lost in rabbit holes.", tag: "#Whistleblowing #Whistleblowing", ourPick: true, href: 'https://privacy.sexy' },
+               { id: 2, title: "Privacy.sexy",text:"Personalized privacy setup recommendations based on threat model and OS. ", tag: "#tools, #setup-guide, #web2, #open-source", href: 'https://privacy.sexy' },
+               { id: 3, title: "Web3Privacy", text: "Curated database evaluating privacy in Web3 projects and protocols. ", tag: "#tools, #web3, #database, #open-source", href:'https://github.com/web3privacy/web3privacy' },
+               { id: 4, title: "SecureShare", text:"A platform for secure file sharing with end-to-end encryption",tag:"#web2,  #Advanced" },
+               { id: 5, title: "DataGuardians", text:"Community-based initiative to educate users about data protection",tag:"#web3,  #Beginner" },
+             ]} />  
     </div>
     </>
   )

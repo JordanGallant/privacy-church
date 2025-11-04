@@ -65,10 +65,91 @@ export default function ManifestoPage() {
         <Heading text="additional manifestos" />
         
       <Picks events={[
-        { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },
-        { id: 2, title: "Web3 Summit", date: "2025-09-10", tag: "blockchain" },
-        { id: 3, title: "DeFi Conference", date: "2025-09-15", location: "New York" }
-      ]} />
+  { 
+    id: 1, 
+    title: "Healthy Digital Habits That Protect Against Identity Theft",
+    text: "Behavioral shifts preventing exposure without specialized tools.", 
+    tag: "#tools #beginner-friendly #web2 #habits #beginner",
+    href: 'https://enthec.com/en/9-healthy-digital-habits-that-will-protect-you-from-identity-theft-and-leaks' 
+  },
+  { 
+    id: 2, 
+    title: "Stay Safe Online", 
+    text: "Accessible basics for personal digital security.", 
+    tag: "#tools #beginner-friendly #web2 #security #beginner",
+    href: 'https://www.staysafeonline.org/resources/online-safety-and-privacy' 
+  },
+  { 
+    id: 3, 
+    title: "Maintain Privacy and Digital Wellness", 
+    text: "University of Washington guide on personal data management.", 
+    tag: "#tools #beginner-friendly #web2 #education #beginner",
+    href: 'https://azbigmedia.com/lifestyle/protecting-your-privacy-online-18-tips-and-resources/' 
+  },
+  { 
+    id: 4, 
+    title: "Protecting Your Privacy in the Digital Age", 
+    text: "ACLU guide on legal rights and practical steps.", 
+    tag: "#tools #policy #web2 #rights #beginner",
+    href: 'https://www.aclum.org/en/resource-protecting-your-privacy-digital-age' 
+  },
+  { 
+    id: 5, 
+    title: "7 Best Online Resources to Learn About Data Privacy & Security", 
+    text: "Curated learning paths.", 
+    tag: "#tools #education #web2 #beginner",
+    href: 'https://dataprivacymanager.net/8-best-online-resources-to-learn-more-about-data-privacy-security/' 
+  },
+  { 
+    id: 6, 
+    title: "Crypto Anarchist Manifesto", 
+    text: "Digital pseudonyms as tools for decentralizing power away from coerced legal identity.", 
+    tag: "#theory #crypto-anarchist #web3 #foundational #beginner",
+    href: 'https://www.alamut.com/subj/ideologies/manifestos/cryptoanarchist.html' 
+  },
+  { 
+    id: 7, 
+    title: "Cypherpunk Manifesto", 
+    text: "Privacy as a right in digital spaces; encryption as political infrastructure.", 
+    tag: "#theory #crypto-anarchist #web2 #foundational #beginner",
+    href: 'https://www.activism.net/cypherpunk/manifesto.html' 
+  },
+  { 
+    id: 8, 
+    title: "A Declaration of the Independence of Cyberspace", 
+    text: "Early web sovereignty text claiming digital spaces exist beyond state jurisdiction.", 
+    tag: "#theory #foundational #manifesto #beginner",
+    href: 'https://www.eff.org/it/cyberspace-independence' 
+  },
+  { 
+    id: 9, 
+    title: "The Priv/Acc Manifesto", 
+    text: "Contemporary privacy + advocacy framework.", 
+    tag: "#theory #manifesto #web3 #contemporary #beginner",
+    href: 'https://privacc.org/' 
+  },
+  { 
+    id: 10, 
+    title: "The Core of Crypto is Punks and Principles", 
+    text: "Why ideology matters more than tech in decentralized movements.", 
+    tag: "#theory #web3 #culture #ethics #beginner",
+    href: 'https://news.dyne.org/the-core-of-crypto-is-punks-and-principles/' 
+  },
+  { 
+    id: 11, 
+    title: "Web3 Will Fail If It Doesn't Put People Before Profits", 
+    text: "Critique of extractive logic in decentralized tech.", 
+    tag: "#theory #web3 #critique #ethics #beginner",
+    href: 'https://kriskrug.co/2023/11/01/web3-will-fail-if-it-doesnt-put-people-before-profits-and-technology/' 
+  },
+  { 
+    id: 12, 
+    title: "A Manifesto for Web Science @ 10", 
+    text: "Social and technical governance frameworks for the web's future.", 
+    tag: "#theory #governance #policy #intermediate",
+    href: 'https://policyreview.info/articles/analysis/crypto-communities-legal-orders' 
+  }
+]} />
     </div>
     </>
   )
