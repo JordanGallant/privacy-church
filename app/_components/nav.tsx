@@ -31,19 +31,49 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
     e.currentTarget.blur();
   };
 
+  // Split text into individual characters for wave animation
+  const greetingText = "Hello, stranger";
+  const greetingChars = greetingText.split('');
+
   return (
     <>
+      <style jsx>{`
+        @keyframes wave {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+        
+        .wave-char {
+          display: inline-block;
+          animation: wave 2.5s ease-in-out infinite;
+        }
+      `}</style>
+
       <nav className="relative flex items-center justify-between px-4 py-5 z-[110]">
         {hideLogo ? (
           <div className="relative flex-1 text-center">
-            {/* Greeting text */}
-            <span 
+            {/* Greeting text with wave animation */}
+            <div 
               className={`absolute inset-0 flex items-center justify-center text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight transition-opacity duration-700 ${
                 showGreeting ? 'opacity-100' : 'opacity-0 pointer-events-none'
               }`}
             >
-              Hello, stranger
-            </span>
+              {greetingChars.map((char, index) => (
+                <span
+                  key={index}
+                  className="wave-char"
+                  style={{
+                    animationDelay: `${index * 0.1}s`
+                  }}
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </span>
+              ))}
+            </div>
             
             {/* Logo */}
             <div 
