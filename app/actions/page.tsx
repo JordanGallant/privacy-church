@@ -18,8 +18,7 @@ export default function ToolsPage() {
         >
           Each setting you change, each tracker you block, each lie you tell an algorithm, it all adds up.
         </p>
-
-        <img src = "/assets/tool.png" className='mb-8'/>
+<img src="/assets/actions.png" className='mb-8 w-full h-52 object-cover' />
         <Heading text="Policy-Level Engagement" />
        
         <Picks events={[

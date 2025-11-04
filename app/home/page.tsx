@@ -37,7 +37,7 @@ export default function Home() {
           <div>
             <Link href="/events">
               <CustomImage
-                src="/assets/statue.png" 
+                src="/assets/events.png" 
                 crop="top" 
                 text="Events"
                 subtext='Show up in real life'
