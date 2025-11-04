@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Menu from './modals/menu';
 
 interface NavbarProps {
@@ -9,6 +9,18 @@ interface NavbarProps {
 
 export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [showGreeting, setShowGreeting] = useState(hideLogo);
+
+  useEffect(() => {
+    if (hideLogo) {
+      // Wait 5 seconds, then fade out greeting and show logo
+      const timer = setTimeout(() => {
+        setShowGreeting(false);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [hideLogo]);
 
   const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newState = !isOpen;
@@ -23,8 +35,30 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
     <>
       <nav className="relative flex items-center justify-between px-4 py-5 z-[110]">
         {hideLogo ? (
-          <div className="flex-1 text-center">
-            <span className="text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight">Hello, stranger</span>
+          <div className="relative flex-1 text-center">
+            {/* Greeting text */}
+            <span 
+              className={`absolute inset-0 flex items-center justify-center text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight transition-opacity duration-700 ${
+                showGreeting ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
+            >
+              Hello, stranger
+            </span>
+            
+            {/* Logo */}
+            <div 
+              className={`transition-opacity duration-700 ${
+                showGreeting ? 'opacity-0' : 'opacity-100'
+              }`}
+            >
+              <a href="/home">
+                <img 
+                  src="/assets/logo.svg" 
+                  alt="Logo" 
+                  className="h-8 w-auto cursor-pointer mx-auto"
+                />
+              </a>
+            </div>
           </div>
         ) : (
           <div className="flex items-center">
@@ -59,12 +93,12 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
             />
             
             <span 
-  className="relative text-base font-bold tracking-tight z-10 transition-colors duration-200 font-[family-name:var(--font-gt-planar-menusmall)]"
-  style={{
-    letterSpacing: '-0.01em',
-    color: isOpen ? '#FFFFFF' : '#000000'
-  }}
->
+              className="relative text-base font-bold tracking-tight z-10 transition-colors duration-200 font-[family-name:var(--font-gt-planar-menusmall)]"
+              style={{
+                letterSpacing: '-0.01em',
+                color: isOpen ? '#FFFFFF' : '#000000'
+              }}
+            >
               {isOpen ? 'Close' : 'Menu'}
             </span>
           </button>
@@ -72,13 +106,13 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
       </nav>
 
       {/* Mobile Full-screen Overlay */}
-{isOpen && (
-  <div className="fixed inset-0 z-[100] flex items-start justify-center md:items-center">
-<div className="max-w-[420px] w-full h-screen md:h-[calc(100vh-4rem)] md:rounded-lg overflow-hidden relative">
-      <Menu/>
-    </div>
-  </div>
-)}
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-start justify-center md:items-center">
+          <div className="max-w-[420px] w-full h-screen md:h-[calc(100vh-4rem)] md:rounded-lg overflow-hidden relative">
+            <Menu/>
+          </div>
+        </div>
+      )}
     </>
   )
 }
