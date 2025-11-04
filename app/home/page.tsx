@@ -92,8 +92,9 @@ export default function Home() {
         </div>
         <News/>
 
-        <div className='pt-12 pb-4 text-[#000000] text-[20px] font-black whitespace-nowrap uppercase font-[family-name:var(--font-gt-planar-black)]'>Modern Privacy Philosophy</div>
+        <div className='py-6'> <Heading text="Modern Privacy Philosophy" /></div>
 
+       
         <Picks events={[
   { 
     id: 1, 
