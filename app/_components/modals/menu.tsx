@@ -16,7 +16,8 @@ export default function Menu() {
     { href: '/community', label: 'Community' },
     { href: '/tools', label: 'Tools' },
     { href: '/manifesto', label: 'Manifesto' },
-    { href: '/news', label: 'News' }
+    { href: '/news', label: 'News' },
+    { href: '/readings', label: 'Readings' }
   ]
   
   return (

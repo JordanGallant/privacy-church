@@ -1,76 +1,167 @@
-'use client'
+import Picks from '../_components/pick'
+import Navbar from "../_components/nav";
+import Heading from '../_components/tiny/heading';
 
-import { useState } from 'react';
-
-interface BeeAddresses {
-  overlay?: string;
-  underlay?: string[];
-  ethereum?: string;
-  publicKey?: string;
-  pssPublicKey?: string;
-}
-
-export default function BeeAddressTester() {
-  const [data, setData] = useState<BeeAddresses | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchAddresses = async (): Promise<void> => {
-    setLoading(true);
-    setError(null);
-    
-    try {
-      const response = await fetch('https://bee-app.proudpebble-a87a48df.eastus.azurecontainerapps.io/addresses');
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const json: BeeAddresses = await response.json();
-      setData(json);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An unknown error occurred');
-    } finally {
-      setLoading(false);
-    }
-  };
-
+export default function NewspPage() {
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Bee Node Address Tester</h1>
-        
-        <button
-          onClick={fetchAddresses}
-          disabled={loading}
-          className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white font-semibold py-2 px-6 rounded-lg transition-colors"
+    <>
+      <Navbar hideLogo={false} />
+
+<div className="px-6 max-w-4xl mx-auto">
+  <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">Readings</h1>
+
+        <p
+          className="font-[family-name:var(--font-dm-mono)] font-normal text-[15px] leading-[20px] tracking-[-0.06em] mb-4"
+          style={{ color: "#717171" }}
         >
-          {loading ? 'Loading...' : 'Fetch Addresses'}
-        </button>
+Books, papers, and manifestos that decode power, expose extraction, and chart paths to digital autonomy.
+        </p>
 
-        {error && (
-          <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-            <h2 className="text-red-800 font-semibold mb-2">Error:</h2>
-            <p className="text-red-600">{error}</p>
-          </div>
-        )}
+        
+<Picks events={[
+  { 
+    id: 1, 
+    title: "Age of Surveillance Capitalism", 
+    text: "How tech platforms monetize behavioral prediction as a new form of power and extraction.",
+    tag: "#theory, #critique, #web2, #intersectional, #beginner",
+    href: "https://en.wikipedia.org/wiki/The_Age_of_Surveillance_Capitalism" 
+  },
+  { 
+    id: 2, 
+    title: "The Black Box Society", 
+    text: "Algorithmic opacity in finance, hiring, and reputation systems as concentrated institutional control.",
+    tag: "#theory, #critique, #algorithms, #policy, #intermediate",
+    href: "https://en.wikipedia.org/wiki/The_Black_Box_Society" 
+  },
+  { 
+    id: 3, 
+    title: "The Transparent Society", 
+    text: "Why 'more transparency' doesn't equal liberation; asymmetric exposure as a political problem.",
+    tag: "#theory, #surveillance, #power-dynamics, #intermediate",
+    href: "https://en.wikipedia.org/wiki/The_Transparent_Society" 
+  },
+  { 
+    id: 4, 
+    title: "Technocreep", 
+    text: "How intimate data is harvested, tracked, and capitalized in real-time without consent.",
+    tag: "#theory, #critique, #data-extraction, #web2, #beginner",
+    href: "https://en.wikipedia.org/wiki/Technocreep" 
+  },
+  { 
+    id: 5, 
+    title: "Dragnet Nation", 
+    text: "Investigative narrative on hidden surveillance systems operating at scale.",
+    tag: "#theory, #journalism, #surveillance, #investigation, #beginner",
+    href: "https://en.wikipedia.org/wiki/Dragnet_Nation" 
+  },
+  { 
+    id: 6, 
+    title: "You Are Not a Gadget", 
+    text: "Critique of how platforms shape identity and what we lose surrendering control of digital selves.",
+    tag: "#theory, #critique, #identity, #platforms, #beginner",
+    href: "https://www.goodreads.com/book/show/6683549-you-are-not-a-gadget" 
+  },
+  { 
+    id: 7, 
+    title: "Ten Arguments for Deleting Your Social Media Accounts Right Now", 
+    text: "Accessible case against social platforms; behavioral manipulation and privacy erosion.",
+    tag: "#theory, #critique, #web2, #beginner-friendly, #beginner",
+    href: "https://www.amazon.com/Arguments-Deleting-Social-Media-Accounts/dp/125019668X" 
+  },
+  { 
+    id: 8, 
+    title: "The Naked Society", 
+    text: "Early warning on data-gathering tech; decades-old lessons still urgent today.",
+    tag: "#theory, #history, #foundational, #beginner",
+    href: "https://en.wikipedia.org/wiki/The_Naked_Society" 
+  }
+]} />
+        <div className='pt-8'>
+        <Heading text="Historical" />
+        </div>
 
-        {data && (
-          <div className="mt-6 p-4 bg-white border border-gray-200 rounded-lg">
-            <h2 className="text-lg font-semibold mb-3">Response:</h2>
-            <pre className="bg-gray-100 p-4 rounded overflow-x-auto text-sm">
-              {JSON.stringify(data, null, 2)}
-            </pre>
-            
-            {data.ethereum && (
-              <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded">
-                <p className="text-sm font-semibold text-green-800">Ethereum Address:</p>
-                <p className="text-green-600 font-mono break-all">{data.ethereum}</p>
-              </div>
-            )}
-          </div>
-        )}
+<Picks events={[
+  { 
+    id: 1, 
+    title: "Crypto: How the Code Rebels Beat the Government", 
+    text: "Historical grounding on cryptography and privacy movements; the cypherpunk lineage.",
+    tag: "#theory, #history, #web3, #journalism, #beginner",
+    href: "https://en.wikipedia.org/wiki/Crypto_(book)" 
+  },
+  { 
+    id: 2, 
+    title: "True Nyms and Crypto Anarchy", 
+    text: "How digital identity systems bypass state surveillance through cryptographic design.",
+    tag: "#theory, #crypto-anarchist, #identity, #academic, #intermediate",
+    href: "https://gwern.net/doc/bitcoin/1996-may.pdf" 
+  },
+  { 
+    id: 3, 
+    title: "Cypherpunks: Freedom and the Future of the Internet", 
+    text: "Modern treatment of encryption's role in internet politics post-Snowden.",
+    tag: "#theory, #web3, #surveillance, #contemporary, #intermediate",
+    href: "https://en.wikipedia.org/wiki/Cypherpunks_%28book%29" 
+  },
+  { 
+    id: 4, 
+    title: "Crypto Anarchy, Cyberstates, and Pirate Utopias", 
+    text: "Essays on governance, tech, and identity at the crypto/anarchy frontier.",
+    tag: "#theory, #web3, #governance, #essays, #intermediate",
+    href: "https://monoskop.org/images/4/42/Ludlow_Peter_Crypto_Anarchy_Cyberstates_and_Pirate_Utopias.pdf" 
+  }
+]} />
+
+<div className='pt-8'>
+        <Heading text="Web3 & Decentralization" />
+        </div>
+<Picks events={[
+  { 
+    id: 1, 
+    title: "Crypto Communities as Legal Orders", 
+    text: "How crypto architectures create alternate jurisdictions and governance models.",
+    tag: "#theory, #web3, #governance, #academic, #intermediate",
+    href: "https://policyreview.info/articles/analysis/crypto-communities-legal-orders" 
+  },
+  { 
+    id: 2, 
+    title: "The Shift from Central to Cryptographic Trust", 
+    text: "Moving institutional trust to cryptographic systems; what fails in the transition.",
+    tag: "#theory, #web3, #trust, #academic, #advanced",
+    href: "https://arxiv.org/abs/1409.2432" 
+  }
+]} />
+
+
+<div className='pt-8'>
+        <Heading text="Technical & Academic Studies" />
+        </div>
+              <Picks events={[
+  { 
+    id: 1, 
+    title: "Browsing Behavior Exposes Identities on the Web", 
+    text: "Proves anonymity layers fail when behavioral patterns are cross-profiled.",
+    tag: "#academic, #technical, #web2, #de-anonymization, #advanced",
+    href: "https://arxiv.org/abs/2312.15489" 
+  },
+  { 
+    id: 2, 
+    title: "I'm Not For Sale", 
+    text: "Documents how personal data is commodified in real-time markets invisible to users.",
+    tag: "#academic, #data-extraction, #web2, #investigation, #intermediate",
+    href: "https://arxiv.org/abs/2502.11658" 
+  },
+  { 
+    id: 3, 
+    title: "Internet Safety Resources for Students", 
+    text: "Curated guides and research for younger users.",
+    tag: "#education, #beginner-friendly, #web2, #beginner",
+    href: "https://arxiv.org/abs/2312.15489" 
+  }
+]} />
       </div>
-    </div>
+
+
+      
+    </>
   );
 }
