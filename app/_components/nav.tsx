@@ -49,7 +49,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
         
         .wave-char {
           display: inline-block;
-          animation: wave 2.5s ease-in-out infinite;
+          animation: wave 1.5s ease-in-out infinite;
         }
       `}</style>
 
@@ -77,7 +77,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
             
             {/* Logo */}
             <div 
-              className={`transition-opacity duration-2000 ${
+              className={`transition-opacity duration-700 ${
                 showGreeting ? 'opacity-0' : 'opacity-100'
               }`}
             >
