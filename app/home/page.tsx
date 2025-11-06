@@ -55,7 +55,7 @@ export default function Home() {
             </Link>
           </div>
           
-          <div className="flex gap-2 md:justify-between">
+          <div className="flex gap-3 md:justify-between md:gap-2">
   <Link href="/tools">
     <CustomImage
       src="/assets/usb.png" 
