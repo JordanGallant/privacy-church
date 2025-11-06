@@ -1,5 +1,6 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import Menu from './modals/menu';
 
 interface NavbarProps {
@@ -10,15 +11,40 @@ interface NavbarProps {
 export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
-  const [showGreeting, setShowGreeting] = useState(hideLogo);
+  const greetingRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (hideLogo) {
-      const timer = setTimeout(() => {
-        setShowGreeting(false);
-      }, 1000);
+    if (hideLogo && greetingRef.current && logoRef.current) {
+      const timeline = gsap.timeline({
+        delay: 1.5 // Wait 1.5 seconds before starting animation
+      });
+      
+      // Set initial states
+      gsap.set(logoRef.current, { 
+        y: -50, 
+        opacity: 0 
+      });
+      
+      gsap.set(greetingRef.current, { 
+        x: 0, 
+        opacity: 1 
+      });
 
-      return () => clearTimeout(timer);
+      // Animate greeting out to the left, then logo in from top
+      timeline
+        .to(greetingRef.current, {
+          x: -100,
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power2.inOut'
+        })
+        .to(logoRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power3.out'
+        }, '-=0.2'); // Start slightly before greeting finishes
     }
   }, [hideLogo]);
 
@@ -26,18 +52,15 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
     e.currentTarget.blur();
     
     if (!isOpen) {
-      // Opening
       setShouldRender(true);
       setIsOpen(true);
       onMenuToggle?.(true);
     } else {
-      // Closing - trigger animation first
       setIsOpen(false);
       onMenuToggle?.(false);
-      // Delay unmounting to allow animation to complete
       setTimeout(() => {
         setShouldRender(false);
-      }, 800); // Match this to your closing animation duration
+      }, 800);
     }
   };
 
@@ -47,20 +70,15 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
     <>
       <nav className="relative flex items-center justify-between px-4 py-5 z-[110]">
         {hideLogo ? (
-        <div className="relative flex-1 pl-[6px]">  
+          <div className="relative flex-1 pl-[6px]">  
             <div 
-              className={`absolute left-0 text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight transition-opacity duration-200 ease-in-out pl-[6px] ${
-                showGreeting ? 'opacity-100' : 'opacity-0 pointer-events-none'
-              }`}
+              ref={greetingRef}
+              className="absolute left-0 text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight pl-[6px]"
             >
               {greetingText}
             </div>
             
-            <div 
-              className={`transition-opacity duration-200 ease-in-out  ${
-                showGreeting ? 'opacity-0' : 'opacity-100'
-              }`}
-            >
+            <div ref={logoRef} style={{ transform: 'translateY(-100px)', opacity: 0 }}>
               <a href="/home">
                 <img 
                   src="/assets/logo.svg" 
