@@ -1,5 +1,4 @@
 Menu -> shorten time in gradient more objects come in more abrubt 
-fade out when close annimation moving out  between hello stranger and logo 
 gap hight link title and news source
  remove hashtages 2-3
  rounded curve for desktop visuals

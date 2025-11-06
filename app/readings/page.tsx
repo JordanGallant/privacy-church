@@ -23,56 +23,56 @@ Books, papers, and manifestos that decode power, expose extraction, and chart pa
     id: 1, 
     title: "Age of Surveillance Capitalism", 
     text: "How tech platforms monetize behavioral prediction as a new form of power and extraction.",
-    tag: "#theory, #critique, #web2, #intersectional, #beginner",
+    tag: "#theory,   #beginner",
     href: "https://en.wikipedia.org/wiki/The_Age_of_Surveillance_Capitalism" 
   },
   { 
     id: 2, 
     title: "The Black Box Society", 
     text: "Algorithmic opacity in finance, hiring, and reputation systems as concentrated institutional control.",
-    tag: "#theory, #critique, #algorithms, #policy, #intermediate",
+    tag: "#theory,  #intermediate",
     href: "https://en.wikipedia.org/wiki/The_Black_Box_Society" 
   },
   { 
     id: 3, 
     title: "The Transparent Society", 
     text: "Why 'more transparency' doesn't equal liberation; asymmetric exposure as a political problem.",
-    tag: "#theory, #surveillance, #power-dynamics, #intermediate",
+    tag: "#theory,  #intermediate",
     href: "https://en.wikipedia.org/wiki/The_Transparent_Society" 
   },
   { 
     id: 4, 
     title: "Technocreep", 
     text: "How intimate data is harvested, tracked, and capitalized in real-time without consent.",
-    tag: "#theory, #critique, #data-extraction, #web2, #beginner",
+    tag: "#theory,   #beginner",
     href: "https://en.wikipedia.org/wiki/Technocreep" 
   },
   { 
     id: 5, 
     title: "Dragnet Nation", 
     text: "Investigative narrative on hidden surveillance systems operating at scale.",
-    tag: "#theory, #journalism, #surveillance, #investigation, #beginner",
+    tag: "#theory,    #beginner",
     href: "https://en.wikipedia.org/wiki/Dragnet_Nation" 
   },
   { 
     id: 6, 
     title: "You Are Not a Gadget", 
     text: "Critique of how platforms shape identity and what we lose surrendering control of digital selves.",
-    tag: "#theory, #critique, #identity, #platforms, #beginner",
+    tag: "#theory,   #beginner",
     href: "https://www.goodreads.com/book/show/6683549-you-are-not-a-gadget" 
   },
   { 
     id: 7, 
     title: "Ten Arguments for Deleting Your Social Media Accounts Right Now", 
     text: "Accessible case against social platforms; behavioral manipulation and privacy erosion.",
-    tag: "#theory, #critique, #web2, #beginner-friendly, #beginner",
+    tag: "#theory,   #beginner",
     href: "https://www.amazon.com/Arguments-Deleting-Social-Media-Accounts/dp/125019668X" 
   },
   { 
     id: 8, 
     title: "The Naked Society", 
     text: "Early warning on data-gathering tech; decades-old lessons still urgent today.",
-    tag: "#theory, #history, #foundational, #beginner",
+    tag: "#theory, #history, #beginner",
     href: "https://en.wikipedia.org/wiki/The_Naked_Society" 
   }
 ]} />
@@ -85,28 +85,28 @@ Books, papers, and manifestos that decode power, expose extraction, and chart pa
     id: 1, 
     title: "Crypto: How the Code Rebels Beat the Government", 
     text: "Historical grounding on cryptography and privacy movements; the cypherpunk lineage.",
-    tag: "#theory, #history, #web3, #journalism, #beginner",
+    tag: "#theory, #history, #beginner",
     href: "https://en.wikipedia.org/wiki/Crypto_(book)" 
   },
   { 
     id: 2, 
     title: "True Nyms and Crypto Anarchy", 
     text: "How digital identity systems bypass state surveillance through cryptographic design.",
-    tag: "#theory, #crypto-anarchist, #identity, #academic, #intermediate",
+    tag: "#theory,   #intermediate",
     href: "https://gwern.net/doc/bitcoin/1996-may.pdf" 
   },
   { 
     id: 3, 
     title: "Cypherpunks: Freedom and the Future of the Internet", 
     text: "Modern treatment of encryption's role in internet politics post-Snowden.",
-    tag: "#theory, #web3, #surveillance, #contemporary, #intermediate",
+    tag: "#theory,   #contemporary, #intermediate",
     href: "https://en.wikipedia.org/wiki/Cypherpunks_%28book%29" 
   },
   { 
     id: 4, 
     title: "Crypto Anarchy, Cyberstates, and Pirate Utopias", 
     text: "Essays on governance, tech, and identity at the crypto/anarchy frontier.",
-    tag: "#theory, #web3, #governance, #essays, #intermediate",
+    tag: "#theory,  #governance,  #intermediate",
     href: "https://monoskop.org/images/4/42/Ludlow_Peter_Crypto_Anarchy_Cyberstates_and_Pirate_Utopias.pdf" 
   }
 ]} />
@@ -119,14 +119,14 @@ Books, papers, and manifestos that decode power, expose extraction, and chart pa
     id: 1, 
     title: "Crypto Communities as Legal Orders", 
     text: "How crypto architectures create alternate jurisdictions and governance models.",
-    tag: "#theory, #web3, #governance, #academic, #intermediate",
+    tag: "#theory,  #governance,  #intermediate",
     href: "https://policyreview.info/articles/analysis/crypto-communities-legal-orders" 
   },
   { 
     id: 2, 
     title: "The Shift from Central to Cryptographic Trust", 
     text: "Moving institutional trust to cryptographic systems; what fails in the transition.",
-    tag: "#theory, #web3, #trust, #academic, #advanced",
+    tag: "#theory,  #trust,  #advanced",
     href: "https://arxiv.org/abs/1409.2432" 
   }
 ]} />
@@ -140,21 +140,21 @@ Books, papers, and manifestos that decode power, expose extraction, and chart pa
     id: 1, 
     title: "Browsing Behavior Exposes Identities on the Web", 
     text: "Proves anonymity layers fail when behavioral patterns are cross-profiled.",
-    tag: "#academic, #technical, #web2, #de-anonymization, #advanced",
+    tag: " #advanced",
     href: "https://arxiv.org/abs/2312.15489" 
   },
   { 
     id: 2, 
     title: "I'm Not For Sale", 
     text: "Documents how personal data is commodified in real-time markets invisible to users.",
-    tag: "#academic, #data-extraction, #web2, #investigation, #intermediate",
+    tag: " #intermediate",
     href: "https://arxiv.org/abs/2502.11658" 
   },
   { 
     id: 3, 
     title: "Internet Safety Resources for Students", 
     text: "Curated guides and research for younger users.",
-    tag: "#education, #beginner-friendly, #web2, #beginner",
+    tag: "#education,  #beginner",
     href: "https://arxiv.org/abs/2312.15489" 
   }
 ]} />

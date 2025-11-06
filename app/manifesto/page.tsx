@@ -69,105 +69,105 @@ export default function ManifestoPage() {
     id: 1, 
     title: "Crypto Anarchist Manifesto", 
     text: "Digital pseudonyms as tools for decentralizing power away from coerced legal identity.", 
-    tag: "#theory #crypto-anarchist #web3 #foundational #beginner",
+    tag: "#theory  #beginner",
     href: 'https://www.alamut.com/subj/ideologies/manifestos/cryptoanarchist.html' 
   },
   { 
     id: 2, 
     title: "Cypherpunk Manifesto", 
     text: "Privacy as a right in digital spaces; encryption as political infrastructure.", 
-    tag: "#theory #crypto-anarchist #web2 #foundational #beginner",
+    tag: "#theory  #beginner",
     href: 'https://www.activism.net/cypherpunk/manifesto.html' 
   },
   { 
     id: 3, 
     title: "A Declaration of the Independence of Cyberspace", 
     text: "Early web sovereignty text claiming digital spaces exist beyond state jurisdiction.", 
-    tag: "#theory #foundational #manifesto #beginner",
+    tag: "#theory  #beginner",
     href: 'https://www.eff.org/it/cyberspace-independence' 
   },
   { 
     id: 4, 
     title: "The Priv/Acc Manifesto", 
     text: "Contemporary privacy + advocacy framework.", 
-    tag: "#theory #manifesto #web3 #contemporary #beginner",
+    tag: "#theory    #beginner",
     href: 'https://privacc.org/' 
   },
   { 
     id: 5, 
     title: "The Core of Crypto is Punks and Principles", 
     text: "Why ideology matters more than tech in decentralized movements.", 
-    tag: "#theory #web3 #culture #ethics #beginner",
+    tag: "#theory  #culture  #beginner",
     href: 'https://news.dyne.org/the-core-of-crypto-is-punks-and-principles/' 
   },
   { 
     id: 6, 
     title: "Web3 Will Fail If It Doesn't Put People Before Profits", 
     text: "Critique of extractive logic in decentralized tech.", 
-    tag: "#theory #web3 #critique #ethics #beginner",
+    tag: "#theory   #beginner",
     href: 'https://kriskrug.co/2023/11/01/web3-will-fail-if-it-doesnt-put-people-before-profits-and-technology/' 
   },
   { 
     id: 7, 
     title: "A Manifesto for Web Science @ 10", 
     text: "Social and technical governance frameworks for the web's future.", 
-    tag: "#theory #governance #policy #intermediate",
+    tag: "#theory #governance  #intermediate",
     href: 'https://policyreview.info/articles/analysis/crypto-communities-legal-orders' 
   },
   { 
     id: 8, 
     title: "Age of Surveillance Capitalism", 
     text: "How tech platforms monetize behavioral prediction as a new form of power and extraction.", 
-    tag: "#theory #critique #web2 #intersectional #beginner",
+    tag: "#theory  #intersectional #beginner",
     href: 'https://en.wikipedia.org/wiki/The_Age_of_Surveillance_Capitalism' 
   },
   { 
     id: 9, 
     title: "The Black Box Society", 
     text: "Algorithmic opacity in finance, hiring, and reputation systems as concentrated institutional control.", 
-    tag: "#theory #critique #algorithms #policy #intermediate",
+    tag: "#theory #algorithms  #intermediate",
     href: 'https://en.wikipedia.org/wiki/The_Black_Box_Society' 
   },
   { 
     id: 10, 
     title: "The Transparent Society", 
     text: "Why \"more transparency\" doesn't equal liberation; asymmetric exposure as a political problem.", 
-    tag: "#theory #surveillance #power-dynamics #intermediate",
+    tag: "#theory #power-dynamics #intermediate",
     href: 'https://en.wikipedia.org/wiki/The_Transparent_Society' 
   },
   { 
     id: 11, 
     title: "Technocreep", 
     text: "How intimate data is harvested, tracked, and capitalized in real-time without consent.", 
-    tag: "#theory #critique #data-extraction #web2 #beginner",
+    tag: "#theory #data-extraction  #beginner",
     href: 'https://en.wikipedia.org/wiki/Technocreep' 
   },
   { 
     id: 12, 
     title: "Dragnet Nation", 
     text: "Investigative narrative on hidden surveillance systems operating at scale.", 
-    tag: "#theory #journalism #surveillance #investigation #beginner",
+    tag: "#theory #journalism #investigation #beginner",
     href: 'https://en.wikipedia.org/wiki/Dragnet_Nation' 
   },
   { 
     id: 13, 
     title: "You Are Not a Gadget", 
     text: "Critique of how platforms shape identity and what we lose surrendering control of digital selves.", 
-    tag: "#theory #critique #identity #platforms #beginner",
+    tag: "#theory #platforms #beginner",
     href: 'https://www.goodreads.com/book/show/6683549-you-are-not-a-gadget' 
   },
   { 
     id: 14, 
     title: "Ten Arguments for Deleting Your Social Media Accounts Right Now", 
     text: "Accessible case against social platforms; behavioral manipulation and privacy erosion.", 
-    tag: "#theory #critique #web2 #beginner-friendly #beginner",
+    tag: "#theory  #beginner",
     href: 'https://www.amazon.com/Arguments-Deleting-Social-Media-Accounts/dp/125019668X' 
   },
   { 
     id: 15, 
     title: "The Naked Society", 
     text: "Early warning on data-gathering tech; decades-old lessons still urgent today.", 
-    tag: "#theory #history #foundational #beginner",
+    tag: "#theory #history  #beginner",
     href: 'https://en.wikipedia.org/wiki/The_Naked_Society' 
   }
 ]} />
