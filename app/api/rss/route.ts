@@ -20,8 +20,30 @@ const RSS_FEEDS = [
   { name: 'r/Privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 1, maxItems: 50, filter: true },
   { name: 'Privacy International', url: 'https://privacyinternational.org/rss.xml', priority: 3, maxItems: 50, filter: false },
   { name: 'The Intercept', url: 'https://theintercept.com/feed/', priority: 3, maxItems: 50, filter: false },
-  { name: 'MIT Technology Review', url: 'https://privacyinternational.org/rss.xml', priority: 3, maxItems: 50, filter: true },
-
+  { name: 'MIT Technology', url: 'https://privacyinternational.org/rss.xml', priority: 3, maxItems: 50, filter: true },
+  { name: 'Bankless', url: 'https://newsletter.banklesshq.com/feed', priority: 2, maxItems: 50, filter: true },
+  { name: 'Messari', url: 'https://messari.io/rss', priority: 2, maxItems: 50, filter: true },
+  { name: 'ProtonMail Blog', url: 'https://proton.me/blog/feed', priority: 2, maxItems: 50, filter: false },
+  { name: 'Brave Blog', url: 'https://brave.com/blog/rss/', priority: 2, maxItems: 50, filter: true },
+  { name: 'Tor Blog', url: 'https://blog.torproject.org/rss.xml', priority: 2, maxItems: 50, filter: false },
+  { name: 'Mullvad Blog', url: 'https://mullvad.net/en/blog/rss/', priority: 2, maxItems: 50, filter: false },
+  { name: 'Tails News', url: 'https://tails.net/news/index.en.rss', priority: 2, maxItems: 50, filter: false },
+  { name: 'IVPN Blog', url: 'https://www.ivpn.net/blog/rss.xml', priority: 2, maxItems: 50, filter: false },
+  { name: 'Trail of Bits Blog', url: 'https://blog.trailofbits.com/feed/', priority: 2, maxItems: 50, filter: true },
+  { name: 'Google Project Zero', url: 'https://googleprojectzero.blogspot.com/feeds/posts/default', priority: 3, maxItems: 50, filter: true },
+  { name: 'Citizen Lab', url: 'https://citizenlab.ca/feed/', priority: 3, maxItems: 50, filter: false },
+  { name: 'Threatpost', url: 'https://threatpost.com/feed/', priority: 2, maxItems: 100, filter: true },
+  { name: 'Ethereum Blog', url: 'https://blog.ethereum.org/feed.xml', priority: 2, maxItems: 50, filter: true },
+  { name: 'IPFS Blog', url: 'https://blog.ipfs.tech/index.xml', priority: 2, maxItems: 50, filter: false },
+  { name: 'Protocol Labs Blog', url: 'https://protocol.ai/blog/rss.xml', priority: 2, maxItems: 50, filter: true },
+  { name: 'Filecoin Blog', url: 'https://filecoin.io/blog/rss.xml', priority: 2, maxItems: 50, filter: true },
+  { name: 'Access Now', url: 'https://www.accessnow.org/feed/', priority: 2, maxItems: 50, filter: false },
+  { name: 'Fight for the Future', url: 'https://www.fightforthefuture.org/feed', priority: 2, maxItems: 50, filter: false },
+  { name: 'OpenMedia', url: 'https://openmedia.org/feed', priority: 2, maxItems: 50, filter: false },
+  { name: 'Bleeping Computer', url: 'https://www.bleepingcomputer.com/feed/', priority: 2, maxItems: 100, filter: true },
+  { name: 'Dark Reading', url: 'https://www.darkreading.com/rss.xml', priority: 2, maxItems: 100, filter: true },
+  { name: 'ZDNet Security', url: 'https://www.zdnet.com/topic/security/rss.xml', priority: 2, maxItems: 100, filter: true },
+  
 ];
 
 const REDIS_KEY = 'rss:items';
