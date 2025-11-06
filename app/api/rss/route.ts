@@ -16,17 +16,16 @@ const RSS_FEEDS = [
   { name: 'Schneier on Security', url: 'https://www.schneier.com/feed/atom/', priority: 2, maxItems: 100, filter: true },
   { name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml', priority: 2, maxItems: 100, filter: true },
   { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml', priority: 2, maxItems: 100, filter: true },
-  { name: 'Ludlow Institute', url: 'https://www.ludlowinstitute.org/sitemap.xml', priority: 2, maxItems: 100, filter: false },
+  { name: 'Ludlow Institute', url: 'https://www.ludlowinstitute.org/sitemap.xml', priority: 2, maxItems: 100, filter: true },
   { name: 'r/Privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 1, maxItems: 50, filter: true },
   { name: 'Privacy International', url: 'https://privacyinternational.org/rss.xml', priority: 3, maxItems: 50, filter: false },
   { name: 'The Intercept', url: 'https://theintercept.com/feed/', priority: 3, maxItems: 50, filter: true },
-  { name: 'MIT Technology Review', url: 'https://privacyinternational.org/rss.xml', priority: 3, maxItems: 50, filter: false },
   { name: 'Rest of World', url: 'https://www.technologyreview.com/sitemap-1.xml', priority: 3, maxItems: 50, filter: false },
 
 ];
 
 const REDIS_KEY = 'rss:items';
-const KEYWORDS = ['privacy'];
+const KEYWORDS = ['privacy', 'security', 'digital'];
 
 interface RSSItem {
   source: string;
