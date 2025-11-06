@@ -11,13 +11,15 @@ interface NavbarProps {
 export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const greetingRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (hideLogo && greetingRef.current && logoRef.current) {
+    if (hideLogo && !hasAnimated && greetingRef.current && logoRef.current) {
       const timeline = gsap.timeline({
-        delay: 1.5 // Wait 1.5 seconds before starting animation
+        delay: 1.5, // Wait 1.5 seconds before starting animation
+        onComplete: () => setHasAnimated(true)
       });
       
       // Set initial states
@@ -46,7 +48,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
           ease: 'power3.out'
         }, '-=0.2'); // Start slightly before greeting finishes
     }
-  }, [hideLogo]);
+  }, [hideLogo, hasAnimated]);
 
   const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.currentTarget.blur();
@@ -71,14 +73,16 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
       <nav className="relative flex items-center justify-between px-4 py-5 z-[110]">
         {hideLogo ? (
           <div className="relative flex-1 pl-[6px]">  
-            <div 
-              ref={greetingRef}
-              className="absolute left-0 text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight pl-[6px]"
-            >
-              {greetingText}
-            </div>
+            {!hasAnimated && (
+              <div 
+                ref={greetingRef}
+                className="absolute left-0 text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight pl-[6px]"
+              >
+                {greetingText}
+              </div>
+            )}
             
-            <div ref={logoRef} style={{ transform: 'translateY(-100px)', opacity: 0 }}>
+            <div ref={logoRef} style={{ transform: hasAnimated ? 'translateY(0)' : 'translateY(-100px)', opacity: hasAnimated ? 1 : 0 }}>
               <a href="/home">
                 <img 
                   src="/assets/logo.svg" 
