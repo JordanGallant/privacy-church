@@ -26,42 +26,42 @@ export default function ToolsPage() {
     id: 1, 
     title: "Fight Chat Control – EU Campaign Hub", 
     text: "Coordinated resistance to EU surveillance proposals; templates and resources for action.", 
-    tag: "#action #policy #eu-specific #campaign #beginner #low-barrier",
+    tag: "#action #policy   #beginner ",
     href: 'https://fightchatcontrol.eu/' 
   },
   { 
     id: 2, 
     title: "EU Citizens Initiative", 
     text: "1 million signatures can force legislative action on privacy topics; high barrier, high impact.", 
-    tag: "#action #policy #eu-specific #beginner #high-barrier",
+    tag: "#action #policy  #beginner ",
     href: 'https://citizens-initiative.europa.eu/how-it-works/faq_en' 
   },
   { 
     id: 3, 
     title: "European Parliament Committee on Petitions", 
     text: "EU residents submit petitions on privacy and surveillance issues.", 
-    tag: "#action #policy #eu-specific #beginner #low-barrier",
+    tag: "#action #policy  #beginner ",
     href: 'https://guichet.public.lu/en/citoyens/organismes/organismes_citoyens/parlement-europeen-petitions.html' 
   },
   { 
     id: 4, 
     title: "Write to European Parliament", 
     text: "Direct contact form to send questions or comments on privacy legislation.", 
-    tag: "#action #policy #eu-specific #direct-contact #beginner #low-barrier",
+    tag: "#action #policy  #beginner ",
     href: 'https://www.europarl.europa.eu/forms/en/ask-ep' 
   },
   { 
     id: 5, 
     title: "National Data Protection Authorities Contact List", 
     text: "Find and contact your country's DPA for corporate privacy violations.", 
-    tag: "#action #policy #legal #beginner #low-barrier",
+    tag: "#action #policy  #beginner ",
     href: 'https://dataprivacymanager.net/list-of-eu-data-protection-supervisory-authorities-gdpr/' 
   },
   { 
     id: 6, 
     title: "OpenPetition Platform", 
     text: "Launch and sign privacy-focused petitions across Europe.", 
-    tag: "#action #policy #grassroots #beginner #low-barrier",
+    tag: "#action #policy  #beginner ",
     href: 'https://www.openpetition.eu/' 
   }
 ]} />
