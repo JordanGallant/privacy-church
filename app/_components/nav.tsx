@@ -71,7 +71,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
   return (
     <>
       <nav className="relative flex items-center justify-between px-4 py-5 z-[110]">
-        {hideLogo ? (
+        {hideLogo || hasAnimated ? (
           <div className="relative flex-1 pl-[6px]">  
             {!hasAnimated && (
               <div 
@@ -82,7 +82,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
               </div>
             )}
             
-            <div ref={logoRef} style={{ transform: hasAnimated ? 'translateY(0)' : 'translateY(-100px)', opacity: hasAnimated ? 1 : 0 }}>
+            <div ref={logoRef} className="relative" style={{ transform: hasAnimated ? 'translateY(0)' : 'translateY(-100px)', opacity: hasAnimated ? 1 : 0 }}>
               <a href="/home">
                 <img 
                   src="/assets/logo.svg" 
