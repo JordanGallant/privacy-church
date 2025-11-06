@@ -19,7 +19,7 @@ const RSS_FEEDS = [
   { name: 'Ludlow Institute', url: 'https://www.ludlowinstitute.org/sitemap.xml', priority: 2, maxItems: 100, filter: false },
   { name: 'r/Privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 1, maxItems: 50, filter: true },
   { name: 'Privacy International', url: 'https://privacyinternational.org/rss.xml', priority: 3, maxItems: 50, filter: false },
-  { name: 'The Intercept', url: 'https://theintercept.com/feed/', priority: 3, maxItems: 50, filter: false },
+  { name: 'The Intercept', url: 'https://theintercept.com/feed/', priority: 3, maxItems: 50, filter: true },
   { name: 'MIT Technology Review', url: 'https://privacyinternational.org/rss.xml', priority: 3, maxItems: 50, filter: false },
   { name: 'Rest of World', url: 'https://www.technologyreview.com/sitemap-1.xml', priority: 3, maxItems: 50, filter: false },
 
