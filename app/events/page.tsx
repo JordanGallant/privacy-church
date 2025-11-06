@@ -19,7 +19,7 @@ export default function EventsPage() {
         >
         Go if you know everything. Go if you know nothing.        </p>
 
-        <img src = "/assets/tool.png"/>
+      
 
     </div>
     <div className='pl-6'>
@@ -36,7 +36,6 @@ export default function EventsPage() {
        <Heading text="in Argentina" />
           <Picks events={[
             { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },
-            { id: 2, title: "Web3 Summit", date: "2025-09-10", tag: "blockchain" },
             { id: 3, title: "DeFi Conference", date: "2025-09-15", location: "New York" }
           ]} />
         </div>
