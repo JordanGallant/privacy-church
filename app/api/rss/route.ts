@@ -8,7 +8,6 @@ const RSS_FEEDS = [
   { name: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index', priority: 2, maxItems: 100, filter: true },
   { name: 'TechCrunch', url: 'https://techcrunch.com/feed/', priority: 2, maxItems: 100, filter: true },
   { name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml', priority: 1, maxItems: 10, filter: true },
-  { name: 'Decrypt', url: 'https://decrypt.co/feed', priority: 2, maxItems: 100, filter: true },
   { name: 'The Block', url: 'https://www.theblock.co/rss.xml', priority: 2, maxItems: 100, filter: true },
   { name: 'Krebs on Security', url: 'https://krebsonsecurity.com/feed/', priority: 2, maxItems: 100, filter: true },
   { name: 'Schneier on Security', url: 'https://www.schneier.com/feed/atom/', priority: 2, maxItems: 100, filter: true },
