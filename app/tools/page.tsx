@@ -18,7 +18,7 @@ export default function ToolsPage() {
           A to Z’s of digital freedom.
         </p>
 
-        <img src = "/assets/tool.png" className='mb-8'/>
+      <img src="/assets/tools.png" className='mb-8 w-full h-52 object-cover' />
         
         <Heading text="Tool Aggregators" />
         <Picks events={[

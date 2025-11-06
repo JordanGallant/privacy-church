@@ -20,6 +20,7 @@ export default function ManifestoPage() {
         </p>
         <br/>
 
+
          <p
           className="text-[15px]  text-[#353535] md:text-lg leading-relaxed font-[family-name:var(--font-dm-mono)]"
           
@@ -28,8 +29,7 @@ export default function ManifestoPage() {
         </p>
         <br/>
 
-        <img src = "/assets/tool.png"/>
-        <br/>
+              <img src="/assets/manifesto.png" className='mb-8 w-full h-52 object-cover' />
 
         <h2 className="text-[20px]  font-[family-name:var(--font-gt-planar-straight)] leading-tight">Why privacy matters?</h2>
         <br/>

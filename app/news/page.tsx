@@ -16,6 +16,7 @@ export default function NewspPage() {
           Fresh sins, big wins and ongoing acts of surveillance disguised as progress.
 
         </p>
+        
         <News />
       </div>
 

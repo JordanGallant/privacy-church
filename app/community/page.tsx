@@ -20,7 +20,7 @@ export default function EventsPage() {
     Welcome to the Other Side of the Screen, for the curious, cautious and chronically online.
   </p>
 
-  <img src="/assets/tool.png" alt="Tool" className="mt-8" />
+      <img src="/assets/community.png" className='mb-8 w-full h-52 object-cover' />
 </div>
 <div className='pl-6'>
 <h1 className="text-[#A0A0A0] text-[20px] font-black whitespace-nowrap uppercase font-[family-name:var(--font-gt-planar-black)]">Featured</h1>

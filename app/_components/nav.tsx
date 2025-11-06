@@ -98,7 +98,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
               <img 
                 src="/assets/logo.svg" 
                 alt="Logo" 
-                className="h-8 w-auto cursor-pointer"
+                className="h-8 w-auto cursor-pointer pl-[6px]"
               />
             </a>
           </div>
