@@ -9,75 +9,55 @@ interface NavbarProps {
 
 export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
   const [showGreeting, setShowGreeting] = useState(hideLogo);
 
   useEffect(() => {
     if (hideLogo) {
-      // Wait 5 seconds, then fade out greeting and show logo
       const timer = setTimeout(() => {
         setShowGreeting(false);
-      }, 5000);
+      }, 1000);
 
       return () => clearTimeout(timer);
     }
   }, [hideLogo]);
 
   const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const newState = !isOpen;
-    setIsOpen(newState);
-    onMenuToggle?.(newState);
-    
-    // Remove focus from button to prevent styling issue
     e.currentTarget.blur();
+    
+    if (!isOpen) {
+      // Opening
+      setShouldRender(true);
+      setIsOpen(true);
+      onMenuToggle?.(true);
+    } else {
+      // Closing - trigger animation first
+      setIsOpen(false);
+      onMenuToggle?.(false);
+      // Delay unmounting to allow animation to complete
+      setTimeout(() => {
+        setShouldRender(false);
+      }, 800); // Match this to your closing animation duration
+    }
   };
 
-  // Split text into individual characters for wave animation
   const greetingText = "Hello, stranger";
-  const greetingChars = greetingText.split('');
 
   return (
     <>
-      <style jsx>{`
-        @keyframes wave {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-8px);
-          }
-        }
-        
-        .wave-char {
-          display: inline-block;
-          animation: wave 1.5s ease-in-out infinite;
-        }
-      `}</style>
-
       <nav className="relative flex items-center justify-between px-4 py-5 z-[110]">
         {hideLogo ? (
-          <div className="relative flex-1 text-center">
-            {/* Greeting text with wave animation */}
+        <div className="relative flex-1 pl-[6px]">  
             <div 
-              className={`absolute inset-0 flex items-center justify-center text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight transition-opacity duration-700 ${
+              className={`absolute left-0 text-xl font-[family-name:var(--font-gt-planar-straight)] leading-tight transition-opacity duration-200 ease-in-out pl-[6px] ${
                 showGreeting ? 'opacity-100' : 'opacity-0 pointer-events-none'
               }`}
             >
-              {greetingChars.map((char, index) => (
-                <span
-                  key={index}
-                  className="wave-char"
-                  style={{
-                    animationDelay: `${index * 0.1}s`
-                  }}
-                >
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
-              ))}
+              {greetingText}
             </div>
             
-            {/* Logo */}
             <div 
-              className={`transition-opacity duration-700 ${
+              className={`transition-opacity duration-200 ease-in-out  ${
                 showGreeting ? 'opacity-0' : 'opacity-100'
               }`}
             >
@@ -85,7 +65,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
                 <img 
                   src="/assets/logo.svg" 
                   alt="Logo" 
-                  className="h-8 w-auto cursor-pointer mx-auto"
+                  className="h-8 w-auto cursor-pointer"
                 />
               </a>
             </div>
@@ -135,11 +115,10 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
         </div>
       </nav>
 
-      {/* Mobile Full-screen Overlay */}
-      {isOpen && (
+      {shouldRender && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center md:items-center">
           <div className="max-w-[420px] w-full h-screen md:h-[calc(100vh-4rem)] md:rounded-lg overflow-hidden relative">
-            <Menu/>
+            <Menu isClosing={!isOpen} />
           </div>
         </div>
       )}
