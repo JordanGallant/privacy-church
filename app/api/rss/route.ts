@@ -16,16 +16,41 @@ const RSS_FEEDS = [
   { name: 'Schneier on Security', url: 'https://www.schneier.com/feed/atom/', priority: 2, maxItems: 100, filter: true },
   { name: 'EFF Deeplinks', url: 'https://www.eff.org/rss/updates.xml', priority: 2, maxItems: 100, filter: true },
   { name: 'Privacy Guides', url: 'https://www.privacyguides.org/en/feed_rss_created.xml', priority: 2, maxItems: 100, filter: true },
-  { name: 'Ludlow Institute', url: 'https://www.ludlowinstitute.org/sitemap.xml', priority: 2, maxItems: 100, filter: true },
+  { name: 'Ludlow Institute', url: 'https://www.ludlowinstitute.org/sitemap.xml', priority: 2, maxItems: 100, filter: false },
   { name: 'r/Privacy', url: 'https://www.reddit.com/r/privacy/.rss', priority: 1, maxItems: 50, filter: true },
   { name: 'Privacy International', url: 'https://privacyinternational.org/rss.xml', priority: 3, maxItems: 50, filter: false },
-  { name: 'The Intercept', url: 'https://theintercept.com/feed/', priority: 3, maxItems: 50, filter: true },
-  { name: 'Rest of World', url: 'https://www.technologyreview.com/sitemap-1.xml', priority: 3, maxItems: 50, filter: false },
+  { name: 'The Intercept', url: 'https://theintercept.com/feed/', priority: 3, maxItems: 50, filter: false },
+  { name: 'MIT Technology Review', url: 'https://privacyinternational.org/rss.xml', priority: 3, maxItems: 50, filter: true },
 
 ];
 
 const REDIS_KEY = 'rss:items';
-const KEYWORDS = ['privacy', 'security', 'digital'];
+const KEYWORDS = [
+  'privacy', 'security', 'anonymous', 'anonymity', 'confidential', 'private',
+  
+  'zero-knowledge', 'zk-proof', 'zk-snark', 'zk-stark', 'monero', 'zcash',
+  'tornado', 'mixer', 'tumbler', 'coinjoin', 'stealth address',
+   
+  'decentralized', 'decentralised', 'distributed', 'p2p', 'peer-to-peer',
+  'self-sovereign', 'censorship-resistant', 'permissionless',
+  
+  'decentralized identity', 'self-sovereign identity', 'verifiable credential',
+  'web3 auth', 'wallet connect', 'metamask',
+  
+  'ipfs', 'swarm', 'arweave', 'filecoin', 'storj', 'sia',
+  'encrypted messaging', 'end-to-end encryption', 'e2ee', 'signal protocol',
+  
+  'tor', 'i2p', 'vpn', 'proxy', 'mysterium', 'orchid', 'dvpn',
+  
+  'private transaction', 'confidential transaction', 'ring signature',
+  'stealth address', 'view key', 'spend key', 'shielded pool',
+  
+  'encryption', 'cryptography', 'homomorphic', 'multi-party computation',
+  'mpc', 'secure enclave', 'trusted execution', 'tee',
+  
+  'trustless', 'non-custodial', 'self-custody', 'sovereign',
+  'surveillance', 'tracking', 'fingerprint', 'metadata'
+];
 
 interface RSSItem {
   source: string;
