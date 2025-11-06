@@ -122,7 +122,7 @@ export default function Menu({ isClosing = false }: MenuProps) {
             itemsRef.current[index] = el
           }}
           href={item.href} 
-          className={`text-5xl leading-tight ${getLinkFont(item.href)}`}
+          className={`text-5xl leading-tight pl-[10px] ${getLinkFont(item.href)}`}
           style={{ opacity: 0 }}
         >
           {item.label}

@@ -64,7 +64,7 @@ export default function SimpleEventsList({ events }: SimpleEventsListProps) {
               )}
             </div>
             {index < events.length - 1 && (
-              <hr className="border-gray-400 my-4" />
+              <hr className="border-[#E2E2E2] my-4" />
             )}
           </>
         );

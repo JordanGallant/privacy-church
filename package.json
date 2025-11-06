@@ -9,13 +9,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ethersphere/bee-js": "^9.8.1",
+    "@solarpunkltd/swarm-stream-js": "^0.1.0",
     "@types/xml2js": "^0.4.14",
+    "@usedapp/core": "^1.2.16",
     "gsap": "^3.13.0",
     "ioredis": "^5.8.2",
     "lucide-react": "^0.552.0",
     "next": "16.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-hook-form": "^7.66.0",
     "redis": "^5.9.0",
     "xml2js": "^0.6.2"
   },

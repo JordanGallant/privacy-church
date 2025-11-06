@@ -1,4 +1,2 @@
 Menu -> shorten time in gradient more objects come in more abrubt 
 gap hight link title and news source
- remove hashtages 2-3
- rounded curve for desktop visuals
