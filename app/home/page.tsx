@@ -77,12 +77,11 @@ export default function Home() {
   
 </div>
 <div className='pl-2 pt-6'>
-    <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)]">
-          News
-        </h1>
+  <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)] pl-[8px]">News</h1>
+        
 
          <p
-          className="font-[family-name:var(--font-dm-mono)] font-normal text-[15px] leading-[20px] tracking-[-0.06em] mb-4"
+          className="font-[family-name:var(--font-dm-mono)] font-normal text-[15px] leading-[20px] tracking-[-0.06em] mb-8"
           style={{ color: "#717171" }}
         >
           Fresh sins, big wins and ongoing acts of surveillance disguised as progress.
