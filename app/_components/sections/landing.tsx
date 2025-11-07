@@ -23,7 +23,7 @@ export default function Landing() {
           </div>
         </div>
 
-<div className="w-full max-w-7xl mx-auto px-6 md:px-10">
+<div className="w-full max-w-7xl mx-auto px-6 pb-8">
   <p
     className="font-[family-name:var(--font-dm-mono)] font-normal text-[15px] leading-[20px] tracking-[-0.06em]"
   >

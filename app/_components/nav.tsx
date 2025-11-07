@@ -128,7 +128,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
               className="relative text-base font-bold tracking-tight z-10 transition-colors duration-200 font-[family-name:var(--font-gt-planar-menusmall)]"
               style={{
                 letterSpacing: '-0.01em',
-                color: isOpen ? '#FFFFFF' : '#000000'
+                color: isOpen ? '#FAFAFA' : '#000000'
               }}
             >
               {isOpen ? 'Close' : 'Menu'}

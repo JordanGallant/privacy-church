@@ -75,6 +75,7 @@ export default function Stream() {
 
   const onSubmit = WithAsyncErrorBoundary(async (data: FormData) => {
     if (!library) return;
+    
 
     await startStream({ address: account!, key: data.key }, data.streamTopic, new BatchId(data.stamp), {
       audio: options.audio,
