@@ -6,18 +6,12 @@ import Navbar from '../_components/nav';
 
 export default function Stream() {
   const { account, library } = useEthers();
-  const [streamName, setStreamName] = useState('');
   const [expiry, setExpiry] = useState(60);
   const [loading, setLoading] = useState(false);
   const [streamKey, setStreamKey] = useState('');
   const [error, setError] = useState('');
 
   const generateStreamKey = async () => {
-    if (!streamName.trim()) {
-      setError('Please enter a stream name');
-      return;
-    }
-
     setLoading(true);
     setError('');
     setStreamKey('');
@@ -29,7 +23,7 @@ export default function Stream() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          stream: streamName,
+          stream: 'my_stream',
           expiry: expiry,
         }),
       });
@@ -40,7 +34,14 @@ export default function Stream() {
         throw new Error(data.error || 'Failed to generate stream key');
       }
 
-      setStreamKey(data.output);
+      // Parse the stream key from the output
+      let streamKey = data.output;
+      const streamKeyMatch = data.output?.match(/OBS Stream Key: (.+)/);
+      if (streamKeyMatch) {
+        streamKey = streamKeyMatch[1].trim();
+      }
+
+      setStreamKey(streamKey);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
@@ -70,19 +71,6 @@ export default function Stream() {
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <h2 className="text-2xl font-bold mb-4">Generate Stream Key</h2>
           
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">
-              Stream Name
-            </label>
-            <input
-              type="text"
-              value={streamName}
-              onChange={(e) => setStreamName(e.target.value)}
-              placeholder="my_stream"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2">
               Expiry (minutes)
