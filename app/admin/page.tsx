@@ -57,7 +57,6 @@ export default function Stream() {
     <>
       <Navbar />
       <div className="px-6 max-w-4xl mx-auto">
-        <Connect />
         <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)] pl-[10px]">
           Stream Admin
         </h1>
