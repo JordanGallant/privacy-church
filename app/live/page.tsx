@@ -1,92 +1,114 @@
-'use client'
-import { useEffect, useRef, useState } from 'react';
-import { attach, detach, EVENTS, playerBee  } from '@solarpunkltd/swarm-stream-js';
-import Navbar from '../_components/nav';
+'use client';
 
-const readBeeUrl = process.env.NEXT_PUBLIC_READ_BEE_URL!;
-playerBee.setBee(readBeeUrl);
+import React, { useState, useEffect, useRef } from 'react';
 
-export default function LiveStreamPage() {
+declare global {
+  interface Window {
+    Hls: any;
+  }
+}
+
+export default function StreamPlayer() {
+  const [isLive, setIsLive] = useState<boolean | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const controlsRef = useRef<any>(null);
-  
-  const [topic, setTopic] = useState('');
-  const [owner, setOwner] = useState('');
-  const [watching, setWatching] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const hlsRef = useRef<any>(null);
+
+  const streamUrl = 'https://stream.slim.community/swarm-hls/video/my_stream/index.m3u8';
 
   useEffect(() => {
-    if (watching && videoRef.current && topic && owner) {
-      const controls = attach({ 
-        media: videoRef.current, 
-        address: owner.replace('0x', ''), 
-        topic 
-      });
-      
-      controlsRef.current = controls;
-      controls.on(EVENTS.LOADING_PLAYING_CHANGE, (loading: boolean) => setLoading(loading));
-      controls.on(EVENTS.IS_PLAYING_CHANGE, (playing: boolean) => setIsPlaying(playing));
-      
-      controls.play();
-    }
+    const loadHls = async () => {
+      if (!videoRef.current) return;
+
+      const video = videoRef.current;
+
+      // Check if HLS is natively supported (Safari)
+      if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = streamUrl;
+        video.addEventListener('loadeddata', () => setIsLive(true));
+        video.addEventListener('error', () => {
+          setIsLive(false);
+          setError('Stream not available');
+        });
+      } else if (window.Hls?.isSupported()) {
+        const hls = new window.Hls();
+        hlsRef.current = hls;
+
+        hls.on(window.Hls.Events.MANIFEST_PARSED, () => {
+          setIsLive(true);
+          video.play().catch(() => {});
+        });
+
+        hls.on(window.Hls.Events.ERROR, (event: any, data: any) => {
+          if (data.fatal) {
+            setIsLive(false);
+            setError('Stream not available');
+          }
+        });
+
+        hls.loadSource(streamUrl);
+        hls.attachMedia(video);
+      } else {
+        setError('HLS not supported in this browser');
+      }
+    };
+
+    // Load HLS.js library
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/hls.js@latest';
+    script.async = true;
+    script.onload = loadHls;
+    document.body.appendChild(script);
 
     return () => {
-      if (controlsRef.current) detach();
+      if (hlsRef.current) {
+        hlsRef.current.destroy();
+      }
     };
-  }, [watching, topic, owner]);
-
-  const startWatching = () => {
-    if (topic && owner) setWatching(true);
-  };
+  }, []);
 
   return (
-    <>
-      <Navbar/>
-      <div className="px-6 max-w-4xl mx-auto">
-        <h1 className="text-5xl mb-2 leading-tight font-[family-name:var(--font-gt-planar-heading)] pl-[10px]">
-          Live Stream
-        </h1>
-        <p className="font-[family-name:var(--font-dm-mono)] text-[15px] mb-4 pl-[10px]" style={{ color: "#717171" }}>
-          Watch live streams from the swarm
-        </p>
-        
-        {!watching ? (
-          <div className="space-y-3 mb-4">
-            <input
-              type="text"
-              placeholder="Stream topic"
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-              className="w-full px-4 py-2 border rounded font-[family-name:var(--font-dm-mono)] text-sm"
-            />
-            <input
-              type="text"
-              placeholder="Owner address (0x...)"
-              value={owner}
-              onChange={(e) => setOwner(e.target.value)}
-              className="w-full px-4 py-2 border rounded font-[family-name:var(--font-dm-mono)] text-sm"
-            />
-            <button
-              onClick={startWatching}
-              className="w-full bg-blue-500 text-white py-2 rounded font-[family-name:var(--font-dm-mono)]"
-            >
-              Watch
-            </button>
+    <div className="min-h-screen bg-[#0a0a0a] text-white p-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="bg-[#111111] border border-[#222222] rounded-lg overflow-hidden">
+          <video
+            ref={videoRef}
+            className="w-full aspect-video bg-black"
+            controls
+            playsInline
+            muted
+          />
+          
+          <div className="p-6 border-t border-[#222222]">
+            {isLive === null && !error && (
+              <div className="flex items-center gap-3 text-gray-400">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+                <span>Checking stream...</span>
+              </div>
+            )}
+            
+            {isLive === true && (
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+                <span className="font-medium text-blue-500">LIVE</span>
+              </div>
+            )}
+            
+            {isLive === false && (
+              <div className="flex items-center gap-3 text-gray-400">
+                <div className="w-2 h-2 bg-gray-600 rounded-full" />
+                <span>Stream not live</span>
+              </div>
+            )}
+            
+            {error && (
+              <div className="text-gray-400">
+                {error}
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="mb-4">
-            {loading && <p className="text-sm mb-2">Loading...</p>}
-            <video 
-              ref={videoRef}
-              controls
-              autoPlay
-              className="w-full rounded"
-              style={{ maxHeight: '600px' }}
-            />
-          </div>
-        )}
+        </div>
       </div>
-    </>
+    </div>
   );
 }

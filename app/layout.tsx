@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from 'next/font/local';
-import { Providers } from "./_components/providers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -87,9 +86,7 @@ export default function RootLayout({
   className={`${geistSans.variable} ${Menusmall.variable} ${Heading.variable} ${Image.variable} ${geistMono.variable} ${gtDMono.variable} ${Elevatica.variable} ${gtPlanarHead.variable} ${gtPlanarStraight.variable} ${gtPlanarLight.variable} ${gtPlanarMenu.variable} ${gtPlanarBlack.variable} antialiased bg-white md:bg-[#280cfb] md:flex md:justify-center md:items-center md:h-screen md:p-8 md:overflow-hidden`}
 >
   <div className="w-full h-full md:max-w-[420px] md:max-h-full md:shadow-2xl md:bg-white md:overflow-y-auto md:rounded-[32px] scrollbar-hide">
-   <Providers>
     {children}
-    </Providers>
   </div>
 </body>
     </html>
