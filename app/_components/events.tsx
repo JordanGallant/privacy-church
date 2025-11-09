@@ -35,10 +35,10 @@ export default function EventsList({ argentina = false }: EventsListProps) {
         let filteredEvents: Event[];
 
         if (argentina) {
-          // Show only events with IDs from 14 to 32
+          // ✅ Show events with IDs 14–32
           filteredEvents = data.filter(event => event.id >= 14 && event.id <= 32);
         } else {
-          // Only show event with id 1
+          // Default: show event with ID 1
           filteredEvents = data.filter(event => event.id === 1);
         }
 
