@@ -41,7 +41,7 @@ export default function EventsList({ argentina = false }: EventsListProps) {
         } else {
           // Only show event with id 1
           filteredEvents = data.filter(event => event.id === 1);
-        }
+        } 
         
         setEvents(filteredEvents);
       } catch (err) {
@@ -99,12 +99,12 @@ export default function EventsList({ argentina = false }: EventsListProps) {
                 <h3 className="text-xl leading-tight tracking-[-0.01em] font-medium mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)]">
                   {event.title}
                 </h3>
-                <div className="flex gap-4">
-                  <p className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
+                <div className="flex gap-4 sm:gap-2">
+                  <p className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)] whitespace-nowrap"
                     style={{ color: '#A0A0A0' }}>
                     {event.date}
                   </p>
-                  <p className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)] flex items-center gap-1"
+                  <p className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)] flex items-center gap-1 whitespace-nowrap"
                     style={{ color: '#A0A0A0' }}>
                     <MapPin className="w-5 h-5" />
                     {event.location.city}
