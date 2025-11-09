@@ -17,6 +17,8 @@ export default function NewspPage() {
 Books, papers, and manifestos that decode power, expose extraction, and chart paths to digital autonomy.
         </p>
 
+      <img src="/assets/read.png" className='mb-8 w-full h-52 object-cover' />
+
         
 <Picks events={[
   { 

@@ -117,8 +117,7 @@ export default function Home() {
           <div ref={el => { imagesRef.current[0] = el; }}>
             <Link href="/actions">
               <CustomImage
-                src="/assets/keys.png" 
-                crop="bottom" 
+                src="/assets/actions.png" 
                 text="Action" 
                 subtext='Where belief becomes practice'
               />
@@ -128,8 +127,7 @@ export default function Home() {
           <div ref={el => { imagesRef.current[1] = el; }}>
             <Link href="/events">
               <CustomImage
-                src="/assets/events.png" 
-                crop="top" 
+                src="/assets/pray.png" 
                 text="Events"
                 subtext='Show up in real life'
               />
