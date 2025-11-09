@@ -12,17 +12,23 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
   const [isOpen, setIsOpen] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isSticky, setIsSticky] = useState(false);
+  
   const greetingRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+  const navRef = useRef<HTMLElement>(null);
 
+  // Logo animation effect
   useEffect(() => {
     if (hideLogo && !hasAnimated && greetingRef.current && logoRef.current) {
       const timeline = gsap.timeline({
-        delay: 1.5, // Wait 1.5 seconds before starting animation
+        delay: 1.5,
         onComplete: () => setHasAnimated(true)
       });
       
-      // Set initial states
       gsap.set(logoRef.current, { 
         y: -50, 
         opacity: 0 
@@ -33,7 +39,6 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
         opacity: 1 
       });
 
-      // Animate greeting out to the left, then logo in from top
       timeline
         .to(greetingRef.current, {
           x: -100,
@@ -46,9 +51,71 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
           opacity: 1,
           duration: 0.8,
           ease: 'power3.out'
-        }, '-=0.2'); // Start slightly before greeting finishes
+        }, '-=0.2');
     }
   }, [hideLogo, hasAnimated]);
+
+  // Scroll detection effect - works with both window and container scroll
+  useEffect(() => {
+    const handleScroll = (e?: Event) => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          let currentScrollY = 0;
+          
+          // Check if scroll came from container or window
+          if (e?.target && e.target !== document) {
+            // Desktop: scroll from container
+            currentScrollY = (e.target as HTMLElement).scrollTop;
+          } else {
+            // Try to find scrollable container first (desktop)
+            const scrollContainer = navRef.current?.closest('.md\\:overflow-y-auto') as HTMLElement;
+            if (scrollContainer && scrollContainer.scrollTop > 0) {
+              currentScrollY = scrollContainer.scrollTop;
+            } else {
+              // Mobile: use window scroll
+              currentScrollY = window.scrollY;
+            }
+          }
+          
+          // Scrolling down - hide navbar when past threshold
+          if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+            setIsSticky(true);
+            setIsVisible(false);
+          } 
+          // Scrolling up - show navbar with sticky
+          else if (currentScrollY < lastScrollY.current && currentScrollY > 10) {
+            setIsSticky(true);
+            setIsVisible(true);
+          }
+          // At top of page - make non-sticky and visible
+          else if (currentScrollY <= 100) {
+            setIsSticky(false);
+            setIsVisible(true);
+          }
+          
+          lastScrollY.current = currentScrollY;
+          ticking.current = false;
+        });
+        
+        ticking.current = true;
+      }
+    };
+
+    // Attach to both window scroll (mobile) and container scroll (desktop)
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    const scrollContainer = navRef.current?.closest('.md\\:overflow-y-auto');
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+    }
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollContainer) {
+        scrollContainer.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
 
   const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.currentTarget.blur();
@@ -68,9 +135,22 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
 
   const greetingText = "Hello, stranger";
 
+  // Determine background: transparent when menu is open/closing, white only when sticky and scrolling up
+  const getBackgroundClass = () => {
+    if (shouldRender) return 'bg-transparent';
+    if (isSticky && isVisible) return 'bg-white';
+    return 'bg-transparent';
+  };
+
   return (
     <>
-      <nav className="relative flex items-center justify-between px-4 py-5 z-[110]">
+      <nav 
+        ref={navRef}
+        className={`${isSticky ? 'md:sticky md:top-0 fixed top-0' : 'relative'} left-0 right-0 flex items-center justify-between px-4 py-5 z-[110] ${getBackgroundClass()} transition-all duration-300 ease-in-out`}
+        style={{
+          transform: isSticky ? (isVisible ? 'translateY(0)' : 'translateY(-100%)') : 'translateY(0)'
+        }}
+      >
         {hideLogo || hasAnimated ? (
           <div className="relative flex-1 pl-[6px]">  
             {!hasAnimated && (
@@ -140,8 +220,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
       {shouldRender && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center md:items-center">
           <div className="max-w-[420px] w-full h-screen md:h-[calc(100vh-4rem)] md:rounded-[32px] overflow-hidden relative">
-            <Menu isClosing={!isOpen} />
-          </div>
+          <Menu isClosing={!isOpen} />          </div>
         </div>
       )}
     </>
