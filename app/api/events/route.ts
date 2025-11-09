@@ -290,17 +290,17 @@ export async function GET(request: Request) {
   //     "country": "Argentina"
   //   }
   // },
-  {
-    "id": 26,
-    "title": "From compliance to care \u2013 Privacy-preserving tech in activism, journalism & humanitarian aid",
-    "date": "Wed Nov 19",
-    "link": "https://lu.ma/9lnlosqf",
-    "img": "https://images.unsplash.com/photo-1623039405147-547794f92e9e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjQyMjF8MHwxfHNlYXJjaHwxfHxqb3VybmFsaXNtfGVufDB8fHx8MTc2MTg4MDA5MHwy&ixlib=rb-4.1.0&q=80&w=1080",
-    "location": {
-      "city": "Buenos Aires",
-      "country": "Argentina"
-    }
-  },
+  // {
+  //   "id": 26,
+  //   "title": "From compliance to care \u2013 Privacy-preserving tech in activism, journalism & humanitarian aid",
+  //   "date": "Wed Nov 19",
+  //   "link": "https://lu.ma/9lnlosqf",
+  //   "img": "https://images.unsplash.com/photo-1623039405147-547794f92e9e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjQyMjF8MHwxfHNlYXJjaHwxfHxqb3VybmFsaXNtfGVufDB8fHx8MTc2MTg4MDA5MHwy&ixlib=rb-4.1.0&q=80&w=1080",
+  //   "location": {
+  //     "city": "Buenos Aires",
+  //     "country": "Argentina"
+  //   }
+  // },
   {
     "id": 27,
     "title": "Anonymous Yet Authentic",
