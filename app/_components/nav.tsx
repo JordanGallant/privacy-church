@@ -63,71 +63,72 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
     }
   }, []);
 
-  // Scroll detection effect - works with both window and container scroll
-  useEffect(() => {
-    const handleScroll = (e?: Event) => {
-      if (!ticking.current) {
-        window.requestAnimationFrame(() => {
-          let currentScrollY = 0;
-          
-          // Check if scroll came from container or window
-          if (e?.target && e.target !== document) {
-            // Desktop: scroll from container
-            currentScrollY = (e.target as HTMLElement).scrollTop;
+
+useEffect(() => {
+  const handleScroll = (e?: Event) => {
+    if (!ticking.current) {
+      window.requestAnimationFrame(() => {
+        let currentScrollY = 0;
+        
+        // Check if scroll came from container or window
+        if (e?.target && e.target !== document) {
+          // Desktop: scroll from container
+          const rawScrollY = (e.target as HTMLElement).scrollTop;
+          currentScrollY = Math.max(0, rawScrollY);
+        } else {
+          // Try to find scrollable container first (desktop)
+          const scrollContainer = navRef.current?.closest('.md\\:overflow-y-auto') as HTMLElement;
+          if (scrollContainer && scrollContainer.scrollTop > 0) {
+            currentScrollY = Math.max(0, scrollContainer.scrollTop);
           } else {
-            // Try to find scrollable container first (desktop)
-            const scrollContainer = navRef.current?.closest('.md\\:overflow-y-auto') as HTMLElement;
-            if (scrollContainer && scrollContainer.scrollTop > 0) {
-              currentScrollY = scrollContainer.scrollTop;
-            } else {
-              // Mobile: use window scroll
-              currentScrollY = window.scrollY;
-            }
+            // Mobile: use window scroll
+            currentScrollY = Math.max(0, window.scrollY);
           }
-          
-          // Make sticky immediately when scrolling starts (even 1px)
-          if (currentScrollY > 1) {
-            setIsSticky(true);
-          } else {
-            setIsSticky(false);
+        }
+        
+        // Make sticky immediately when scrolling starts (even 1px)
+        if (currentScrollY > 1) {
+          setIsSticky(true);
+        } else {
+          setIsSticky(false);
+          setIsVisible(true);
+        }
+        
+        // Only handle visibility after we're already sticky
+        if (currentScrollY > 1) {
+          // Scrolling down - hide navbar when past threshold
+          if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+            setIsVisible(false);
+          } 
+          // Scrolling up - show navbar
+          else if (currentScrollY < lastScrollY.current) {
             setIsVisible(true);
           }
-          
-          // Only handle visibility after we're already sticky
-          if (currentScrollY > 1) {
-            // Scrolling down - hide navbar when past threshold
-            if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-              setIsVisible(false);
-            } 
-            // Scrolling up - show navbar
-            else if (currentScrollY < lastScrollY.current) {
-              setIsVisible(true);
-            }
-          }
-          
-          lastScrollY.current = currentScrollY;
-          ticking.current = false;
-        });
+        }
         
-        ticking.current = true;
-      }
-    };
-
-    // Attach to both window scroll (mobile) and container scroll (desktop)
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    const scrollContainer = navRef.current?.closest('.md\\:overflow-y-auto');
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+        lastScrollY.current = currentScrollY;
+        ticking.current = false;
+      });
+      
+      ticking.current = true;
     }
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (scrollContainer) {
-        scrollContainer.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
+  };
+
+  // Attach to both window scroll (mobile) and container scroll (desktop)
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  
+  const scrollContainer = navRef.current?.closest('.md\\:overflow-y-auto');
+  if (scrollContainer) {
+    scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+  }
+  
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+    if (scrollContainer) {
+      scrollContainer.removeEventListener('scroll', handleScroll);
+    }
+  };
+}, []);
 
   const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.currentTarget.blur();
