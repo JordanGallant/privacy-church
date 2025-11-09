@@ -237,7 +237,7 @@ export async function GET(request: Request) {
   },
   {
     "id": 21,
-    "title": "The biggest security breaches in recent history...",
+    "title": "The biggest security breaches in recent history... ",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/w31jzd1j",
     "img": "https://i.ibb.co/gbRKMcBH/a1e0783a1af6.png",

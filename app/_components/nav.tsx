@@ -70,20 +70,21 @@ useEffect(() => {
       window.requestAnimationFrame(() => {
         let currentScrollY = 0;
         
-        // Check if scroll came from container or window
-        if (e?.target && e.target !== document) {
-          // Desktop: scroll from container
-          const rawScrollY = (e.target as HTMLElement).scrollTop;
-          currentScrollY = Math.max(0, rawScrollY);
+        // Desktop: Find the scrollable container (md:overflow-y-auto wrapper)
+        const scrollContainer = document.querySelector('.md\\:overflow-y-auto') as HTMLElement;
+        
+        if (scrollContainer) {
+          // Desktop mode - use container scroll
+          currentScrollY = scrollContainer.scrollTop;
         } else {
-          // Try to find scrollable container first (desktop)
-          const scrollContainer = navRef.current?.closest('.md\\:overflow-y-auto') as HTMLElement;
-          if (scrollContainer && scrollContainer.scrollTop > 0) {
-            currentScrollY = Math.max(0, scrollContainer.scrollTop);
-          } else {
-            // Mobile: use window scroll
-            currentScrollY = Math.max(0, window.scrollY);
-          }
+          // Mobile mode - use window scroll
+          currentScrollY = window.scrollY;
+        }
+        
+        // Ignore negative scroll values completely (overscroll bounce)
+        if (currentScrollY < 0) {
+          ticking.current = false;
+          return;
         }
         
         // Make sticky immediately when scrolling starts (even 1px)
@@ -114,10 +115,10 @@ useEffect(() => {
     }
   };
 
-  // Attach to both window scroll (mobile) and container scroll (desktop)
+  // Listen to both window scroll (mobile) and container scroll (desktop)
   window.addEventListener('scroll', handleScroll, { passive: true });
   
-  const scrollContainer = navRef.current?.closest('.md\\:overflow-y-auto');
+  const scrollContainer = document.querySelector('.md\\:overflow-y-auto');
   if (scrollContainer) {
     scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
   }
