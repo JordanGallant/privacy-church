@@ -236,7 +236,8 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
       {shouldRender && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center md:items-center">
           <div className="max-w-[420px] w-full h-screen md:h-[calc(100vh-4rem)] md:rounded-[32px] overflow-hidden relative">
-            <Menu isClosing={!isOpen} />          </div>
+            <Menu isClosing={!isOpen} />          
+          </div>
         </div>
       )}
     </>

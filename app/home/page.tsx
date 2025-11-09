@@ -135,9 +135,10 @@ export default function Home() {
           </div>
           
           <div ref={el => { imagesRef.current[2] = el; }}>
-            <Link href="/community">
+            <Link href="/community" >
               <CustomImage
-                src="/assets/people.png" 
+                src="/assets/nuns.png" 
+                crop="top"
                 text="Community" 
                 subtext='Where connections begin'
               />
@@ -148,9 +149,9 @@ export default function Home() {
             ref={el => { imagesRef.current[3] = el; }}
             className="flex gap-3 md:justify-between md:gap-2"
           >
-            <Link href="/tools">
+            <Link href="/tools" className="flex-1"> 
               <CustomImage
-                src="/assets/usb.png" 
+                src="/assets/tool.png" 
                 crop="shrink" 
                 text="Tools" 
                 subtext='A-Z'
@@ -158,7 +159,7 @@ export default function Home() {
               />
             </Link>
 
-            <Link href="/manifesto">
+            <Link href="/manifesto" className="flex-1">
               <CustomImage 
                 src="/assets/candle.png" 
                 crop="shrink" 

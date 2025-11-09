@@ -45,11 +45,11 @@ const CustomImage: React.FC<CustomImageProps> = ({
   };
 
   const getContainerClass = () => {
-    if (crop === 'shrink') {
+  if (crop === 'shrink') {
+    return 'relative w-full h-[180px] overflow-hidden rounded-lg shadow-lg'; // Slightly taller
+  }
   return 'relative w-full h-[167px] overflow-hidden rounded-lg shadow-lg';
-    }
-    return 'relative w-full h-[167px] overflow-hidden rounded-lg shadow-lg';
-  };
+};
 
   const getGradientStyle = () => {
     if (crop === 'shrink') {
