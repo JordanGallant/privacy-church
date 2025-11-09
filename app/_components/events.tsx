@@ -32,19 +32,16 @@ export default function EventsList({ argentina = false }: EventsListProps) {
         if (!response.ok) throw new Error('Failed to fetch events');
         
         const data: Event[] = await response.json();
-        
         let filteredEvents: Event[];
-        
+
         if (argentina) {
-          // Show only 4 events in Argentina
-          filteredEvents = data
-            .filter(event => event.location.country === 'Argentina')
-            .slice(0, 4);
+          // Show only events with IDs from 14 to 32
+          filteredEvents = data.filter(event => event.id >= 14 && event.id <= 32);
         } else {
           // Only show event with id 1
           filteredEvents = data.filter(event => event.id === 1);
         }
-        
+
         setEvents(filteredEvents);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
@@ -56,19 +53,13 @@ export default function EventsList({ argentina = false }: EventsListProps) {
     fetchEvents();
   }, [argentina]);
 
-  if (loading) {
-    return <div className="p-6">Loading events...</div>;
-  }
-
-  if (error) {
-    return <div className="p-6 text-red-600">Error: {error}</div>;
-  }
+  if (loading) return <div className="p-6">Loading events...</div>;
+  if (error) return <div className="p-6 text-red-600">Error: {error}</div>;
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      
       <div className="space-y-4">
-        {events.map((event, index) => (
+        {events.map((event, index) =>
           argentina ? (
             <a
               key={event.id}
@@ -79,14 +70,11 @@ export default function EventsList({ argentina = false }: EventsListProps) {
             >
               <div
                 className="rounded-lg flex-shrink-0 relative overflow-hidden"
-                style={{
-                  width: '100px',
-                  height: '100px'
-                }}
+                style={{ width: '100px', height: '100px' }}
               >
                 {event.img && (
-                  <img 
-                    src={event.img} 
+                  <img
+                    src={event.img}
                     alt={event.title}
                     className="w-full h-full object-cover"
                   />
@@ -98,16 +86,20 @@ export default function EventsList({ argentina = false }: EventsListProps) {
                 )}
               </div>
               <div>
-                <h3 className="text-xl leading-tight tracking-[-0.01em] font-medium mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)]">
+                <h3 className="text-xl leading-tight tracking-[-0.01em] font-medium mb-2 font-[family-name:var(--font-gt-planar-image)]">
                   {event.title}
                 </h3>
                 <div className="flex gap-4">
-                  <p className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
-                    style={{ color: '#A0A0A0' }}>
+                  <p
+                    className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
+                    style={{ color: '#A0A0A0' }}
+                  >
                     {event.date}
                   </p>
-                  <p className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)] flex items-center gap-1"
-                    style={{ color: '#A0A0A0' }}>
+                  <p
+                    className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)] flex items-center gap-1"
+                    style={{ color: '#A0A0A0' }}
+                  >
                     <MapPin className="w-5 h-5" />
                     {event.location.city}
                   </p>
@@ -121,39 +113,42 @@ export default function EventsList({ argentina = false }: EventsListProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-lg overflow-hidden hover:shadow-lg transition-shadow flex flex-col justify-end relative"
-              style={{
-                height: '200px'
-              }}
+              style={{ height: '200px' }}
             >
               {event.img && (
-                <img 
-                  src={event.img} 
+                <img
+                  src={event.img}
                   alt={event.title}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               )}
-              <div className="relative z-10 p-5" style={{
-                background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)'
-              }}>
+              <div
+                className="relative z-10 p-5"
+                style={{
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)',
+                }}
+              >
                 {index === 0 && <OurPick color="green" />}
                 <h3 className="text-xl text-white mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)]">
                   {event.title}
                 </h3>
-                <p className="txt-xl font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
+                <p
+                  className="txt-xl font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
                   style={{ color: '#A0A0A0' }}
                 >
                   {new Date(event.date).toLocaleDateString('en-US', {
                     weekday: 'short',
                     day: 'numeric',
-                    month: 'short'
-                  })}, {event.location.city}
+                    month: 'short',
+                  })}
+                  , {event.location.city}
                 </p>
               </div>
             </a>
           )
-        ))}
+        )}
       </div>
-      
+
       {events.length === 0 && (
         <p className="text-gray-500 text-center">No events found.</p>
       )}

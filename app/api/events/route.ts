@@ -156,8 +156,240 @@ export async function GET(request: Request) {
         city: "Buenos Aires",
         country: "Argentina"
       }
+    },
+    
+  {
+    "id": 14,
+    "title": "Everyday Opsec \u2013 Personal security audit & aid",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/5nr33ves",
+    "img": "https://i.ibb.co/SDJgrMVQ/04717b74d28f.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
     }
-  ];
+  },
+  {
+    "id": 15,
+    "title": "ZK Dark Pools",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/qaltyvst",
+    "img": "https://i.ibb.co/MDCFSCt9/a050e120c12c.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 16,
+    "title": "Wallet Security Fundamentals",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/retb0z4r",
+    "img": "https://i.ibb.co/tTjkqPsB/adbbe854e1b6.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 17,
+    "title": "Power to the People: How Privacy Tech Can Safeguard Democracy",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/uxenfv7u",
+    "img": "https://i.ibb.co/7xhdKr1x/22aa9f1e731f.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 18,
+    "title": "Data Privacy in Legal Documentation: What to Look For",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/az795puf",
+    "img": "https://i.ibb.co/HT5ZfxZ8/415500303039.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 19,
+    "title": "The Aesthetics of Privacy \u2013 How visual language, product tone, and brand aesthetics can normalise privacy instead of fear-mongering",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/o9ztepnk",
+    "img": "https://i.ibb.co/ZshW0bH/c8fe3ec59492.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 20,
+    "title": "Privacy as Culture",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/al81hy3j",
+    "img": "https://i.ibb.co/M5jkN2V2/938c1b08c8a0.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 21,
+    "title": "The biggest security breaches in recent history and what we (should have) learned from them",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/w31jzd1j",
+    "img": "https://i.ibb.co/gbRKMcBH/a1e0783a1af6.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 22,
+    "title": "Practical tools for more private digital world",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/6pkovegk",
+    "img": "https://i.ibb.co/0VYQKpph/3f9b9c53b7e0.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 23,
+    "title": "Building Future Spaces for Digital Integrity",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/x1bdq9as",
+    "img": "https://i.ibb.co/JjzX13Rb/5aed95cb5c63.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 24,
+    "title": "Everyday Opsec \u2013 Personal security audit & aid",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/hgxtjbjw",
+    "img": "https://i.ibb.co/5xSTyrjc/05345062a73e.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  // {
+  //   "id": 25,
+  //   "title": "Eyes Wide Open: Navigating Privacy in the Age of AI",
+  //   "date": "Wed Nov 19",
+  //   "link": "https://lu.ma/qtjk3nx2",
+  //   "img": "https://images.lumacdn.com/gallery-images/dd/4042727d-8671-483c-81b0-5c178916a196.png",
+  //   "location": {
+  //     "city": "Buenos Aires",
+  //     "country": "Argentina"
+  //   }
+  // },
+  {
+    "id": 26,
+    "title": "From compliance to care \u2013 Privacy-preserving tech in activism, journalism & humanitarian aid",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/9lnlosqf",
+    "img": "https://images.unsplash.com/photo-1623039405147-547794f92e9e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjQyMjF8MHwxfHNlYXJjaHwxfHxqb3VybmFsaXNtfGVufDB8fHx8MTc2MTg4MDA5MHwy&ixlib=rb-4.1.0&q=80&w=1080",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 27,
+    "title": "Anonymous Yet Authentic",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/u7g5unik",
+    "img": "https://i.ibb.co/PGyNWNgj/05539e5c1344.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 28,
+    "title": "The Invisible Work We Do: Emotional Labour, Invisible Moderation and Ethical Decisions in Privacy Tech and Womxnhood",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/0jgjatyw",
+    "img": "https://i.ibb.co/sdLQY7t0/0406d6e2d727.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 29,
+    "title": "The Privacy Growth Playbook: Winning Without Surveillance",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/f5susl3w",
+    "img": "https://i.ibb.co/Sw62y0bc/bc176c5bb18b.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 30,
+    "title": "Culture of Care in Teams",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/8f67qt49",
+    "img": "https://i.ibb.co/Nb2zW6r/a2996aba2867.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 31,
+    "title": "Cyberfeminism Privacy in Protest Times",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/w85wwlav",
+    "img": "https://i.ibb.co/YBxpY134/3092e9aa71ae.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 32,
+    "title": "MKT en la Era Web3",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/8l98q2cc",
+    "img": "https://i.ibb.co/GQVR5xDg/43b06a6d1dfe.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 33,
+    "title": "Navigating the Legal Complexities of Building a Thorough Privacy Stack",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/mkibcpnh",
+    "img": "https://i.ibb.co/j9NCBJDk/99e6ea084358.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  },
+  {
+    "id": 34,
+    "title": "Inclusion Without Exposure \u2013 Protecting presence, privacy, and power in an age of digital surveillance",
+    "date": "Wed Nov 19",
+    "link": "https://lu.ma/2q5won0h",
+    "img": "https://i.ibb.co/gLyxyTVR/3855da5b79c9.png",
+    "location": {
+      "city": "Buenos Aires",
+      "country": "Argentina"
+    }
+  } 
+];
 
   return NextResponse.json(events);
 }
