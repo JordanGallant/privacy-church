@@ -14,7 +14,7 @@ export default function StreamPlayer() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<any>(null);
 
-  const streamUrl = 'https://stream.slim.community/swarm-hls/video/my_stream/index.m3u8';
+  const streamUrl = 'https://stream.slim.community/swarm-hls/video/my_stream/playlist-live.m3u8';
 
   useEffect(() => {
     const loadHls = async () => {

@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react';
 import { useEthers } from '@usedapp/core';
-import { Connect } from '../_components/modals/wallet';
 import Navbar from '../_components/nav';
 
 export default function Stream() {
