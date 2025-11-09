@@ -215,7 +215,7 @@ export async function GET(request: Request) {
   },
   {
     "id": 19,
-    "title": "The Aesthetics of Privacy \u2013 How visual language, product tone, and brand aesthetics can normalise privacy instead of fear-mongering",
+    "title": "The Aesthetics of Privacy \u2013 How visual language...",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/o9ztepnk",
     "img": "https://i.ibb.co/ZshW0bH/c8fe3ec59492.png",
@@ -237,7 +237,7 @@ export async function GET(request: Request) {
   },
   {
     "id": 21,
-    "title": "The biggest security breaches in recent history and what we (should have) learned from them",
+    "title": "The biggest security breaches in recent history...",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/w31jzd1j",
     "img": "https://i.ibb.co/gbRKMcBH/a1e0783a1af6.png",
@@ -314,7 +314,7 @@ export async function GET(request: Request) {
   },
   {
     "id": 28,
-    "title": "The Invisible Work We Do: Emotional Labour, Invisible Moderation and Ethical Decisions in Privacy Tech and Womxnhood",
+    "title": "The Invisible Work We Do: Emotional Labour...",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/0jgjatyw",
     "img": "https://i.ibb.co/sdLQY7t0/0406d6e2d727.png",
