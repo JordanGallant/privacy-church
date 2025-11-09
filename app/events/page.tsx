@@ -23,22 +23,14 @@ export default function EventsPage() {
 
     </div>
     <div className='pl-6'>
-    <Heading text="in Argentina" />
+    <Heading text="Featured" />
     </div>
     <EventsList/>
      <div className='pl-6'>
-    <Heading text="in Argentina" />
+    <Heading text="Devcon Side Events" />
     </div>
     <EventsList argentina={true}/>
 
-    <div className="p-6 max-w-4xl mx-auto">
-
-       <Heading text="in Argentina" />
-          <Picks events={[
-            { id: 1, title: "Ethereum Cypherpunk Congress", date: "2025-09-04", location: "Buenos Aires", ourPick: true },
-            { id: 3, title: "DeFi Conference", date: "2025-09-15", location: "New York" }
-          ]} />
-        </div>
     </>
   )
 }

@@ -13,6 +13,7 @@ interface Event {
     city: string;
     country: string;
   };
+  img?: string;
 }
 
 interface EventsListProps {
@@ -40,8 +41,8 @@ export default function EventsList({ argentina = false }: EventsListProps) {
             .filter(event => event.location.country === 'Argentina')
             .slice(0, 4);
         } else {
-          // Show top 3 events from bottom of JSON (last 3 events)
-          filteredEvents = data.slice(-3);
+          // Only show event with id 1
+          filteredEvents = data.filter(event => event.id === 1);
         }
         
         setEvents(filteredEvents);
@@ -69,7 +70,6 @@ export default function EventsList({ argentina = false }: EventsListProps) {
       <div className="space-y-4">
         {events.map((event, index) => (
           argentina ? (
-            // Argentina style - green square with text
             <a
               key={event.id}
               href={event.link}
@@ -78,30 +78,40 @@ export default function EventsList({ argentina = false }: EventsListProps) {
               className="flex items-center gap-4 hover:shadow-md transition-shadow"
             >
               <div
-                className="rounded-lg flex-shrink-0 relative flex items-start justify-start p-2"
+                className="rounded-lg flex-shrink-0 relative overflow-hidden"
                 style={{
                   width: '100px',
-                  height: '100px',
-                  backgroundColor: '#873A03'
+                  height: '100px'
                 }}
               >
-                {index < 1 && <OurPick color="green" />}
+                {event.img && (
+                  <img 
+                    src={event.img} 
+                    alt={event.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+                {index < 1 && (
+                  <div className="absolute top-2 left-2">
+                    <OurPick color="green" />
+                  </div>
+                )}
               </div>
               <div>
                 <h3 className="text-xl leading-tight tracking-[-0.01em] font-medium mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)]">
                   {event.title}
                 </h3>
                 <div className="flex gap-4">
-  <p className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
-    style={{ color: '#A0A0A0' }}>
-    {event.date}
-  </p>
-  <p className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)] flex items-center gap-1"
-    style={{ color: '#A0A0A0' }}>
-    <MapPin className="w-5 h-5" />
-    {event.location.city}
-  </p>
-</div>
+                  <p className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
+                    style={{ color: '#A0A0A0' }}>
+                    {event.date}
+                  </p>
+                  <p className="txt-xl font-thin mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)] flex items-center gap-1"
+                    style={{ color: '#A0A0A0' }}>
+                    <MapPin className="w-5 h-5" />
+                    {event.location.city}
+                  </p>
+                </div>
               </div>
             </a>
           ) : (
@@ -110,20 +120,28 @@ export default function EventsList({ argentina = false }: EventsListProps) {
               href={event.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-lg p-5 hover:shadow-lg transition-shadow flex flex-col justify-end"
+              className="rounded-lg overflow-hidden hover:shadow-lg transition-shadow flex flex-col justify-end relative"
               style={{
-                background: 'linear-gradient(to top, #000000, #FF6213)',
                 height: '200px'
               }}
             >
-              <div>
+              {event.img && (
+                <img 
+                  src={event.img} 
+                  alt={event.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              )}
+              <div className="relative z-10 p-5" style={{
+                background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)'
+              }}>
                 {index === 0 && <OurPick color="green" />}
-                <h3 className="text-xl  text-white mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)]">
+                <h3 className="text-xl text-white mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)]">
                   {event.title}
                 </h3>
                 <p className="txt-xl font-semibold mb-2 leading-tight font-[family-name:var(--font-gt-planar-head)]"
                   style={{ color: '#A0A0A0' }}
->
+                >
                   {new Date(event.date).toLocaleDateString('en-US', {
                     weekday: 'short',
                     day: 'numeric',
