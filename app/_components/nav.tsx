@@ -20,6 +20,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
   const navRef = useRef<HTMLElement>(null);
+  const [navHeight, setNavHeight] = useState(0);
 
   // Logo animation effect
   useEffect(() => {
@@ -55,6 +56,13 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
     }
   }, [hideLogo, hasAnimated]);
 
+  // Measure navbar height
+  useEffect(() => {
+    if (navRef.current) {
+      setNavHeight(navRef.current.offsetHeight);
+    }
+  }, []);
+
   // Scroll detection effect - works with both window and container scroll
   useEffect(() => {
     const handleScroll = (e?: Event) => {
@@ -77,20 +85,24 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
             }
           }
           
-          // Scrolling down - hide navbar when past threshold
-          if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+          // Make sticky immediately when scrolling starts (even 1px)
+          if (currentScrollY > 1) {
             setIsSticky(true);
-            setIsVisible(false);
-          } 
-          // Scrolling up - show navbar with sticky
-          else if (currentScrollY < lastScrollY.current && currentScrollY > 100) {
-            setIsSticky(true);
-            setIsVisible(true);
-          }
-          // At top of page - make non-sticky and visible
-          else if (currentScrollY <= 100) {
+          } else {
             setIsSticky(false);
             setIsVisible(true);
+          }
+          
+          // Only handle visibility after we're already sticky
+          if (currentScrollY > 1) {
+            // Scrolling down - hide navbar when past threshold
+            if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+              setIsVisible(false);
+            } 
+            // Scrolling up - show navbar
+            else if (currentScrollY < lastScrollY.current) {
+              setIsVisible(true);
+            }
           }
           
           lastScrollY.current = currentScrollY;
@@ -144,11 +156,15 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
 
   return (
     <>
+      {/* Spacer to prevent content jump when navbar becomes fixed */}
+      {isSticky && <div style={{ height: `${navHeight}px` }} />}
+      
       <nav 
         ref={navRef}
-        className={`${isSticky ? 'md:sticky md:top-0 fixed top-0' : 'relative'} left-0 right-0 flex items-center justify-between px-4 py-5 z-[110] ${getBackgroundClass()} transition-all duration-300 ease-in-out`}
+        className={`${isSticky ? 'md:sticky md:top-0 fixed top-0' : 'relative'} left-0 right-0 flex items-center justify-between px-4 py-5 z-[110] ${getBackgroundClass()}`}
         style={{
-          transform: isSticky ? (isVisible ? 'translateY(0)' : 'translateY(-100%)') : 'translateY(0)'
+          transform: isSticky ? (isVisible ? 'translateY(0)' : 'translateY(-100%)') : 'translateY(0)',
+          transition: 'transform 0.3s ease-in-out, background-color 0.3s ease-in-out'
         }}
       >
         {hideLogo || hasAnimated ? (
@@ -220,7 +236,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
       {shouldRender && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center md:items-center">
           <div className="max-w-[420px] w-full h-screen md:h-[calc(100vh-4rem)] md:rounded-[32px] overflow-hidden relative">
-          <Menu isClosing={!isOpen} />          </div>
+            <Menu isClosing={!isOpen} />          </div>
         </div>
       )}
     </>
