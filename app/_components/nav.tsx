@@ -83,7 +83,7 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
             setIsVisible(false);
           } 
           // Scrolling up - show navbar with sticky
-          else if (currentScrollY < lastScrollY.current && currentScrollY > 10) {
+          else if (currentScrollY < lastScrollY.current && currentScrollY > 100) {
             setIsSticky(true);
             setIsVisible(true);
           }
