@@ -36,10 +36,8 @@ export default function EventsList({ argentina = false }: EventsListProps) {
         let filteredEvents: Event[];
         
         if (argentina) {
-          // Show only 4 events in Argentina
-          filteredEvents = data
-            .filter(event => event.location.country === 'Argentina')
-            .slice(0, 4);
+          // Show only events with IDs from 14 to 32
+          filteredEvents = data.filter(event => event.id >= 14 && event.id <= 32);
         } else {
           // Only show event with id 1
           filteredEvents = data.filter(event => event.id === 1);
