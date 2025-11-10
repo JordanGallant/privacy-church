@@ -63,6 +63,8 @@ export default function Navbar({ hideLogo = false, onMenuToggle }: NavbarProps) 
     }
   }, []);
 
+  // Scroll detection effect - works with both window and container scroll
+// Replace your scroll detection useEffect with this:
 
 useEffect(() => {
   const handleScroll = (e?: Event) => {
@@ -70,22 +72,23 @@ useEffect(() => {
       window.requestAnimationFrame(() => {
         let currentScrollY = 0;
         
-        // Desktop: Find the scrollable container (md:overflow-y-auto wrapper)
-        const scrollContainer = document.querySelector('.md\\:overflow-y-auto') as HTMLElement;
-        
-        if (scrollContainer) {
-          // Desktop mode - use container scroll
-          currentScrollY = scrollContainer.scrollTop;
+        // Check if scroll came from container or window
+        if (e?.target && e.target !== document) {
+          // Desktop: scroll from container
+          currentScrollY = (e.target as HTMLElement).scrollTop;
         } else {
-          // Mobile mode - use window scroll
-          currentScrollY = window.scrollY;
+          // Try to find scrollable container first (desktop)
+          const scrollContainer = navRef.current?.closest('.md\\:overflow-y-auto') as HTMLElement;
+          if (scrollContainer && scrollContainer.scrollTop > 0) {
+            currentScrollY = scrollContainer.scrollTop;
+          } else {
+            // Mobile: use window scroll
+            currentScrollY = window.scrollY;
+          }
         }
         
-        // Ignore negative scroll values completely (overscroll bounce)
-        if (currentScrollY < 0) {
-          ticking.current = false;
-          return;
-        }
+        // Clamp scroll value to prevent negative values from overscroll
+        currentScrollY = Math.max(0, currentScrollY);
         
         // Make sticky immediately when scrolling starts (even 1px)
         if (currentScrollY > 1) {
@@ -115,10 +118,10 @@ useEffect(() => {
     }
   };
 
-  // Listen to both window scroll (mobile) and container scroll (desktop)
+  // Attach to both window scroll (mobile) and container scroll (desktop)
   window.addEventListener('scroll', handleScroll, { passive: true });
   
-  const scrollContainer = document.querySelector('.md\\:overflow-y-auto');
+  const scrollContainer = navRef.current?.closest('.md\\:overflow-y-auto');
   if (scrollContainer) {
     scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
   }
