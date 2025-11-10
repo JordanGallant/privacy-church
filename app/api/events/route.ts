@@ -58,17 +58,17 @@ export async function GET(request: Request) {
         country: "Argentina"
       }
     },
-    {
-      id: 6,
-      title: "zkID and Client-Side Proving Day",
-      date: "Tues Nov 18",
-      link: "https://devconnect.org/calendar?event=zkid-day",
-      img: "",
-      location: {
-        city: "Buenos Aires",
-        country: "Argentina"
-      }
-    },
+    // {
+    //   id: 6,
+    //   title: "zkID and Client-Side Proving Day",
+    //   date: "Tues Nov 18",
+    //   link: "https://devconnect.org/calendar?event=zkid-day",
+    //   img: "",
+    //   location: {
+    //     city: "Buenos Aires",
+    //     country: "Argentina"
+    //   }
+    // },
     {
       id: 7,
       title: "Confidential Token Association",
@@ -113,53 +113,8 @@ export async function GET(request: Request) {
         country: "Argentina"
       }
     },
-    {
-      id: 11,
-      title: "WalletCon",
-      date: "Thurs Nov 20",
-      link: "https://luma.com/walletconbuenosaires?tk=52vaFL",
-      img: "https://i.ibb.co/zjwkQGb/1875381d29cb.png",
-      location: {
-        city: "Buenos Aires",
-        country: "Argentina"
-      }
-    },
-    {
-      id: 12,
-      title: "Noir Con ",
-      date: "Thurs Nov 20",
-      link: "https://luma.com/m5uc4w2k?tk=3q7jsM",
-      img: "https://i.ibb.co/1GztN5dy/190c9cb57862.png",
-      location: {
-        city: "Buenos Aires",
-        country: "Argentina"
-      }
-    },
-    {
-      id: 13,
-      title: "Ethereum Privacy Stack",
-      date: "Thurs Nov 21",
-      link: "https://devconnect.org/calendar?event=ethereum-privacy-stack",
-      img: "https://i.ibb.co/cSrJxr6c/6e59f8df1dd8.png",
-      location: {
-        city: "Buenos Aires",
-        country: "Argentina"
-      }
-    },
-    {
-      id: 14,
-      title: "P2P Privacy Hacker Lounge",
-      date: "Thurs Nov 20",
-      link: "https://luma.com/mcodb4f7?tk=q1GU96",
-      img: "https://i.ibb.co/qYRF9b8y/a7a0e162f288.png",
-      location: {
-        city: "Buenos Aires",
-        country: "Argentina"
-      }
-    },
-    
   {
-    "id": 14,
+    "id": 11,
     "title": "Everyday Opsec \u2013 Personal security audit & aid",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/5nr33ves",
@@ -170,7 +125,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 15,
+    "id": 12,
     "title": "ZK Dark Pools",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/qaltyvst",
@@ -181,7 +136,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 16,
+    "id": 13,
     "title": "Wallet Security Fundamentals",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/retb0z4r",
@@ -192,7 +147,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 17,
+    "id": 14,
     "title": "Power to the People: How Privacy Tech Can Safeguard Democracy",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/uxenfv7u",
@@ -203,7 +158,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 18,
+    "id": 15,
     "title": "Data Privacy in Legal Documentation: What to Look For",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/az795puf",
@@ -214,7 +169,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 19,
+    "id": 16,
     "title": "The Aesthetics of Privacy \u2013 How visual language...",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/o9ztepnk",
@@ -225,7 +180,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 20,
+    "id": 17,
     "title": "Privacy as Culture",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/al81hy3j",
@@ -236,7 +191,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 21,
+    "id": 18,
     "title": "The biggest security breaches in recent history... ",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/w31jzd1j",
@@ -247,7 +202,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 22,
+    "id": 19,
     "title": "Practical tools for more private digital world",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/6pkovegk",
@@ -258,7 +213,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 23,
+    "id": 20,
     "title": "Building Future Spaces for Digital Integrity",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/x1bdq9as",
@@ -269,7 +224,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 24,
+    "id": 21,
     "title": "Everyday Opsec \u2013 Personal security audit & aid",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/hgxtjbjw",
@@ -302,7 +257,7 @@ export async function GET(request: Request) {
   //   }
   // },
   {
-    "id": 27,
+    "id": 22,
     "title": "Anonymous Yet Authentic",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/u7g5unik",
@@ -313,7 +268,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 28,
+    "id": 23,
     "title": "The Invisible Work We Do: Emotional Labour...",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/0jgjatyw",
@@ -324,7 +279,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 29,
+    "id": 24,
     "title": "The Privacy Growth Playbook: Winning Without Surveillance",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/f5susl3w",
@@ -335,7 +290,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 30,
+    "id": 25,
     "title": "Culture of Care in Teams",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/8f67qt49",
@@ -346,7 +301,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 31,
+    "id": 26,
     "title": "Cyberfeminism Privacy in Protest Times",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/w85wwlav",
@@ -357,7 +312,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 32,
+    "id": 27,
     "title": "MKT en la Era Web3",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/8l98q2cc",
@@ -368,7 +323,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 33,
+    "id": 28,
     "title": "Navigating the Legal Complexities of Building a Thorough Privacy Stack",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/mkibcpnh",
@@ -379,7 +334,7 @@ export async function GET(request: Request) {
     }
   },
   {
-    "id": 34,
+    "id": 29,
     "title": "Inclusion Without Exposure \u2013 Protecting presence, privacy, and power in an age of digital surveillance",
     "date": "Wed Nov 19",
     "link": "https://lu.ma/2q5won0h",
@@ -388,7 +343,51 @@ export async function GET(request: Request) {
       "city": "Buenos Aires",
       "country": "Argentina"
     }
-  } 
+  },
+  {
+      id: 30,
+      title: "WalletCon",
+      date: "Thurs Nov 20",
+      link: "https://luma.com/walletconbuenosaires?tk=52vaFL",
+      img: "https://i.ibb.co/zjwkQGb/1875381d29cb.png",
+      location: {
+        city: "Buenos Aires",
+        country: "Argentina"
+      }
+    },
+    {
+      id: 31,
+      title: "Noir Con ",
+      date: "Thurs Nov 20",
+      link: "https://luma.com/m5uc4w2k?tk=3q7jsM",
+      img: "https://i.ibb.co/1GztN5dy/190c9cb57862.png",
+      location: {
+        city: "Buenos Aires",
+        country: "Argentina"
+      }
+    },
+     {
+      id: 32,
+      title: "P2P Privacy Hacker Lounge",
+      date: "Thurs Nov 20",
+      link: "https://luma.com/mcodb4f7?tk=q1GU96",
+      img: "https://i.ibb.co/qYRF9b8y/a7a0e162f288.png",
+      location: {
+        city: "Buenos Aires",
+        country: "Argentina"
+      }
+    },
+    {
+      id: 33,
+      title: "Ethereum Privacy Stack",
+      date: "Thurs Nov 21",
+      link: "https://devconnect.org/calendar?event=ethereum-privacy-stack",
+      img: "https://i.ibb.co/cSrJxr6c/6e59f8df1dd8.png",
+      location: {
+        city: "Buenos Aires",
+        country: "Argentina"
+      }
+    },
 ];
 
   return NextResponse.json(events);
