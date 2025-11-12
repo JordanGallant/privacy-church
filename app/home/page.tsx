@@ -98,9 +98,7 @@ export default function Home() {
           </ScrollTrailWrapper>
         </div>
 
-        <ScrollTrailWrapper>
           <News/>
-        </ScrollTrailWrapper>
 
         <ScrollTrailWrapper>
           <div className='py-6'>
@@ -108,7 +106,6 @@ export default function Home() {
           </div>
         </ScrollTrailWrapper>
 
-        <ScrollTrailWrapper>
           <Picks events={[
             { 
               id: 1, 
@@ -167,7 +164,6 @@ export default function Home() {
               href: 'https://en.wikipedia.org/wiki/The_Naked_Society' 
             }
           ]} />
-        </ScrollTrailWrapper>
       </div>
     </>
   );
