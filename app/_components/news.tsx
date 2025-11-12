@@ -1,7 +1,6 @@
 // app/_components/news.tsx
 'use client'
 import { useState, useEffect } from 'react';
-import { ScrollTrailWrapper } from './ScrollTrailWrapper';
 
 interface NewsItem {
   source: string;
@@ -39,42 +38,41 @@ export default function News() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+<div className=" max-w-4xl mx-auto">
       <div className="max-w-2xl mx-auto">
         <div className="space-y-6">
           {items.map((item, i) => (
-            <ScrollTrailWrapper key={i}>
-              <a
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-4 group"
-              >
-                <div className="flex-1">
-                  <h2 className="text-xl font-medium mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)] group-hover:underline">
-                    {item.title}
-                  </h2>
-                  <p className="flex items-center gap-2 text-base italic md:text-lg leading-relaxed font-[family-name:var(--font-gt-planar-light)] text-[#A0A0A0]">
-                    <img
-                      src={item.favicon}
-                      alt=""
-                      className="w-4 h-4 flex-shrink-0"
-                    />
-                    <span>{item.source}</span>
-                    <span>•</span>
-                    <span>
-                      {new Date(item.pubDate).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        timeZone: 'Europe/Amsterdam',
-                      })}
-                    </span>
-                  </p>
-                </div>
-              </a>
-            </ScrollTrailWrapper>
+            <a
+              key={i}
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-4 group"
+            >
+              <div className="flex-1">
+                <h2 className="text-xl  font-medium mb-2 leading-tight font-[family-name:var(--font-gt-planar-image)] group-hover:underline">
+                  {item.title}
+                </h2>
+                <p className="flex items-center gap-2 text-base italic md:text-lg leading-relaxed font-[family-name:var(--font-gt-planar-light)] text-[#A0A0A0]">
+                  <img
+                    src={item.favicon}
+                    alt=""
+                    className="w-4 h-4 flex-shrink-0"
+                  />
+                  <span>{item.source}</span>
+                  <span>•</span>
+                  <span>
+                    {new Date(item.pubDate).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      timeZone: 'Europe/Amsterdam',
+                    })}
+                  </span>
+                </p>
+              </div>
+            </a>
           ))}
         </div>
       </div>

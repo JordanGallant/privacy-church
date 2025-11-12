@@ -1,7 +1,6 @@
 "use client"
 import Ourpick from "./tiny/ourpick";
 import Link from "next/link";
-import { ScrollTrailWrapper } from "./ScrollTrailWrapper";
 
 interface SimpleEvent {
   id: number;
@@ -70,22 +69,19 @@ export default function SimpleEventsList({ events }: SimpleEventsListProps) {
           </>
         );
 
-        return (
-          <ScrollTrailWrapper key={event.id}>
-            {event.href ? (
-              <Link 
-                href={event.href}
-                {...(event.external && { target: "_blank", rel: "noopener noreferrer" })}
-                className="block hover:opacity-80 transition-opacity"
-              >
-                {content}
-              </Link>
-            ) : (
-              <div>
-                {content}
-              </div>
-            )}
-          </ScrollTrailWrapper>
+        return event.href ? (
+          <Link 
+            key={event.id} 
+            href={event.href}
+            {...(event.external && { target: "_blank", rel: "noopener noreferrer" })}
+            className="block hover:opacity-80 transition-opacity"
+          >
+            {content}
+          </Link>
+        ) : (
+          <div key={event.id}>
+            {content}
+          </div>
         );
       })}
     </div>
