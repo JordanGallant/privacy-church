@@ -78,7 +78,7 @@ Books, papers, and manifestos that decode power, expose extraction, and chart pa
     href: "https://en.wikipedia.org/wiki/The_Naked_Society" 
   }
 ]} />
-        <div className='pt-8 ml-[3px]'>
+        <div className='pt-8 ml-[4px]'>
         <Heading text="Historical" />
         </div>
 
@@ -113,7 +113,7 @@ Books, papers, and manifestos that decode power, expose extraction, and chart pa
   }
 ]} />
 
-<div className='pt-8 ml-[3px]'>
+<div className='pt-8 ml-[4px]'>
         <Heading text="Web3 & Decentralization" />
         </div>
 <Picks events={[
@@ -134,7 +134,7 @@ Books, papers, and manifestos that decode power, expose extraction, and chart pa
 ]} />
 
 
-<div className='pt-8 ml-[3px]'>
+<div className='pt-8 ml-[4px]'>
         <Heading text=" Academic Studies" />
         </div>
               <Picks events={[
