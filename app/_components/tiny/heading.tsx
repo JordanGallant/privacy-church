@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Heading({ text = "Your Heading Here" }) {
   return (
-    <div className="w-full max-w-4xl mx-auto mb-2">
+    <div className="w-full max-w-4xl mx-auto mb-2 -ml-[13px]">
       <div className="flex items-center gap-2">
         <div className="w-[3px] h-8 bg-[#FF6213] "></div>
         

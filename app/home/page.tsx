@@ -1,19 +1,15 @@
 'use client'
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { useRouter } from 'next/navigation';
 import CustomImage from '../_components/img';
 import Navbar from '../_components/nav';
-import PageLoader from '../_components/modals/loading';
+import Link from 'next/link';
 import News from '../_components/news';
 import Heading from '../_components/tiny/heading';
 import Picks from '../_components/pick';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-  
   const headerRef = useRef(null);
   const subheaderRef = useRef(null);
   const imagesRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -22,14 +18,6 @@ export default function Home() {
   const newsRef = useRef(null);
   const philosophyRef = useRef(null);
   const picksRef = useRef(null);
-
-  const handleNavigation = (href: string) => {
-    setIsLoading(true);
-    // Simulate loading time or wait for actual page load
-    setTimeout(() => {
-      router.push(href);
-    }, 300);
-  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -107,7 +95,6 @@ export default function Home() {
 
   return (
     <>
-      <PageLoader isLoading={isLoading} />
       <Navbar hideLogo={!isMenuOpen} onMenuToggle={setIsMenuOpen} />
 
       <div className="px-6 pb-8">
@@ -128,41 +115,41 @@ export default function Home() {
         
         <div className="grid grid-cols-1 gap-2.5">
           <div ref={el => { imagesRef.current[0] = el; }}>
-            <div onClick={() => handleNavigation('/actions')} className="cursor-pointer">
+            <Link href="/actions">
               <CustomImage
                 src="/assets/actions.png" 
                 text="Action" 
                 subtext='Where belief becomes practice'
               />
-            </div>
+            </Link>
           </div>
           
           <div ref={el => { imagesRef.current[1] = el; }}>
-            <div onClick={() => handleNavigation('/events')} className="cursor-pointer">
+            <Link href="/events">
               <CustomImage
                 src="/assets/pray.png" 
                 text="Events"
                 subtext='Show up in real life'
               />
-            </div>
+            </Link>
           </div>
           
           <div ref={el => { imagesRef.current[2] = el; }}>
-            <div onClick={() => handleNavigation('/community')} className="cursor-pointer">
+            <Link href="/community" >
               <CustomImage
                 src="/assets/nuns.png" 
                 crop="top"
                 text="Community" 
                 subtext='Where connections begin'
               />
-            </div>
+            </Link>
           </div>
           
           <div 
             ref={el => { imagesRef.current[3] = el; }}
             className="flex gap-3 md:justify-between md:gap-2"
           >
-            <div onClick={() => handleNavigation('/tools')} className="flex-1 cursor-pointer"> 
+            <Link href="/tools" className="flex-1"> 
               <CustomImage
                 src="/assets/tool.png" 
                 crop="shrink" 
@@ -170,16 +157,16 @@ export default function Home() {
                 subtext='A-Z'
                 invert={true}
               />
-            </div>
+            </Link>
 
-            <div onClick={() => handleNavigation('/manifesto')} className="flex-1 cursor-pointer">
+            <Link href="/manifesto" className="flex-1">
               <CustomImage 
                 src="/assets/candle.png" 
                 crop="shrink" 
                 text="Manifesto" 
                 subtext='Why, who, how'
               />
-            </div>
+            </Link>
           </div>
 
           <div className='pt-6'>

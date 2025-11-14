@@ -28,8 +28,8 @@ export default function EventsPage() {
     <Communities/>
 
     
-    <div className="p-6 max-w-4xl mx-auto">
-     <Heading text="Grassroots & Activist Collectives" />
+    <div className="p-6 max-w-4xl mx-auto ">
+     <Heading text="Grassroots Collectives" />
 <Picks events={[
   { 
     id: 1, 
@@ -60,7 +60,7 @@ export default function EventsPage() {
     href: "https://digitalcourage.de/en" 
   }
 ]} />
-<div className='pt-8'>
+<div className='pt-8 ml-[3px]'>
 <Heading text="Institutional & Legal Strategy" />
 </div>
 
@@ -95,8 +95,8 @@ export default function EventsPage() {
   }
 ]} />
 
-<div className='pt-8'>
-<Heading text="Research & Technical Standards" />
+<div className='pt-8 ml-[3px]'>
+<Heading text="Technical Standards" />
 </div>
 
 <Picks events={[
@@ -137,8 +137,8 @@ export default function EventsPage() {
   }
 ]} />
 
-<div className='pt-8'>
-<Heading text="Regional & Global Focus" />
+<div className='pt-8 ml-[3px]'>
+<Heading text="Regional & Global" />
 </div>
 <Picks events={[
   { 
@@ -177,7 +177,7 @@ export default function EventsPage() {
     href: "https://just-access.de/volunteer_with_us/" 
   }
 ]} />
-<div className='pt-8'>
+<div className='pt-8 ml-[3px]'>
 <Heading text="Honorable Mention" />
 </div>
 <Picks events={[
