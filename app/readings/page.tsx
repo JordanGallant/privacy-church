@@ -135,7 +135,7 @@ Books, papers, and manifestos that decode power, expose extraction, and chart pa
 
 
 <div className='pt-8 ml-[3px]'>
-        <Heading text="Technical & Academic Studies" />
+        <Heading text=" Academic Studies" />
         </div>
               <Picks events={[
   { 
